@@ -12,6 +12,10 @@ namespace TP4_SIM
         private double horaInicioEspera;
         private double horaInicioAtencion;
 
+        public Cliente()
+        {
+        }
+
         public string Estado { get => estado; set => estado = value; }
         public double HoraInicioEspera { get => horaInicioEspera; set => horaInicioEspera = value; }
         public double HoraInicioAtencion { get => horaInicioAtencion; set => horaInicioAtencion = value; }

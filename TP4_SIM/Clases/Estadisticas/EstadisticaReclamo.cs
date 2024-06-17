@@ -12,6 +12,13 @@ namespace TP4_SIM.Clases.Estadisticas
         private double acumuladorOcupacion;
         private int cantClientesAtendidos;
 
+        public EstadisticaReclamo()
+        {
+            acumuladorEspera = 0;
+            acumuladorOcupacion = 0;
+            cantClientesAtendidos = 0;
+        }
+
         public double AcumuladorEspera { get => acumuladorEspera; set => acumuladorEspera = value; }
         public double AcumuladorOcupacion { get => acumuladorOcupacion; set => acumuladorOcupacion = value; }
         public int CantClientesAtendidos { get => cantClientesAtendidos; set => cantClientesAtendidos = value; }

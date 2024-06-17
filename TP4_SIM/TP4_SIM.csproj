@@ -46,7 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilaVector.cs" />
+    <Compile Include="Clases\AtencionEmpresarial.cs" />
+    <Compile Include="Clases\Cliente.cs" />
+    <Compile Include="Clases\EnvioPaquete.cs" />
+    <Compile Include="Clases\Estadisticas\EstadisticaAE.cs" />
+    <Compile Include="Clases\Estadisticas\EstadisticaEnvio.cs" />
+    <Compile Include="Clases\Estadisticas\EstadisticaPostales.cs" />
+    <Compile Include="Clases\Estadisticas\EstadisticaReclamo.cs" />
+    <Compile Include="Clases\Estadisticas\EstadisticaVenta.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAtencionEmpresarial.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAtencionEnvio.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAtencionPostales.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAtencionReclamo.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAtencionVenta.cs" />
+    <Compile Include="Clases\FilaVector.cs" />
+    <Compile Include="Clases\Postales.cs" />
+    <Compile Include="Clases\Reclamo.cs" />
+    <Compile Include="Clases\Venta.cs" />
     <Compile Include="Simulacion.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,6 +12,11 @@ namespace TP4_SIM.Clases
         private int cola;
         private string estado;
 
+        public AtencionEmpresarial()
+        {
+            cola = 0;
+            estado = "Libre";
+        }
         public int Cola { get => cola; set => cola = value; }
         public string Estado { get => estado; set => estado = value; }
     }

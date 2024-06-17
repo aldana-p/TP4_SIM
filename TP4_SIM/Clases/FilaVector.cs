@@ -36,6 +36,55 @@ namespace TP4_SIM
         private EstadisticaPostales estadisticasPostales;
         private List<Cliente> clientes;
 
+        public FilaVector()
+        {
+            this.evento = "";
+            this.reloj = 0;
+            this.llegada_cliente_envio = new double[3];
+            this.llegada_cliente_reclamo = new double[3];
+            this.llegada_cliente_venta = new double[3];
+            this.llegada_cliente_AE = new double[3];
+            this.llegada_cliente_postales = new double[3];
+            this.fin_envio = new FinAtencionEnvio();
+            this.fin_reclamo = new FinAtencionReclamo();
+            this.fin_venta = new FinAtencionVenta();
+            this.fin_AE = new FinAtencionEmpresarial();
+            this.fin_postales = new FinAtencionPostales();
+            this.ventas = new List<Venta>
+        {
+            new Venta(),
+            new Venta(),
+            new Venta()
+        };
+            this.envioPaquetes = new List<EnvioPaquete>
+        {
+            new EnvioPaquete(),
+            new EnvioPaquete(),
+            new EnvioPaquete()
+        };
+            this.reclamos= new List<Reclamo>
+        {
+            new Reclamo(),
+            new Reclamo(),
+        };
+            this.atencionEmp = new List<AtencionEmpresarial>
+        {
+            new AtencionEmpresarial(),
+            new AtencionEmpresarial()
+        };
+            this.postales = new List<Postales> { new Postales() };
+            this.estadisticasEnvio = new EstadisticaEnvio();
+            this.estadisticasReclamo = new EstadisticaReclamo();
+            this.estadisticasPostales = new EstadisticaPostales();
+            this.estadisticasVenta = new EstadisticaVenta();
+            this.estadisticasAE = new EstadisticaAE();
+            this.clientes = new List<Cliente>();
+
+
+
+
+        }
+
         public string Evento { get => evento; set => evento = value; }
         public double Reloj { get => reloj; set => reloj = value; }
         public double[] Llegada_cliente_envio { get => llegada_cliente_envio; set => llegada_cliente_envio = value; }
