@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TP4_SIM.Clases;
+using TP4_SIM.Clases.EventosLlegadas;
 
 namespace TP4_SIM
 {
@@ -41,33 +42,33 @@ namespace TP4_SIM
 
             // Se completa la primera fila 
             FilaVector fila1 = new FilaVector();
-            fila1.Reloj = 0;
+            fila1.NroFila = 1;
             fila1.Evento = "inicialización";
-            fila1.Llegada_cliente_envio = new double[3];
-            fila1.Llegada_cliente_envio[0] = generarRandom(random);
-            fila1.Llegada_cliente_envio[1] = calcularTiempo(mediaLlegadaPaquete, fila1.Llegada_cliente_envio[0]);
-            fila1.Llegada_cliente_envio[2] = fila1.Reloj + fila1.Llegada_cliente_envio[1];
+            fila1.Reloj = 0;
 
-            fila1.Llegada_cliente_reclamo = new double[3];
-            fila1.Llegada_cliente_reclamo[0] = generarRandom(random);
-            fila1.Llegada_cliente_reclamo[1] = calcularTiempo(mediaLlegadaReclamo, fila1.Llegada_cliente_reclamo[0]);
-            fila1.Llegada_cliente_reclamo[2] = fila1.Reloj + fila1.Llegada_cliente_reclamo[1];
+            fila1.LlegadaEnvio.Rnd = generarRandom(random);
+            fila1.LlegadaEnvio.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPaquete, fila1.LlegadaEnvio.Rnd);
+            fila1.LlegadaEnvio.ProxLlegada = fila1.Reloj + fila1.LlegadaEnvio.TiempoEntreLlegadas;
 
-            fila1.Llegada_cliente_venta = new double[3];
-            fila1.Llegada_cliente_venta[0] = generarRandom(random);
-            fila1.Llegada_cliente_venta[1] = calcularTiempo(mediaLlegadaVenta, fila1.Llegada_cliente_venta[0]);
-            fila1.Llegada_cliente_venta[2] = fila1.Reloj + fila1.Llegada_cliente_venta[1];
+            fila1.LlegadaReclamo.Rnd = generarRandom(random);
+            fila1.LlegadaReclamo.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaReclamo, fila1.LlegadaReclamo.Rnd);
+            fila1.LlegadaReclamo.ProxLlegada = fila1.Reloj + fila1.LlegadaReclamo.TiempoEntreLlegadas;
 
-            fila1.Llegada_cliente_AE = new double[3];
-            fila1.Llegada_cliente_AE[0] = generarRandom(random);
-            fila1.Llegada_cliente_AE[1] = calcularTiempo(mediaLlegadaAE, fila1.Llegada_cliente_AE[0]);
-            fila1.Llegada_cliente_AE[2] = fila1.Reloj + fila1.Llegada_cliente_AE[1];
+            fila1.LlegadaVenta.Rnd = generarRandom(random);
+            fila1.LlegadaVenta.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaVenta, fila1.LlegadaVenta.Rnd);
+            fila1.LlegadaVenta.ProxLlegada = fila1.Reloj + fila1.LlegadaVenta.TiempoEntreLlegadas;
 
-            fila1.Llegada_cliente_postales = new double[3];
-            fila1.Llegada_cliente_postales[0] = generarRandom(random);
-            fila1.Llegada_cliente_postales[1] = calcularTiempo(mediaLlegadaPostales, fila1.Llegada_cliente_postales[0]);
-            fila1.Llegada_cliente_postales[2] = fila1.Reloj + fila1.Llegada_cliente_postales[1];
+            fila1.LlegadaAE.Rnd = generarRandom(random);
+            fila1.LlegadaAE.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaAE, fila1.LlegadaAE.Rnd);
+            fila1.LlegadaAE.ProxLlegada = fila1.Reloj + fila1.LlegadaAE.TiempoEntreLlegadas;
 
+            fila1.LlegadaPostales.Rnd = generarRandom(random);
+            fila1.LlegadaPostales.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPostales, fila1.LlegadaPostales.Rnd);
+            fila1.LlegadaPostales.ProxLlegada = fila1.Reloj + fila1.LlegadaPostales.TiempoEntreLlegadas;
+
+
+            List<FilaVector> filas = new List<FilaVector>();
+            filas.Add(fila1);
 
             /*grdSimulacion.Rows.Add(fila1.Evento, fila1.Reloj, fila1.Llegada_cliente_envio[0], fila1.Llegada_cliente_envio[1], fila1.Llegada_cliente_envio[2],
             fila1.Llegada_cliente_reclamo[0], fila1.Llegada_cliente_reclamo[1], fila1.Llegada_cliente_reclamo[2],
@@ -78,47 +79,85 @@ namespace TP4_SIM
 
             // pone todos los tiempos de los prox eventos en una lista para madarlos al método que busca al siguiente
             List<double> posiblesProxEventos = new List<double>();
-            posiblesProxEventos.Add(fila1.Llegada_cliente_envio[2]); // 0 
-            posiblesProxEventos.Add(fila1.Llegada_cliente_reclamo[2]); // 1
-            posiblesProxEventos.Add(fila1.Llegada_cliente_venta[2]); // 2
-            posiblesProxEventos.Add(fila1.Llegada_cliente_AE[2]); // 3
-            posiblesProxEventos.Add(fila1.Llegada_cliente_postales[2]); //4
+            posiblesProxEventos.Add(fila1.LlegadaEnvio.ProxLlegada); // 0 
+            posiblesProxEventos.Add(fila1.LlegadaReclamo.ProxLlegada); // 1
+            posiblesProxEventos.Add(fila1.LlegadaVenta.ProxLlegada); // 2
+            posiblesProxEventos.Add(fila1.LlegadaAE.ProxLlegada); // 3
+            posiblesProxEventos.Add(fila1.LlegadaPostales.ProxLlegada); //4
 
             List<double> proxEvento = buscarProxEvento(posiblesProxEventos);
-
 
             FilaVector fila2 = new FilaVector();
             fila2.Reloj = (double)proxEvento[0];
             fila2.Evento = nombresEventos[Convert.ToInt32(proxEvento[1])];
 
             List<FilaVector> filasMostrar = new List<FilaVector>();
-            
+
+            /*
+            grdSimulacion.Rows.Add(fila1.Evento, fila1.Reloj, fila1.Llegada_cliente_envio[0], fila1.Llegada_cliente_envio[1], fila1.Llegada_cliente_envio[2],
+            fila1.Llegada_cliente_reclamo[0], fila1.Llegada_cliente_reclamo[1], fila1.Llegada_cliente_reclamo[2],
+            fila1.Llegada_cliente_venta[0], fila1.Llegada_cliente_venta[1], fila1.Llegada_cliente_venta[2],
+            fila1.Llegada_cliente_AE[0], fila1.Llegada_cliente_AE[1], fila1.Llegada_cliente_AE[2],
+            fila1.Llegada_cliente_postales[0], fila1.Llegada_cliente_postales[1], fila1.Llegada_cliente_postales[2], fila1.Fin_envio.Rnd, fila1.Fin_envio.TiempoAtencion,
+            fila1.Fin_envio.FinAtencion[0], fila1.Fin_envio.FinAtencion[1], fila1.Fin_envio.FinAtencion[2], fila1.Fin_reclamo.Rnd, fila1.Fin_reclamo.TiempoAtencion, fila1.Fin_reclamo.FinAtencion[0],
+            fila1.Fin_reclamo.FinAtencion[1], fila1.Fin_venta.Rnd, fila1.Fin_venta.TiempoAtencion, fila1.Fin_venta.FinAtencion[0], fila1.Fin_venta.FinAtencion[1], fila1.Fin_venta.FinAtencion[2],
+            fila1.Fin_AE.Rnd, fila1.Fin_AE.TiempoAtencion, fila1.Fin_AE.FinAtencion[0], fila1.Fin_AE.FinAtencion[1], fila1.Fin_postales.Rnd, fila1.Fin_postales.TiempoAtencion, fila1.Fin_postales.FinAtencion,
+            fila1.EnvioPaquetes[0].Cola, fila1.EnvioPaquetes[0].Estado, fila1.EnvioPaquetes[1].Cola, fila1.EnvioPaquetes[1].Estado, fila1.EnvioPaquetes[2].Cola, fila1.EnvioPaquetes[2].Estado,
+            fila1.Reclamos[0].Cola, fila1.Reclamos[0].Estado, fila1.Reclamos[1].Cola, fila1.Reclamos[1].Estado, fila1.Ventas[0].Cola, fila1.Ventas[0].Estado, fila1.Ventas[1].Cola, fila1.Ventas[1].Estado,
+            fila1.Ventas[2].Cola, fila1.Ventas[2].Estado, fila1.AtencionEmp[0].Cola, fila1.AtencionEmp[0].Estado, fila1.AtencionEmp[1].Cola, fila1.AtencionEmp[1].Estado, fila1.Postales[0].Cola, fila1.Postales[0].Estado
+            );
+            */
+
 
 
             // For que genera las filas
             for (int i = 0; i < cantFilas; i++)
             {
-                grdSimulacion.Rows.Add(fila1.Evento, fila1.Reloj, fila1.Llegada_cliente_envio[0], fila1.Llegada_cliente_envio[1], fila1.Llegada_cliente_envio[2],
-            fila1.Llegada_cliente_reclamo[0], fila1.Llegada_cliente_reclamo[1], fila1.Llegada_cliente_reclamo[2],
-            fila1.Llegada_cliente_venta[0], fila1.Llegada_cliente_venta[1], fila1.Llegada_cliente_venta[2],
-            fila1.Llegada_cliente_AE[0], fila1.Llegada_cliente_AE[1], fila1.Llegada_cliente_AE[2],
-            fila1.Llegada_cliente_postales[0], fila1.Llegada_cliente_postales[1], fila1.Llegada_cliente_postales[2], fila1.Fin_envio.Rnd, fila1.Fin_envio.TiempoAtencion);
+                fila2.NroFila = i + 2; //tiene que empezar desde el 2
+
+                filasMostrar.Add(fila1);
+
+
+                grdSimulacion.Rows.Add(fila1.Evento, fila1.Reloj, fila1.LlegadaEnvio.Rnd, fila1.LlegadaEnvio.TiempoEntreLlegadas, fila1.LlegadaEnvio.ProxLlegada,
+          fila1.LlegadaReclamo.Rnd, fila1.LlegadaReclamo.TiempoEntreLlegadas, fila1.LlegadaReclamo.ProxLlegada,
+          fila1.LlegadaVenta.Rnd, fila1.LlegadaVenta.TiempoEntreLlegadas, fila1.LlegadaVenta.ProxLlegada,
+          fila1.LlegadaAE.Rnd, fila1.LlegadaAE.TiempoEntreLlegadas, fila1.LlegadaAE.ProxLlegada,
+          fila1.LlegadaPostales.Rnd, fila1.LlegadaPostales.TiempoEntreLlegadas, fila1.LlegadaPostales.ProxLlegada, fila1.Fin_envio.Rnd, fila1.Fin_envio.TiempoAtencion,
+          fila1.Fin_envio.FinAtencion[0], fila1.Fin_envio.FinAtencion[1], fila1.Fin_envio.FinAtencion[2], fila1.Fin_reclamo.Rnd, fila1.Fin_reclamo.TiempoAtencion, fila1.Fin_reclamo.FinAtencion[0],
+          fila1.Fin_reclamo.FinAtencion[1], fila1.Fin_venta.Rnd, fila1.Fin_venta.TiempoAtencion, fila1.Fin_venta.FinAtencion[0], fila1.Fin_venta.FinAtencion[1], fila1.Fin_venta.FinAtencion[2],
+          fila1.Fin_AE.Rnd, fila1.Fin_AE.TiempoAtencion, fila1.Fin_AE.FinAtencion[0], fila1.Fin_AE.FinAtencion[1], fila1.Fin_postales.Rnd, fila1.Fin_postales.TiempoAtencion, fila1.Fin_postales.FinAtencion,
+          fila1.EnvioPaquetes[0].Cola, fila1.EnvioPaquetes[0].Estado, fila1.EnvioPaquetes[1].Cola, fila1.EnvioPaquetes[1].Estado, fila1.EnvioPaquetes[2].Cola, fila1.EnvioPaquetes[2].Estado,
+          fila1.Reclamos[0].Cola, fila1.Reclamos[0].Estado, fila1.Reclamos[1].Cola, fila1.Reclamos[1].Estado, fila1.Ventas[0].Cola, fila1.Ventas[0].Estado, fila1.Ventas[1].Cola, fila1.Ventas[1].Estado,
+          fila1.Ventas[2].Cola, fila1.Ventas[2].Estado, fila1.AtencionEmp[0].Cola, fila1.AtencionEmp[0].Estado, fila1.AtencionEmp[1].Cola, fila1.AtencionEmp[1].Estado, fila1.Postales[0].Cola, fila1.Postales[0].Estado
+          );
+
+
+
 
                 // ----------------------------------------- LLEGADAS -----------------------------------------------------------------------------
                 //LLEGADA ENVIO
                 if (fila2.Evento == "llegada_envio")
-                {
+                {   
                     copiarProximasLlegadas(fila1, fila2);
                     // Genero la prox. llegada_envio
-                    fila2.Llegada_cliente_envio[0] = generarRandom(random);
-                    fila2.Llegada_cliente_envio[1] = calcularTiempo(mediaLlegadaPaquete, fila2.Llegada_cliente_envio[0]);
-                    fila2.Llegada_cliente_envio[2] = fila2.Reloj + fila2.Llegada_cliente_envio[1];
+                    fila2.LlegadaEnvio.Rnd = generarRandom(random);
+                    fila2.LlegadaEnvio.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPaquete, fila2.LlegadaEnvio.Rnd);
+                    fila2.LlegadaEnvio.ProxLlegada = fila2.Reloj + fila2.LlegadaEnvio.TiempoEntreLlegadas;
 
                     copiarObjetosFilaAnterior(fila1, fila2);
                     copiarFinesAtencion(fila1, fila2);
                     copiarEstadisticas(fila1, fila2);
 
                     Cliente cliente = new Cliente();   //Al ser una llegada tengo que crear al cliente
+
+                    int cantColumnas = grdSimulacion.ColumnCount;
+                    DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn(); 
+                    columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1) ;
+                    DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    grdSimulacion.Columns.Add(columnaEstado);
+                    grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+
 
                     // Reviso las colas y los estados de los objetos ENVIO (en este caso son 3)
                     bool empleadoLibre = false;
@@ -193,6 +232,8 @@ namespace TP4_SIM
                     }
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
+                    grdSimulacion.Rows[i + 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
+                    grdSimulacion.Rows[i + 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA VENTA
@@ -201,9 +242,9 @@ namespace TP4_SIM
                     copiarProximasLlegadas(fila1, fila2);
 
                     // Genero la prox. llegada_venta
-                    fila2.Llegada_cliente_venta[0] = generarRandom(random);
-                    fila2.Llegada_cliente_venta[1] = calcularTiempo(mediaLlegadaVenta, fila2.Llegada_cliente_venta[0]);
-                    fila2.Llegada_cliente_venta[2] = fila2.Reloj + fila2.Llegada_cliente_venta[1];
+                    fila2.LlegadaVenta.Rnd = generarRandom(random);
+                    fila2.LlegadaVenta.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaVenta, fila2.LlegadaVenta.Rnd);
+                    fila2.LlegadaVenta.ProxLlegada = fila2.Reloj + fila2.LlegadaVenta.TiempoEntreLlegadas;
 
                     copiarObjetosFilaAnterior(fila1, fila2);
                     copiarFinesAtencion(fila1, fila2);
@@ -211,6 +252,15 @@ namespace TP4_SIM
 
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
+
+                    int cantColumnas = grdSimulacion.ColumnCount;
+                    DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
+                    columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    grdSimulacion.Columns.Add(columnaEstado);
+                    grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Ventas.Count; j++)
                     {
@@ -280,6 +330,9 @@ namespace TP4_SIM
 
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
+                    grdSimulacion.Rows[i + 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
+
+                    grdSimulacion.Rows[i + 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
 
                 }
 
@@ -289,9 +342,9 @@ namespace TP4_SIM
                     copiarProximasLlegadas(fila1, fila2);
 
                     // Genero la prox. llegada_reclamo
-                    fila2.Llegada_cliente_reclamo[0] = generarRandom(random);
-                    fila2.Llegada_cliente_reclamo[1] = calcularTiempo(mediaLlegadaReclamo, fila2.Llegada_cliente_reclamo[0]);
-                    fila2.Llegada_cliente_reclamo[2] = fila2.Reloj + fila2.Llegada_cliente_reclamo[1];
+                    fila2.LlegadaReclamo.Rnd = generarRandom(random);
+                    fila2.LlegadaReclamo.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaReclamo, fila2.LlegadaReclamo.Rnd);
+                    fila2.LlegadaReclamo.ProxLlegada = fila2.Reloj + fila2.LlegadaReclamo.TiempoEntreLlegadas;
 
                     copiarObjetosFilaAnterior(fila1, fila2);
                     copiarFinesAtencion(fila1, fila2);
@@ -299,6 +352,15 @@ namespace TP4_SIM
 
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
+
+                    int cantColumnas = grdSimulacion.ColumnCount;
+                    DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
+                    columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    grdSimulacion.Columns.Add(columnaEstado);
+                    grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Reclamos.Count; j++)
                     {
@@ -339,6 +401,9 @@ namespace TP4_SIM
                            
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
+                    grdSimulacion.Rows[i+1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
+
+                    grdSimulacion.Rows[i+1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA ATENCIÓN EMPRESARIAL
@@ -347,9 +412,9 @@ namespace TP4_SIM
                     copiarProximasLlegadas(fila1, fila2);
 
                     // Genero la prox. llegada_AE
-                    fila2.Llegada_cliente_AE[0] = generarRandom(random);
-                    fila2.Llegada_cliente_AE[1] = calcularTiempo(mediaLlegadaAE, fila2.Llegada_cliente_AE[0]);
-                    fila2.Llegada_cliente_AE[2] = fila2.Reloj + fila2.Llegada_cliente_AE[1];
+                    fila2.LlegadaAE.Rnd = generarRandom(random);
+                    fila2.LlegadaAE.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaAE, fila2.LlegadaAE.Rnd);
+                    fila2.LlegadaAE.ProxLlegada = fila2.Reloj + fila2.LlegadaAE.TiempoEntreLlegadas;
 
                     copiarObjetosFilaAnterior(fila1, fila2);
                     copiarFinesAtencion(fila1, fila2);
@@ -358,6 +423,16 @@ namespace TP4_SIM
                     // Tengo que revisar las colas y los estados de VENTAS con el for
 
                     Cliente cliente = new Cliente();
+
+                    int cantColumnas = grdSimulacion.ColumnCount;
+                    DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
+                    columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    grdSimulacion.Columns.Add(columnaEstado);
+                    grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+
+
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.AtencionEmp.Count; j++)
                     {
@@ -397,6 +472,10 @@ namespace TP4_SIM
                     }
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
+
+                    grdSimulacion.Rows[i+1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
+
+                    grdSimulacion.Rows[i+1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA POSTALES
@@ -404,10 +483,19 @@ namespace TP4_SIM
                 {
                     copiarProximasLlegadas(fila1, fila2);
                     Cliente cliente = new Cliente();
+
+                    int cantColumnas = grdSimulacion.ColumnCount;
+                    DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
+                    columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    grdSimulacion.Columns.Add(columnaEstado);
+                    grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+
                     // Genero la prox. llegada_AE
-                    fila2.Llegada_cliente_postales[0] = generarRandom(random);
-                    fila2.Llegada_cliente_postales[1] = calcularTiempo(mediaLlegadaPostales, fila2.Llegada_cliente_postales[0]);
-                    fila2.Llegada_cliente_postales[2] = fila2.Reloj + fila2.Llegada_cliente_postales[1];
+                    fila2.LlegadaPostales.Rnd = generarRandom(random);
+                    fila2.LlegadaPostales.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPostales, fila2.LlegadaPostales.Rnd);
+                    fila2.LlegadaPostales.ProxLlegada = fila2.Reloj + fila2.LlegadaPostales.TiempoEntreLlegadas;
 
                     copiarObjetosFilaAnterior(fila1, fila2);
                     copiarFinesAtencion(fila1, fila2);
@@ -435,6 +523,9 @@ namespace TP4_SIM
                     }
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
+                    grdSimulacion.Rows[i+1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
+
+                    grdSimulacion.Rows[i+1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
 
                 }
 
@@ -480,6 +571,7 @@ namespace TP4_SIM
 
                     calcularFinAtencionReclamo(1, fila1, fila2, random, mediaFinReclamo);
                 }
+
                 if (fila2.Evento == "fin_reclamo2")
                 {
                     copiarProximasLlegadas(fila1, fila2);
@@ -553,13 +645,12 @@ namespace TP4_SIM
                     calcularFinAtencionPostales( fila1, fila2, random, mediaFinPostales);
                 }
 
-
                 List<double> posiblesProximosEventos = new List<double>();
-                posiblesProximosEventos.Add(fila2.Llegada_cliente_envio[2]); // 0 
-                posiblesProximosEventos.Add(fila2.Llegada_cliente_reclamo[2]); // 1
-                posiblesProximosEventos.Add(fila2.Llegada_cliente_venta[2]); // 2
-                posiblesProximosEventos.Add(fila2.Llegada_cliente_AE[2]); // 3
-                posiblesProximosEventos.Add(fila2.Llegada_cliente_postales[2]); //4
+                posiblesProximosEventos.Add(fila2.LlegadaEnvio.ProxLlegada); // 0 
+                posiblesProximosEventos.Add(fila2.LlegadaReclamo.ProxLlegada); // 1
+                posiblesProximosEventos.Add(fila2.LlegadaVenta.ProxLlegada); // 2
+                posiblesProximosEventos.Add(fila2.LlegadaAE.ProxLlegada); // 3
+                posiblesProximosEventos.Add(fila2.LlegadaPostales.ProxLlegada); //4
                 posiblesProximosEventos.Add((double)fila2.Fin_envio.FinAtencion[0]);
                 posiblesProximosEventos.Add((double)fila2.Fin_envio.FinAtencion[1]);
                 posiblesProximosEventos.Add((double)fila2.Fin_envio.FinAtencion[2]);
@@ -575,7 +666,7 @@ namespace TP4_SIM
 
                 List<double> proximoEvento = buscarProxEvento(posiblesProximosEventos);
            
-                filasMostrar.Add(fila1);
+                //filasMostrar.Add(fila1);
                 fila1 = fila2;
                 
                 fila2 = new FilaVector();
@@ -665,11 +756,11 @@ namespace TP4_SIM
 
         private void copiarProximasLlegadas( FilaVector fila1, FilaVector fila2)
         {
-            fila2.Llegada_cliente_reclamo[2] = fila1.Llegada_cliente_reclamo[2];
-            fila2.Llegada_cliente_venta[2] = fila1.Llegada_cliente_venta[2];
-            fila2.Llegada_cliente_AE[2] = fila1.Llegada_cliente_AE[2];
-            fila2.Llegada_cliente_postales[2] = fila1.Llegada_cliente_postales[2];
-            fila2.Llegada_cliente_envio[2] = fila1.Llegada_cliente_envio[2];
+            fila2.LlegadaReclamo.ProxLlegada = fila1.LlegadaReclamo.ProxLlegada;
+            fila2.LlegadaVenta.ProxLlegada = fila1.LlegadaVenta.ProxLlegada;
+            fila2.LlegadaAE.ProxLlegada = fila1.LlegadaAE.ProxLlegada;
+            fila2.LlegadaPostales.ProxLlegada = fila1.LlegadaPostales.ProxLlegada;
+            fila2.LlegadaEnvio.ProxLlegada = fila1.LlegadaEnvio.ProxLlegada;
         }
 
         private void copiarEstadisticas(FilaVector fila1, FilaVector fila2)
@@ -693,10 +784,11 @@ namespace TP4_SIM
             fila2.EstadisticasEnvio.CantClientesAtendidos += 1;
 
             fila2.EstadisticasEnvio.AcumuladorOcupacion += (fila2.Reloj - fila2.Clientes[indexClienteAtendido].HoraInicioAtencion);
-            fila2.Clientes.Remove(fila2.Clientes[indexClienteAtendido]);
+            fila2.Clientes[indexClienteAtendido].Estado = "Eliminado";
             if (fila1.EnvioPaquetes[indice].Cola == 0) 
             {
                 fila2.EnvioPaquetes[indice].Estado = "Libre";
+                fila2.Fin_envio.FinAtencion[indice] = 0;
             }
             else
             {
@@ -725,11 +817,12 @@ namespace TP4_SIM
            
             fila2.EstadisticasReclamo.CantClientesAtendidos += 1;
             fila2.EstadisticasReclamo.AcumuladorOcupacion = (fila2.Reloj - fila2.Clientes[indexClienteAtendido].HoraInicioAtencion) + fila1.EstadisticasReclamo.AcumuladorOcupacion;
-            fila2.Clientes.Remove(fila2.Clientes[indexClienteAtendido]);
+            fila2.Clientes[indexClienteAtendido].Estado = "Eliminado";
 
             if (fila1.Reclamos[indice].Cola == 0)
             {
                 fila2.Reclamos[indice].Estado = "Libre";
+                fila2.Fin_reclamo.FinAtencion[indice] = 0;
             }
             else
             {
@@ -758,11 +851,12 @@ namespace TP4_SIM
             fila2.EstadisticasVenta.CantClientesAtendidos += 1;
 
             fila2.EstadisticasVenta.AcumuladorOcupacion = (fila2.Reloj - fila2.Clientes[indexClienteAtendido].HoraInicioAtencion) + fila1.EstadisticasVenta.AcumuladorOcupacion;
-            fila2.Clientes.Remove(fila2.Clientes[indexClienteAtendido]);
+            fila2.Clientes[indexClienteAtendido].Estado = "Eliminado";
 
             if (fila1.Ventas[indice].Cola == 0)
             {
                 fila2.Ventas[indice].Estado = "Libre";
+                fila2.Fin_venta.FinAtencion[indice] = 0;
             }
             else
             {
@@ -792,11 +886,12 @@ namespace TP4_SIM
             fila2.EstadisticasAE.CantClientesAtendidos += 1;
 
             fila2.EstadisticasAE.AcumuladorOcupacion = (fila2.Reloj - fila2.Clientes[indexClienteAtendido].HoraInicioAtencion) + fila1.EstadisticasAE.AcumuladorOcupacion;
+            fila2.Clientes[indexClienteAtendido].Estado = "Eliminado";
 
-            fila2.Clientes.Remove(fila2.Clientes[indexClienteAtendido]);
             if (fila1.AtencionEmp[indice].Cola == 0)
             {
                 fila2.AtencionEmp[indice].Estado = "Libre";
+                fila2.Fin_AE.FinAtencion[indice] = 0;
             }
             else
             {
@@ -821,11 +916,12 @@ namespace TP4_SIM
             fila2.EstadisticasPostales.CantClientesAtendidos += 1;
 
             fila2.EstadisticasPostales.AcumuladorOcupacion = (fila2.Reloj - fila2.Clientes[indexClienteAtendido].HoraInicioAtencion) + fila1.EstadisticasPostales.AcumuladorOcupacion;
-            fila2.Clientes.Remove(fila2.Clientes[indexClienteAtendido]);
+            fila2.Clientes[indexClienteAtendido].Estado = "Eliminado";
 
             if (fila1.Postales[0].Cola == 0)
             {
                 fila2.Postales[0].Estado = "Libre";
+                fila2.Fin_postales.FinAtencion = 0;
             }
             else
             {

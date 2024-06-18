@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 using TP4_SIM.Clases;
 using TP4_SIM.Clases.Estadisticas;
 using TP4_SIM.Clases.EventosFinAtencion;
+using TP4_SIM.Clases.EventosLlegadas;
 
 namespace TP4_SIM
 {
     public class FilaVector
     {
+        int nroFIla;
         private string evento;
         private double reloj;
-        private double[] llegada_cliente_envio;
-        private double[] llegada_cliente_reclamo;
-        private double[] llegada_cliente_venta;
-        private double[] llegada_cliente_AE;
-        private double[] llegada_cliente_postales;
+        //private double[] llegada_cliente_envio;
+        //private double[] llegada_cliente_reclamo;
+        //private double[] llegada_cliente_venta;
+        //private double[] llegada_cliente_AE;
+        //private double[] llegada_cliente_postales;
+        private LlegadaEnvio llegadaEnvio;
+        private LlegadaReclamo llegadaReclamo;
+        private LlegadaVenta llegadaVenta;
+        private LlegadaAE llegadaAE;
+        private LlegadaPostales llegadaPostales;
+
         private FinAtencionEnvio fin_envio;
         private FinAtencionReclamo fin_reclamo;
         private FinAtencionVenta fin_venta;
@@ -39,12 +47,18 @@ namespace TP4_SIM
         public FilaVector()
         {
             this.evento = "";
-            this.reloj = 0;
+            this.reloj = 0;/*
             this.llegada_cliente_envio = new double[3];
             this.llegada_cliente_reclamo = new double[3];
             this.llegada_cliente_venta = new double[3];
             this.llegada_cliente_AE = new double[3];
-            this.llegada_cliente_postales = new double[3];
+            this.llegada_cliente_postales = new double[3];*/
+            this.LlegadaEnvio = new LlegadaEnvio();
+            this.LlegadaReclamo = new LlegadaReclamo();
+            this.LlegadaVenta = new LlegadaVenta();
+            this.LlegadaAE = new LlegadaAE();
+            this.LlegadaPostales = new LlegadaPostales();
+
             this.fin_envio = new FinAtencionEnvio();
             this.fin_reclamo = new FinAtencionReclamo();
             this.fin_venta = new FinAtencionVenta();
@@ -84,14 +98,17 @@ namespace TP4_SIM
 
 
         }
+        public int NroFila { get => nroFIla; set => nroFIla = value; }  
 
         public string Evento { get => evento; set => evento = value; }
         public double Reloj { get => reloj; set => reloj = value; }
+        /*
         public double[] Llegada_cliente_envio { get => llegada_cliente_envio; set => llegada_cliente_envio = value; }
         public double[] Llegada_cliente_reclamo { get => llegada_cliente_reclamo; set => llegada_cliente_reclamo = value; }
         public double[] Llegada_cliente_venta { get => llegada_cliente_venta; set => llegada_cliente_venta = value; }
         public double[] Llegada_cliente_AE { get => llegada_cliente_AE; set => llegada_cliente_AE = value; }
         public double[] Llegada_cliente_postales { get => llegada_cliente_postales; set => llegada_cliente_postales = value; }
+        */
 
 
         public List<Cliente> Clientes { get => clientes; set => clientes = value; }
@@ -109,6 +126,11 @@ namespace TP4_SIM
         public FinAtencionVenta Fin_venta { get => fin_venta; set => fin_venta = value; }
         public FinAtencionEmpresarial Fin_AE { get => fin_AE; set => fin_AE = value; }
         public FinAtencionPostales Fin_postales { get => fin_postales; set => fin_postales = value; }
+        public LlegadaEnvio LlegadaEnvio { get => llegadaEnvio; set => llegadaEnvio = value; }
+        public LlegadaReclamo LlegadaReclamo { get => llegadaReclamo; set => llegadaReclamo = value; }
+        public LlegadaVenta LlegadaVenta { get => llegadaVenta; set => llegadaVenta = value; }
+        public LlegadaAE LlegadaAE { get => llegadaAE; set => llegadaAE = value; }
+        public LlegadaPostales LlegadaPostales { get => llegadaPostales; set => llegadaPostales = value; }
         internal List<AtencionEmpresarial> AtencionEmp { get => atencionEmp; set => atencionEmp = value; }
     }
 }

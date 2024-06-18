@@ -59,6 +59,12 @@
     <Compile Include="Clases\EventosFinAtencion\FinAtencionPostales.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionReclamo.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionVenta.cs" />
+    <Compile Include="Clases\EventosLlegadas\Llegada.cs" />
+    <Compile Include="Clases\EventosLlegadas\LlegadaAE.cs" />
+    <Compile Include="Clases\EventosLlegadas\LlegadaEnvio.cs" />
+    <Compile Include="Clases\EventosLlegadas\LlegadaPostales.cs" />
+    <Compile Include="Clases\EventosLlegadas\LlegadaReclamo.cs" />
+    <Compile Include="Clases\EventosLlegadas\LlegadaVenta.cs" />
     <Compile Include="Clases\FilaVector.cs" />
     <Compile Include="Clases\Postales.cs" />
     <Compile Include="Clases\Reclamo.cs" />
