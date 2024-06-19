@@ -9,3 +9,14 @@ F:\NuevoGit\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.csproj.GenerateResource.cache
 F:\NuevoGit\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.csproj.CoreCompileInputs.cache
 F:\NuevoGit\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.exe
 F:\NuevoGit\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.pdb
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\bin\Debug\TP4_SIM.exe.config
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\bin\Debug\TP4_SIM.exe
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\bin\Debug\TP4_SIM.pdb
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.csproj.AssemblyReference.cache
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.csproj.SuggestedBindingRedirects.cache
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.Simulacion.resources
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.Properties.Resources.resources
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.csproj.GenerateResource.cache
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.csproj.CoreCompileInputs.cache
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.exe
+D:\Mari\Documents\gitHub repository\TP4_SIM\TP4_SIM\obj\Debug\TP4_SIM.pdb

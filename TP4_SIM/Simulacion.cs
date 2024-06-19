@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using TP4_SIM.Clases;
 using TP4_SIM.Clases.EventosLlegadas;
@@ -94,23 +95,91 @@ namespace TP4_SIM
 
                 if ((i+1) >= nroPrimeraFilaMostrar && (i+1) <= nroUltimaFilaMostrar)
                 {
-                    grdSimulacion.Rows.Add(fila1.Evento, fila1.Reloj, fila1.LlegadaEnvio.Rnd, fila1.LlegadaEnvio.TiempoEntreLlegadas, fila1.LlegadaEnvio.ProxLlegada,
-                    fila1.LlegadaReclamo.Rnd, fila1.LlegadaReclamo.TiempoEntreLlegadas, fila1.LlegadaReclamo.ProxLlegada,
-                    fila1.LlegadaVenta.Rnd, fila1.LlegadaVenta.TiempoEntreLlegadas, fila1.LlegadaVenta.ProxLlegada,
-                    fila1.LlegadaAE.Rnd, fila1.LlegadaAE.TiempoEntreLlegadas, fila1.LlegadaAE.ProxLlegada,
-                    fila1.LlegadaPostales.Rnd, fila1.LlegadaPostales.TiempoEntreLlegadas, fila1.LlegadaPostales.ProxLlegada, fila1.Fin_envio.Rnd, fila1.Fin_envio.TiempoAtencion,
-                    fila1.Fin_envio.FinAtencion[0], fila1.Fin_envio.FinAtencion[1], fila1.Fin_envio.FinAtencion[2], fila1.Fin_reclamo.Rnd, fila1.Fin_reclamo.TiempoAtencion, fila1.Fin_reclamo.FinAtencion[0],
-                    fila1.Fin_reclamo.FinAtencion[1], fila1.Fin_venta.Rnd, fila1.Fin_venta.TiempoAtencion, fila1.Fin_venta.FinAtencion[0], fila1.Fin_venta.FinAtencion[1], fila1.Fin_venta.FinAtencion[2],
-                    fila1.Fin_AE.Rnd, fila1.Fin_AE.TiempoAtencion, fila1.Fin_AE.FinAtencion[0], fila1.Fin_AE.FinAtencion[1], fila1.Fin_postales.Rnd, fila1.Fin_postales.TiempoAtencion, fila1.Fin_postales.FinAtencion,
-                    fila1.EnvioPaquetes[0].Cola, fila1.EnvioPaquetes[0].Estado, fila1.EnvioPaquetes[1].Cola, fila1.EnvioPaquetes[1].Estado, fila1.EnvioPaquetes[2].Cola, fila1.EnvioPaquetes[2].Estado,
-                    fila1.Reclamos[0].Cola, fila1.Reclamos[0].Estado, fila1.Reclamos[1].Cola, fila1.Reclamos[1].Estado, fila1.Ventas[0].Cola, fila1.Ventas[0].Estado, fila1.Ventas[1].Cola, fila1.Ventas[1].Estado,
-                    fila1.Ventas[2].Cola, fila1.Ventas[2].Estado, fila1.AtencionEmp[0].Cola, fila1.AtencionEmp[0].Estado, fila1.AtencionEmp[1].Cola, fila1.AtencionEmp[1].Estado, fila1.Postales[0].Cola, fila1.Postales[0].Estado,
-                    fila1.EstadisticasEnvio.AcumuladorEspera, fila1.EstadisticasEnvio.CantClientesAtendidos,
-                    fila1.EstadisticasReclamo.AcumuladorEspera, fila1.EstadisticasReclamo.CantClientesAtendidos,
-                    fila1.EstadisticasVenta.AcumuladorEspera, fila1.EstadisticasVenta.CantClientesAtendidos,
-                    fila1.EstadisticasAE.AcumuladorEspera, fila1.EstadisticasAE.CantClientesAtendidos,
-                    fila1.EstadisticasPostales.AcumuladorEspera, fila1.EstadisticasPostales.CantClientesAtendidos
-                    ); // me falta agregar las columnas de ocupación en el data grid view
+                    // Agregar cada atributo individualmente de fila1
+                    List<string> listaAux1 = new List<string>();
+
+                    // Agregar cada atributo individualmente de fila1
+                    listaAux1.Add(fila1.Evento.ToString());
+                    listaAux1.Add(fila1.Reloj.ToString());
+                    listaAux1.Add(fila1.LlegadaEnvio.Rnd.ToString());
+                    listaAux1.Add(fila1.LlegadaEnvio.TiempoEntreLlegadas.ToString());
+                    listaAux1.Add(fila1.LlegadaEnvio.ProxLlegada.ToString());
+                    listaAux1.Add(fila1.LlegadaReclamo.Rnd.ToString());
+                    listaAux1.Add(fila1.LlegadaReclamo.TiempoEntreLlegadas.ToString());
+                    listaAux1.Add(fila1.LlegadaReclamo.ProxLlegada.ToString());
+                    listaAux1.Add(fila1.LlegadaVenta.Rnd.ToString());
+                    listaAux1.Add(fila1.LlegadaVenta.TiempoEntreLlegadas.ToString());
+                    listaAux1.Add(fila1.LlegadaVenta.ProxLlegada.ToString());
+                    listaAux1.Add(fila1.LlegadaAE.Rnd.ToString());
+                    listaAux1.Add(fila1.LlegadaAE.TiempoEntreLlegadas.ToString());
+                    listaAux1.Add(fila1.LlegadaAE.ProxLlegada.ToString());
+                    listaAux1.Add(fila1.LlegadaPostales.Rnd.ToString());
+                    listaAux1.Add(fila1.LlegadaPostales.TiempoEntreLlegadas.ToString());
+                    listaAux1.Add(fila1.LlegadaPostales.ProxLlegada.ToString());
+                    listaAux1.Add(fila1.Fin_envio.Rnd.ToString());
+                    listaAux1.Add(fila1.Fin_envio.TiempoAtencion.ToString());
+                    listaAux1.Add(fila1.Fin_envio.FinAtencion[0].ToString());
+                    listaAux1.Add(fila1.Fin_envio.FinAtencion[1].ToString());
+                    listaAux1.Add(fila1.Fin_envio.FinAtencion[2].ToString());
+                    listaAux1.Add(fila1.Fin_reclamo.Rnd.ToString());
+                    listaAux1.Add(fila1.Fin_reclamo.TiempoAtencion.ToString());
+                    listaAux1.Add(fila1.Fin_reclamo.FinAtencion[0].ToString());
+                    listaAux1.Add(fila1.Fin_reclamo.FinAtencion[1].ToString());
+                    listaAux1.Add(fila1.Fin_venta.Rnd.ToString());
+                    listaAux1.Add(fila1.Fin_venta.TiempoAtencion.ToString());
+                    listaAux1.Add(fila1.Fin_venta.FinAtencion[0].ToString());
+                    listaAux1.Add(fila1.Fin_venta.FinAtencion[1].ToString());
+                    listaAux1.Add(fila1.Fin_venta.FinAtencion[2].ToString());
+                    listaAux1.Add(fila1.Fin_AE.Rnd.ToString());
+                    listaAux1.Add(fila1.Fin_AE.TiempoAtencion.ToString());
+                    listaAux1.Add(fila1.Fin_AE.FinAtencion[0].ToString());
+                    listaAux1.Add(fila1.Fin_AE.FinAtencion[1].ToString());
+                    listaAux1.Add(fila1.Fin_postales.Rnd.ToString());
+                    listaAux1.Add(fila1.Fin_postales.TiempoAtencion.ToString());
+                    listaAux1.Add(fila1.Fin_postales.FinAtencion.ToString());
+                    listaAux1.Add(fila1.EnvioPaquetes[0].Cola.ToString());
+                    listaAux1.Add(fila1.EnvioPaquetes[0].Estado.ToString());
+                    listaAux1.Add(fila1.EnvioPaquetes[1].Cola.ToString());
+                    listaAux1.Add(fila1.EnvioPaquetes[1].Estado.ToString());
+                    listaAux1.Add(fila1.EnvioPaquetes[2].Cola.ToString());
+                    listaAux1.Add(fila1.EnvioPaquetes[2].Estado.ToString());
+                    listaAux1.Add(fila1.Reclamos[0].Cola.ToString());
+                    listaAux1.Add(fila1.Reclamos[0].Estado.ToString());
+                    listaAux1.Add(fila1.Reclamos[1].Cola.ToString());
+                    listaAux1.Add(fila1.Reclamos[1].Estado.ToString());
+                    listaAux1.Add(fila1.Ventas[0].Cola.ToString());
+                    listaAux1.Add(fila1.Ventas[0].Estado.ToString());
+                    listaAux1.Add(fila1.Ventas[1].Cola.ToString());
+                    listaAux1.Add(fila1.Ventas[1].Estado.ToString());
+                    listaAux1.Add(fila1.Ventas[2].Cola.ToString());
+                    listaAux1.Add(fila1.Ventas[2].Estado.ToString());
+                    listaAux1.Add(fila1.AtencionEmp[0].Cola.ToString());
+                    listaAux1.Add(fila1.AtencionEmp[0].Estado.ToString());
+                    listaAux1.Add(fila1.AtencionEmp[1].Cola.ToString());
+                    listaAux1.Add(fila1.AtencionEmp[1].Estado.ToString());
+                    listaAux1.Add(fila1.Postales[0].Cola.ToString());
+                    listaAux1.Add(fila1.Postales[0].Estado.ToString());
+                    listaAux1.Add(fila1.EstadisticasEnvio.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasEnvio.CantClientesAtendidos.ToString());
+                    listaAux1.Add(fila1.EstadisticasReclamo.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasReclamo.CantClientesAtendidos.ToString());
+                    listaAux1.Add(fila1.EstadisticasVenta.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasVenta.CantClientesAtendidos.ToString());
+                    listaAux1.Add(fila1.EstadisticasAE.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasAE.CantClientesAtendidos.ToString());
+                    listaAux1.Add(fila1.EstadisticasPostales.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasPostales.CantClientesAtendidos.ToString());
+
+                    foreach (Cliente Cli in fila1.Clientes)
+                    {
+                        listaAux1.Add(Cli.Estado);
+                        listaAux1.Add(Cli.HoraInicioEspera.ToString());
+                    }
+
+                    // Agregar la fila a la grilla
+                    grdSimulacion.Rows.Add(listaAux1.ToArray());
+
+                    ; // me falta agregar las columnas de ocupación en el data grid view
                 }
 
                 // ----------------------------------------- LLEGADAS -----------------------------------------------------------------------------
@@ -133,7 +202,8 @@ namespace TP4_SIM
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn(); 
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1) ;
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
+                    
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
                     
@@ -148,6 +218,8 @@ namespace TP4_SIM
                             // atiende, y genero el fin de atención para ese mismo objeto.
                             cliente.Estado = "SE" + (j + 1);
                             cliente.HoraInicioAtencion = fila2.Reloj;
+
+                            cliente.HoraInicioEspera = fila2.Reloj;
                             fila2.EnvioPaquetes[j].Estado = "Ocupado";
 
                             fila2.Fin_envio.Rnd = generarRandom(random);
@@ -231,8 +303,8 @@ namespace TP4_SIM
                     }
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
-                    grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
+                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
+                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA VENTA
@@ -252,15 +324,15 @@ namespace TP4_SIM
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
 
-                    /*
+
                     int cantColumnas = grdSimulacion.ColumnCount;
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    */
+
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Ventas.Count; j++)
                     {
@@ -269,6 +341,8 @@ namespace TP4_SIM
                             // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
                             cliente.Estado = "SV" + (j+1);
                             cliente.HoraInicioAtencion = fila2.Reloj;
+
+                            cliente.HoraInicioEspera = fila2.Reloj;
                             fila2.Ventas[j].Estado = "Ocupado";
 
                             fila2.Fin_venta.Rnd = generarRandom(random);
@@ -371,15 +445,15 @@ namespace TP4_SIM
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
 
-                    /*
+
                     int cantColumnas = grdSimulacion.ColumnCount;
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    */
+
 
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Reclamos.Count; j++)
@@ -388,6 +462,8 @@ namespace TP4_SIM
                         {
                             // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
                             cliente.Estado = "SR" + (j + 1);
+
+                            cliente.HoraInicioEspera = fila2.Reloj;
                             cliente.HoraInicioAtencion = fila2.Reloj;
                             fila2.Reclamos[j].Estado = "Ocupado";
 
@@ -443,15 +519,15 @@ namespace TP4_SIM
 
                     Cliente cliente = new Cliente();
 
-                    /*
+
                     int cantColumnas = grdSimulacion.ColumnCount;
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    */
+
 
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.AtencionEmp.Count; j++)
@@ -461,6 +537,7 @@ namespace TP4_SIM
                             // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
                             cliente.Estado = "SAE" + (j + 1);
                             cliente.HoraInicioAtencion = fila2.Reloj;
+                            cliente.HoraInicioEspera = fila2.Reloj;
                             fila2.AtencionEmp[j].Estado = "Ocupado";
 
                             fila2.Fin_AE.Rnd = generarRandom(random);
@@ -503,15 +580,15 @@ namespace TP4_SIM
                     copiarProximasLlegadas(fila1, fila2);
                     Cliente cliente = new Cliente();
 
-                    /*
+
                     int cantColumnas = grdSimulacion.ColumnCount;
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HIEspera" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    */
+
 
                     // Genero la prox. llegada_AE
                     fila2.LlegadaPostales.Rnd = generarRandom(random);
@@ -528,6 +605,7 @@ namespace TP4_SIM
 
                         cliente.Estado = "SP";
                         cliente.HoraInicioAtencion = fila2.Reloj;
+                        cliente.HoraInicioEspera = fila2.Reloj;
                         fila2.Postales[0].Estado = "Ocupado";
 
                         //Calculo fin_atención
@@ -697,39 +775,90 @@ namespace TP4_SIM
                 }
                 else
                 {
+                    List<String> listaAux = new List<String>();
+                    listaAux.Add(fila2.Evento.ToString());
+                    listaAux.Add(fila2.Reloj.ToString());
+                    listaAux.Add(fila2.LlegadaEnvio.Rnd.ToString());
+                    listaAux.Add(fila2.LlegadaEnvio.TiempoEntreLlegadas.ToString());
+                    listaAux.Add(fila2.LlegadaEnvio.ProxLlegada.ToString());
+                    listaAux.Add(fila2.LlegadaReclamo.Rnd.ToString());
+                    listaAux.Add(fila2.LlegadaReclamo.TiempoEntreLlegadas.ToString());
+                    listaAux.Add(fila1.LlegadaReclamo.ProxLlegada.ToString());
+                    listaAux.Add(fila2.LlegadaVenta.Rnd.ToString());
+                    listaAux.Add(fila2.LlegadaVenta.TiempoEntreLlegadas.ToString());
+                    listaAux.Add(fila2.LlegadaVenta.ProxLlegada.ToString());
+                    listaAux.Add(fila2.LlegadaAE.Rnd.ToString());
+                    listaAux.Add(fila2.LlegadaAE.TiempoEntreLlegadas.ToString());
+                    listaAux.Add(fila2.LlegadaAE.ProxLlegada.ToString());
+                    listaAux.Add(fila2.LlegadaPostales.Rnd.ToString());
+                    listaAux.Add(fila2.LlegadaPostales.TiempoEntreLlegadas.ToString());
+                    listaAux.Add(fila2.LlegadaPostales.ProxLlegada.ToString());
+                    listaAux.Add(fila2.Fin_envio.Rnd.ToString());
+                    listaAux.Add(fila2.Fin_envio.TiempoAtencion.ToString());
+                    listaAux.Add(fila2.Fin_envio.FinAtencion[0].ToString());
+                    listaAux.Add(fila2.Fin_envio.FinAtencion[1].ToString());
+                    listaAux.Add(fila2.Fin_envio.FinAtencion[2].ToString());
+                    listaAux.Add(fila2.Fin_reclamo.Rnd.ToString());
+                    listaAux.Add(fila2.Fin_reclamo.TiempoAtencion.ToString());
+                    listaAux.Add(fila2.Fin_reclamo.FinAtencion[0].ToString());
+                    listaAux.Add(fila2.Fin_reclamo.FinAtencion[1].ToString());
+                    listaAux.Add(fila2.Fin_venta.Rnd.ToString());
+                    listaAux.Add(fila2.Fin_venta.TiempoAtencion.ToString());
+                    listaAux.Add(fila2.Fin_venta.FinAtencion[0].ToString());
+                    listaAux.Add(fila2.Fin_venta.FinAtencion[1].ToString());
+                    listaAux.Add(fila2.Fin_venta.FinAtencion[2].ToString());
+                    listaAux.Add(fila2.Fin_AE.Rnd.ToString());
+                    listaAux.Add(fila2.Fin_AE.TiempoAtencion.ToString());
+                    listaAux.Add(fila2.Fin_AE.FinAtencion[0].ToString());
+                    listaAux.Add(fila2.Fin_AE.FinAtencion[1].ToString());
+                    listaAux.Add(fila2.Fin_postales.Rnd.ToString());
+                    listaAux.Add(fila2.Fin_postales.TiempoAtencion.ToString());
+                    listaAux.Add(fila2.Fin_postales.FinAtencion.ToString());
+                    listaAux.Add(fila2.EnvioPaquetes[0].Cola.ToString());
+                    listaAux.Add(fila2.EnvioPaquetes[0].Estado.ToString());
+                    listaAux.Add(fila2.EnvioPaquetes[1].Cola.ToString());
+                    listaAux.Add(fila2.EnvioPaquetes[1].Estado.ToString());
+                    listaAux.Add(fila2.EnvioPaquetes[2].Cola.ToString());
+                    listaAux.Add(fila2.EnvioPaquetes[2].Estado.ToString());
+                    listaAux.Add(fila2.Reclamos[0].Cola.ToString());
+                    listaAux.Add(fila2.Reclamos[0].Estado.ToString());
+                    listaAux.Add(fila2.Reclamos[1].Cola.ToString());
+                    listaAux.Add(fila2.Reclamos[1].Estado.ToString());
+                    listaAux.Add(fila2.Ventas[0].Cola.ToString());
+                    listaAux.Add(fila2.Ventas[0].Estado.ToString());
+                    listaAux.Add(fila2.Ventas[1].Cola.ToString());
+                    listaAux.Add(fila2.Ventas[1].Estado.ToString());
+                    listaAux.Add(fila2.Ventas[2].Cola.ToString());
+                    listaAux.Add(fila2.Ventas[2].Estado.ToString());
+                    listaAux.Add(fila2.AtencionEmp[0].Cola.ToString());
+                    listaAux.Add(fila2.AtencionEmp[0].Estado.ToString());
+                    listaAux.Add(fila2.AtencionEmp[1].Cola.ToString());
+                    listaAux.Add(fila2.AtencionEmp[1].Estado.ToString());
+                    listaAux.Add(fila2.Postales[0].Cola.ToString());
+                    listaAux.Add(fila2.Postales[0].Estado.ToString());
+                    listaAux.Add(fila2.EstadisticasEnvio.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasEnvio.CantClientesAtendidos.ToString());
+                    listaAux.Add(fila2.EstadisticasReclamo.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasReclamo.CantClientesAtendidos.ToString());
+                    listaAux.Add(fila2.EstadisticasVenta.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasVenta.CantClientesAtendidos.ToString());
+                    listaAux.Add(fila2.EstadisticasAE.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasAE.CantClientesAtendidos.ToString());
+                    listaAux.Add(fila2.EstadisticasPostales.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasPostales.CantClientesAtendidos.ToString());
+                    foreach (Cliente Cli in fila2.Clientes)
+                        {
+                        listaAux.Add(Cli.Estado);
+                        listaAux.Add(Cli.HoraInicioEspera.ToString());
+                        }
+
                     filasMostrar.Add(fila2);
 
                     //tengo que mostrar la útlima fila siempre
-                    grdSimulacion.Rows.Add(fila2.Evento, fila2.Reloj, fila2.LlegadaEnvio.Rnd, fila2.LlegadaEnvio.TiempoEntreLlegadas, fila2.LlegadaEnvio.ProxLlegada,
-fila2.LlegadaReclamo.Rnd, fila2.LlegadaReclamo.TiempoEntreLlegadas, fila1.LlegadaReclamo.ProxLlegada,
-fila2.LlegadaVenta.Rnd, fila2.LlegadaVenta.TiempoEntreLlegadas, fila2.LlegadaVenta.ProxLlegada,
-fila2.LlegadaAE.Rnd, fila2.LlegadaAE.TiempoEntreLlegadas, fila2.LlegadaAE.ProxLlegada,
-fila2.LlegadaPostales.Rnd, fila2.LlegadaPostales.TiempoEntreLlegadas, fila2.LlegadaPostales.ProxLlegada, fila2.Fin_envio.Rnd, fila2.Fin_envio.TiempoAtencion,
-fila2.Fin_envio.FinAtencion[0], fila2.Fin_envio.FinAtencion[1], fila2.Fin_envio.FinAtencion[2], fila2.Fin_reclamo.Rnd, fila2.Fin_reclamo.TiempoAtencion, fila2.Fin_reclamo.FinAtencion[0],
-fila2.Fin_reclamo.FinAtencion[1], fila2.Fin_venta.Rnd, fila2.Fin_venta.TiempoAtencion, fila2.Fin_venta.FinAtencion[0], fila2.Fin_venta.FinAtencion[1], fila2.Fin_venta.FinAtencion[2],
-fila2.Fin_AE.Rnd, fila2.Fin_AE.TiempoAtencion, fila2.Fin_AE.FinAtencion[0], fila2.Fin_AE.FinAtencion[1], fila2.Fin_postales.Rnd, fila2.Fin_postales.TiempoAtencion, fila2.Fin_postales.FinAtencion,
-fila2.EnvioPaquetes[0].Cola, fila2.EnvioPaquetes[0].Estado, fila2.EnvioPaquetes[1].Cola, fila2.EnvioPaquetes[1].Estado, fila2.EnvioPaquetes[2].Cola, fila2.EnvioPaquetes[2].Estado,
-fila2.Reclamos[0].Cola, fila2.Reclamos[0].Estado, fila2.Reclamos[1].Cola, fila2.Reclamos[1].Estado, fila2.Ventas[0].Cola, fila2.Ventas[0].Estado, fila2.Ventas[1].Cola, fila2.Ventas[1].Estado,
-fila2.Ventas[2].Cola, fila2.Ventas[2].Estado, fila2.AtencionEmp[0].Cola, fila2.AtencionEmp[0].Estado, fila2.AtencionEmp[1].Cola, fila2.AtencionEmp[1].Estado, fila2.Postales[0].Cola, fila2.Postales[0].Estado,
-fila2.EstadisticasEnvio.AcumuladorEspera, fila2.EstadisticasEnvio.CantClientesAtendidos,
-fila2.EstadisticasReclamo.AcumuladorEspera, fila2.EstadisticasReclamo.CantClientesAtendidos,
-fila2.EstadisticasVenta.AcumuladorEspera, fila2.EstadisticasVenta.CantClientesAtendidos,
-fila2.EstadisticasAE.AcumuladorEspera, fila2.EstadisticasAE.CantClientesAtendidos,
-fila2.EstadisticasPostales.AcumuladorEspera, fila2.EstadisticasPostales.CantClientesAtendidos
-); // me falta agregar las columnas de ocupación en el data grid view
-
-
-
+                    grdSimulacion.Rows.Add(listaAux.ToArray()); // me falta agregar las columnas de ocupación en el data grid view
                 }
-
-
                 
-
-
-                
-            } 
-
-        
+            }
         }
 
         private List<double> buscarProxEvento(List<double> tiempos)
@@ -794,6 +923,7 @@ fila2.EstadisticasPostales.AcumuladorEspera, fila2.EstadisticasPostales.CantClie
             fila2.Ventas = fila1.Ventas;
             fila2.AtencionEmp = fila1.AtencionEmp;
             fila2.Postales = fila1.Postales;
+
 
             fila2.Clientes = fila1.Clientes;
         }
