@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtFinPaquete = new System.Windows.Forms.TextBox();
@@ -56,11 +56,6 @@
             this.txtLlegadaPostales = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.grdSimulacion = new System.Windows.Forms.DataGridView();
-            this.txtCantFilas = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnIniciarSimulacion = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtPrimeraFila = new System.Windows.Forms.TextBox();
             this.evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reloj = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rndLlegadaEP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -131,6 +126,12 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtCantFilas = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnIniciarSimulacion = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtPrimeraFila = new System.Windows.Forms.TextBox();
+            this.btnReiniciar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -401,6 +402,8 @@
             // 
             // grdSimulacion
             // 
+            this.grdSimulacion.AllowUserToDeleteRows = false;
+            this.grdSimulacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdSimulacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdSimulacion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.evento,
@@ -475,18 +478,577 @@
             this.Column25});
             this.grdSimulacion.Location = new System.Drawing.Point(360, 127);
             this.grdSimulacion.Name = "grdSimulacion";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdSimulacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.grdSimulacion.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdSimulacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grdSimulacion.RowHeadersWidth = 51;
             this.grdSimulacion.RowTemplate.Height = 24;
-            this.grdSimulacion.Size = new System.Drawing.Size(971, 420);
+            this.grdSimulacion.Size = new System.Drawing.Size(1141, 420);
             this.grdSimulacion.TabIndex = 3;
+            // 
+            // evento
+            // 
+            this.evento.HeaderText = "Evento";
+            this.evento.MinimumWidth = 6;
+            this.evento.Name = "evento";
+            this.evento.ReadOnly = true;
+            this.evento.Width = 78;
+            // 
+            // reloj
+            // 
+            this.reloj.HeaderText = "Reloj";
+            this.reloj.MinimumWidth = 6;
+            this.reloj.Name = "reloj";
+            this.reloj.ReadOnly = true;
+            this.reloj.Width = 68;
+            // 
+            // rndLlegadaEP
+            // 
+            this.rndLlegadaEP.HeaderText = "RND llegada EP ";
+            this.rndLlegadaEP.MinimumWidth = 6;
+            this.rndLlegadaEP.Name = "rndLlegadaEP";
+            this.rndLlegadaEP.ReadOnly = true;
+            this.rndLlegadaEP.Width = 98;
+            // 
+            // tiempoLlegadaEP
+            // 
+            this.tiempoLlegadaEP.HeaderText = "Tiempo entre llegadas EP";
+            this.tiempoLlegadaEP.MinimumWidth = 6;
+            this.tiempoLlegadaEP.Name = "tiempoLlegadaEP";
+            this.tiempoLlegadaEP.ReadOnly = true;
+            this.tiempoLlegadaEP.Width = 101;
+            // 
+            // proxLlegadaEP
+            // 
+            this.proxLlegadaEP.HeaderText = "Prox llegada EP";
+            this.proxLlegadaEP.MinimumWidth = 6;
+            this.proxLlegadaEP.Name = "proxLlegadaEP";
+            this.proxLlegadaEP.ReadOnly = true;
+            this.proxLlegadaEP.Width = 95;
+            // 
+            // rndLlegadaReclamo
+            // 
+            this.rndLlegadaReclamo.HeaderText = "RND llegada R";
+            this.rndLlegadaReclamo.MinimumWidth = 6;
+            this.rndLlegadaReclamo.Name = "rndLlegadaReclamo";
+            this.rndLlegadaReclamo.ReadOnly = true;
+            this.rndLlegadaReclamo.Width = 88;
+            // 
+            // tiempoLlegadaReclamo
+            // 
+            this.tiempoLlegadaReclamo.HeaderText = "Tiempo entre llegadas R";
+            this.tiempoLlegadaReclamo.MinimumWidth = 6;
+            this.tiempoLlegadaReclamo.Name = "tiempoLlegadaReclamo";
+            this.tiempoLlegadaReclamo.ReadOnly = true;
+            this.tiempoLlegadaReclamo.Width = 94;
+            // 
+            // proxLlegadaReclamo
+            // 
+            this.proxLlegadaReclamo.HeaderText = "Prox llegada R";
+            this.proxLlegadaReclamo.MinimumWidth = 6;
+            this.proxLlegadaReclamo.Name = "proxLlegadaReclamo";
+            this.proxLlegadaReclamo.ReadOnly = true;
+            this.proxLlegadaReclamo.Width = 88;
+            // 
+            // rndLlegadaVenta
+            // 
+            this.rndLlegadaVenta.HeaderText = "RND llegada V";
+            this.rndLlegadaVenta.MinimumWidth = 6;
+            this.rndLlegadaVenta.Name = "rndLlegadaVenta";
+            this.rndLlegadaVenta.ReadOnly = true;
+            this.rndLlegadaVenta.Width = 87;
+            // 
+            // tiempoLlegadaVenta
+            // 
+            this.tiempoLlegadaVenta.HeaderText = "Tiempo entre llegadas V";
+            this.tiempoLlegadaVenta.MinimumWidth = 6;
+            this.tiempoLlegadaVenta.Name = "tiempoLlegadaVenta";
+            this.tiempoLlegadaVenta.ReadOnly = true;
+            this.tiempoLlegadaVenta.Width = 93;
+            // 
+            // proxLlegadaVenta
+            // 
+            this.proxLlegadaVenta.HeaderText = "Prox llegada V";
+            this.proxLlegadaVenta.MinimumWidth = 6;
+            this.proxLlegadaVenta.Name = "proxLlegadaVenta";
+            this.proxLlegadaVenta.ReadOnly = true;
+            this.proxLlegadaVenta.Width = 87;
+            // 
+            // rndLlegadaAE
+            // 
+            this.rndLlegadaAE.HeaderText = "RND llegada AE";
+            this.rndLlegadaAE.MinimumWidth = 6;
+            this.rndLlegadaAE.Name = "rndLlegadaAE";
+            this.rndLlegadaAE.ReadOnly = true;
+            this.rndLlegadaAE.Width = 95;
+            // 
+            // tiempoLlegadaAE
+            // 
+            this.tiempoLlegadaAE.HeaderText = "Tiempo entre llegadas AE";
+            this.tiempoLlegadaAE.MinimumWidth = 6;
+            this.tiempoLlegadaAE.Name = "tiempoLlegadaAE";
+            this.tiempoLlegadaAE.ReadOnly = true;
+            this.tiempoLlegadaAE.Width = 101;
+            // 
+            // proxLlegadaAE
+            // 
+            this.proxLlegadaAE.HeaderText = "Prox llegada AE";
+            this.proxLlegadaAE.MinimumWidth = 6;
+            this.proxLlegadaAE.Name = "proxLlegadaAE";
+            this.proxLlegadaAE.ReadOnly = true;
+            this.proxLlegadaAE.Width = 95;
+            // 
+            // rndLlegadaPostales
+            // 
+            this.rndLlegadaPostales.HeaderText = "RND llegada P";
+            this.rndLlegadaPostales.MinimumWidth = 6;
+            this.rndLlegadaPostales.Name = "rndLlegadaPostales";
+            this.rndLlegadaPostales.ReadOnly = true;
+            this.rndLlegadaPostales.Width = 87;
+            // 
+            // tiempoLlegadaPostales
+            // 
+            this.tiempoLlegadaPostales.HeaderText = "Tiempo entre llegadas P";
+            this.tiempoLlegadaPostales.MinimumWidth = 6;
+            this.tiempoLlegadaPostales.Name = "tiempoLlegadaPostales";
+            this.tiempoLlegadaPostales.ReadOnly = true;
+            this.tiempoLlegadaPostales.Width = 93;
+            // 
+            // proxLlegadaP
+            // 
+            this.proxLlegadaP.HeaderText = "Prox llegada P";
+            this.proxLlegadaP.MinimumWidth = 6;
+            this.proxLlegadaP.Name = "proxLlegadaP";
+            this.proxLlegadaP.ReadOnly = true;
+            this.proxLlegadaP.Width = 87;
+            // 
+            // rndFinEP
+            // 
+            this.rndFinEP.HeaderText = "RND fin EP";
+            this.rndFinEP.MinimumWidth = 6;
+            this.rndFinEP.Name = "rndFinEP";
+            this.rndFinEP.ReadOnly = true;
+            this.rndFinEP.Width = 79;
+            // 
+            // tiempoFinEP
+            // 
+            this.tiempoFinEP.HeaderText = "Tiempo atención EP";
+            this.tiempoFinEP.MinimumWidth = 6;
+            this.tiempoFinEP.Name = "tiempoFinEP";
+            this.tiempoFinEP.ReadOnly = true;
+            // 
+            // finEP1
+            // 
+            this.finEP1.HeaderText = "Fin envio 1";
+            this.finEP1.MinimumWidth = 6;
+            this.finEP1.Name = "finEP1";
+            this.finEP1.ReadOnly = true;
+            this.finEP1.Width = 74;
+            // 
+            // finEP2
+            // 
+            this.finEP2.HeaderText = "Fin envio 2";
+            this.finEP2.MinimumWidth = 6;
+            this.finEP2.Name = "finEP2";
+            this.finEP2.ReadOnly = true;
+            this.finEP2.Width = 74;
+            // 
+            // finEP3
+            // 
+            this.finEP3.HeaderText = "Fin envio 3";
+            this.finEP3.MinimumWidth = 6;
+            this.finEP3.Name = "finEP3";
+            this.finEP3.ReadOnly = true;
+            this.finEP3.Width = 74;
+            // 
+            // Column26
+            // 
+            this.Column26.HeaderText = "RND fin R";
+            this.Column26.MinimumWidth = 6;
+            this.Column26.Name = "Column26";
+            this.Column26.ReadOnly = true;
+            this.Column26.Width = 79;
+            // 
+            // Column27
+            // 
+            this.Column27.HeaderText = "Tiempo atención R";
+            this.Column27.MinimumWidth = 6;
+            this.Column27.Name = "Column27";
+            this.Column27.ReadOnly = true;
+            this.Column27.Width = 92;
+            // 
+            // Column28
+            // 
+            this.Column28.HeaderText = "Fin R 1";
+            this.Column28.MinimumWidth = 6;
+            this.Column28.Name = "Column28";
+            this.Column28.ReadOnly = true;
+            this.Column28.Width = 54;
+            // 
+            // Column29
+            // 
+            this.Column29.HeaderText = "Fin R 2";
+            this.Column29.MinimumWidth = 6;
+            this.Column29.Name = "Column29";
+            this.Column29.ReadOnly = true;
+            this.Column29.Width = 54;
+            // 
+            // rndFinVenta
+            // 
+            this.rndFinVenta.HeaderText = "RND fin V";
+            this.rndFinVenta.MinimumWidth = 6;
+            this.rndFinVenta.Name = "rndFinVenta";
+            this.rndFinVenta.ReadOnly = true;
+            this.rndFinVenta.Width = 79;
+            // 
+            // tiempoFinVenta
+            // 
+            this.tiempoFinVenta.HeaderText = "Tiempo atención V";
+            this.tiempoFinVenta.MinimumWidth = 6;
+            this.tiempoFinVenta.Name = "tiempoFinVenta";
+            this.tiempoFinVenta.ReadOnly = true;
+            this.tiempoFinVenta.Width = 92;
+            // 
+            // finVenta1
+            // 
+            this.finVenta1.HeaderText = "Fin venta 1";
+            this.finVenta1.MinimumWidth = 6;
+            this.finVenta1.Name = "finVenta1";
+            this.finVenta1.ReadOnly = true;
+            this.finVenta1.Width = 74;
+            // 
+            // finVenta2
+            // 
+            this.finVenta2.HeaderText = "Fin venta 2";
+            this.finVenta2.MinimumWidth = 6;
+            this.finVenta2.Name = "finVenta2";
+            this.finVenta2.ReadOnly = true;
+            this.finVenta2.Width = 74;
+            // 
+            // finVenta3
+            // 
+            this.finVenta3.HeaderText = "Fin venta 3";
+            this.finVenta3.MinimumWidth = 6;
+            this.finVenta3.Name = "finVenta3";
+            this.finVenta3.ReadOnly = true;
+            this.finVenta3.Width = 74;
+            // 
+            // rndFinAE
+            // 
+            this.rndFinAE.HeaderText = "RND fin AE";
+            this.rndFinAE.MinimumWidth = 6;
+            this.rndFinAE.Name = "rndFinAE";
+            this.rndFinAE.ReadOnly = true;
+            this.rndFinAE.Width = 79;
+            // 
+            // tiempoFinAE
+            // 
+            this.tiempoFinAE.HeaderText = "Tiempo atención AE";
+            this.tiempoFinAE.MinimumWidth = 6;
+            this.tiempoFinAE.Name = "tiempoFinAE";
+            this.tiempoFinAE.ReadOnly = true;
+            // 
+            // finAE1
+            // 
+            this.finAE1.HeaderText = "Fin AE 1";
+            this.finAE1.MinimumWidth = 6;
+            this.finAE1.Name = "finAE1";
+            this.finAE1.ReadOnly = true;
+            this.finAE1.Width = 54;
+            // 
+            // finAE2
+            // 
+            this.finAE2.HeaderText = "Fin AE2";
+            this.finAE2.MinimumWidth = 6;
+            this.finAE2.Name = "finAE2";
+            this.finAE2.ReadOnly = true;
+            this.finAE2.Width = 76;
+            // 
+            // rndFinPostales
+            // 
+            this.rndFinPostales.HeaderText = "RND fin P";
+            this.rndFinPostales.MinimumWidth = 6;
+            this.rndFinPostales.Name = "rndFinPostales";
+            this.rndFinPostales.ReadOnly = true;
+            this.rndFinPostales.Width = 79;
+            // 
+            // tiempoFinP
+            // 
+            this.tiempoFinP.HeaderText = "Tiempo atención P";
+            this.tiempoFinP.MinimumWidth = 6;
+            this.tiempoFinP.Name = "tiempoFinP";
+            this.tiempoFinP.ReadOnly = true;
+            this.tiempoFinP.Width = 92;
+            // 
+            // finPostales
+            // 
+            this.finPostales.HeaderText = "Fin postales";
+            this.finPostales.MinimumWidth = 6;
+            this.finPostales.Name = "finPostales";
+            this.finPostales.ReadOnly = true;
+            this.finPostales.Width = 101;
+            // 
+            // cola1EP
+            // 
+            this.cola1EP.HeaderText = "EP Cola1";
+            this.cola1EP.MinimumWidth = 6;
+            this.cola1EP.Name = "cola1EP";
+            this.cola1EP.ReadOnly = true;
+            this.cola1EP.Width = 85;
+            // 
+            // estado1EP
+            // 
+            this.estado1EP.HeaderText = "EP Estado 1";
+            this.estado1EP.MinimumWidth = 6;
+            this.estado1EP.Name = "estado1EP";
+            this.estado1EP.ReadOnly = true;
+            this.estado1EP.Width = 83;
+            // 
+            // cola2EP
+            // 
+            this.cola2EP.HeaderText = "EP Cola 2";
+            this.cola2EP.MinimumWidth = 6;
+            this.cola2EP.Name = "cola2EP";
+            this.cola2EP.ReadOnly = true;
+            this.cola2EP.Width = 69;
+            // 
+            // estado2EP
+            // 
+            this.estado2EP.HeaderText = "EP Estado 2";
+            this.estado2EP.MinimumWidth = 6;
+            this.estado2EP.Name = "estado2EP";
+            this.estado2EP.ReadOnly = true;
+            this.estado2EP.Width = 83;
+            // 
+            // cola3EP
+            // 
+            this.cola3EP.HeaderText = "EP Cola 3";
+            this.cola3EP.MinimumWidth = 6;
+            this.cola3EP.Name = "cola3EP";
+            this.cola3EP.ReadOnly = true;
+            this.cola3EP.Width = 69;
+            // 
+            // estado3EP
+            // 
+            this.estado3EP.HeaderText = "EP Estado 3";
+            this.estado3EP.MinimumWidth = 6;
+            this.estado3EP.Name = "estado3EP";
+            this.estado3EP.ReadOnly = true;
+            this.estado3EP.Width = 83;
+            // 
+            // cola1R
+            // 
+            this.cola1R.HeaderText = "R Cola 1";
+            this.cola1R.MinimumWidth = 6;
+            this.cola1R.Name = "cola1R";
+            this.cola1R.ReadOnly = true;
+            this.cola1R.Width = 69;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "R Estado 1";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 85;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "R Cola 2";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 69;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "R Estado 2";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 85;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "V Cola 1";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 69;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "V Estado 1";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 84;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "V Cola 2";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 69;
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "V Estado 2";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Width = 84;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "V Cola 3";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Width = 69;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "V Estado 3";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 84;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "AE Cola 1";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 69;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "AE Estado 1";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 83;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "AE Cola 2";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 69;
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "AE Estado 1";
+            this.Column14.MinimumWidth = 6;
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            this.Column14.Width = 83;
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "P Cola ";
+            this.Column15.MinimumWidth = 6;
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            this.Column15.Width = 74;
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "P Estado";
+            this.Column16.MinimumWidth = 6;
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            this.Column16.Width = 84;
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "AC tiempo esp EP";
+            this.Column17.MinimumWidth = 6;
+            this.Column17.Name = "Column17";
+            this.Column17.ReadOnly = true;
+            this.Column17.Width = 93;
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "Cant EP";
+            this.Column18.MinimumWidth = 6;
+            this.Column18.Name = "Column18";
+            this.Column18.ReadOnly = true;
+            this.Column18.Width = 78;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "AC tiempo esp R";
+            this.Column19.MinimumWidth = 6;
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            this.Column19.Width = 93;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "Cant R";
+            this.Column20.MinimumWidth = 6;
+            this.Column20.Name = "Column20";
+            this.Column20.ReadOnly = true;
+            this.Column20.Width = 71;
+            // 
+            // Column21
+            // 
+            this.Column21.HeaderText = "AC tiempo esp V";
+            this.Column21.MinimumWidth = 6;
+            this.Column21.Name = "Column21";
+            this.Column21.ReadOnly = true;
+            this.Column21.Width = 93;
+            // 
+            // Column22
+            // 
+            this.Column22.HeaderText = "Cant V";
+            this.Column22.MinimumWidth = 6;
+            this.Column22.Name = "Column22";
+            this.Column22.ReadOnly = true;
+            this.Column22.Width = 70;
+            // 
+            // Column23
+            // 
+            this.Column23.HeaderText = "AC tiempo esp AE";
+            this.Column23.MinimumWidth = 6;
+            this.Column23.Name = "Column23";
+            this.Column23.ReadOnly = true;
+            this.Column23.Width = 93;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Cant AE";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 78;
+            // 
+            // Column24
+            // 
+            this.Column24.HeaderText = "AC tiempo esp P";
+            this.Column24.MinimumWidth = 6;
+            this.Column24.Name = "Column24";
+            this.Column24.ReadOnly = true;
+            this.Column24.Width = 93;
+            // 
+            // Column25
+            // 
+            this.Column25.HeaderText = "Cant P";
+            this.Column25.MinimumWidth = 6;
+            this.Column25.Name = "Column25";
+            this.Column25.ReadOnly = true;
+            this.Column25.Width = 70;
             // 
             // txtCantFilas
             // 
@@ -494,6 +1056,7 @@
             this.txtCantFilas.Name = "txtCantFilas";
             this.txtCantFilas.Size = new System.Drawing.Size(112, 22);
             this.txtCantFilas.TabIndex = 5;
+            this.txtCantFilas.Text = "1000";
             // 
             // label12
             // 
@@ -531,502 +1094,24 @@
             this.txtPrimeraFila.Name = "txtPrimeraFila";
             this.txtPrimeraFila.Size = new System.Drawing.Size(112, 22);
             this.txtPrimeraFila.TabIndex = 8;
-            // 
-            // evento
-            // 
-            this.evento.HeaderText = "Evento";
-            this.evento.MinimumWidth = 6;
-            this.evento.Name = "evento";
-            this.evento.Width = 125;
-            // 
-            // reloj
-            // 
-            this.reloj.HeaderText = "Reloj";
-            this.reloj.MinimumWidth = 6;
-            this.reloj.Name = "reloj";
-            this.reloj.Width = 125;
-            // 
-            // rndLlegadaEP
-            // 
-            this.rndLlegadaEP.HeaderText = "RND llegada EP ";
-            this.rndLlegadaEP.MinimumWidth = 6;
-            this.rndLlegadaEP.Name = "rndLlegadaEP";
-            this.rndLlegadaEP.Width = 125;
-            // 
-            // tiempoLlegadaEP
-            // 
-            this.tiempoLlegadaEP.HeaderText = "Tiempo entre llegadas EP";
-            this.tiempoLlegadaEP.MinimumWidth = 6;
-            this.tiempoLlegadaEP.Name = "tiempoLlegadaEP";
-            this.tiempoLlegadaEP.Width = 125;
-            // 
-            // proxLlegadaEP
-            // 
-            this.proxLlegadaEP.HeaderText = "Prox llegada EP";
-            this.proxLlegadaEP.MinimumWidth = 6;
-            this.proxLlegadaEP.Name = "proxLlegadaEP";
-            this.proxLlegadaEP.Width = 125;
-            // 
-            // rndLlegadaReclamo
-            // 
-            this.rndLlegadaReclamo.HeaderText = "RND llegada R";
-            this.rndLlegadaReclamo.MinimumWidth = 6;
-            this.rndLlegadaReclamo.Name = "rndLlegadaReclamo";
-            this.rndLlegadaReclamo.Width = 125;
-            // 
-            // tiempoLlegadaReclamo
-            // 
-            this.tiempoLlegadaReclamo.HeaderText = "Tiempo entre llegadas R";
-            this.tiempoLlegadaReclamo.MinimumWidth = 6;
-            this.tiempoLlegadaReclamo.Name = "tiempoLlegadaReclamo";
-            this.tiempoLlegadaReclamo.Width = 125;
-            // 
-            // proxLlegadaReclamo
-            // 
-            this.proxLlegadaReclamo.HeaderText = "Prox llegada R";
-            this.proxLlegadaReclamo.MinimumWidth = 6;
-            this.proxLlegadaReclamo.Name = "proxLlegadaReclamo";
-            this.proxLlegadaReclamo.Width = 125;
-            // 
-            // rndLlegadaVenta
-            // 
-            this.rndLlegadaVenta.HeaderText = "RND llegada V";
-            this.rndLlegadaVenta.MinimumWidth = 6;
-            this.rndLlegadaVenta.Name = "rndLlegadaVenta";
-            this.rndLlegadaVenta.Width = 125;
-            // 
-            // tiempoLlegadaVenta
-            // 
-            this.tiempoLlegadaVenta.HeaderText = "Tiempo entre llegadas V";
-            this.tiempoLlegadaVenta.MinimumWidth = 6;
-            this.tiempoLlegadaVenta.Name = "tiempoLlegadaVenta";
-            this.tiempoLlegadaVenta.Width = 125;
-            // 
-            // proxLlegadaVenta
-            // 
-            this.proxLlegadaVenta.HeaderText = "Prox llegada V";
-            this.proxLlegadaVenta.MinimumWidth = 6;
-            this.proxLlegadaVenta.Name = "proxLlegadaVenta";
-            this.proxLlegadaVenta.Width = 125;
-            // 
-            // rndLlegadaAE
-            // 
-            this.rndLlegadaAE.HeaderText = "RND llegada AE";
-            this.rndLlegadaAE.MinimumWidth = 6;
-            this.rndLlegadaAE.Name = "rndLlegadaAE";
-            this.rndLlegadaAE.Width = 125;
-            // 
-            // tiempoLlegadaAE
-            // 
-            this.tiempoLlegadaAE.HeaderText = "Tiempo entre llegadas AE";
-            this.tiempoLlegadaAE.MinimumWidth = 6;
-            this.tiempoLlegadaAE.Name = "tiempoLlegadaAE";
-            this.tiempoLlegadaAE.Width = 125;
-            // 
-            // proxLlegadaAE
-            // 
-            this.proxLlegadaAE.HeaderText = "Prox llegada AE";
-            this.proxLlegadaAE.MinimumWidth = 6;
-            this.proxLlegadaAE.Name = "proxLlegadaAE";
-            this.proxLlegadaAE.Width = 125;
-            // 
-            // rndLlegadaPostales
-            // 
-            this.rndLlegadaPostales.HeaderText = "RND llegada P";
-            this.rndLlegadaPostales.MinimumWidth = 6;
-            this.rndLlegadaPostales.Name = "rndLlegadaPostales";
-            this.rndLlegadaPostales.Width = 125;
-            // 
-            // tiempoLlegadaPostales
-            // 
-            this.tiempoLlegadaPostales.HeaderText = "Tiempo entre llegadas P";
-            this.tiempoLlegadaPostales.MinimumWidth = 6;
-            this.tiempoLlegadaPostales.Name = "tiempoLlegadaPostales";
-            this.tiempoLlegadaPostales.Width = 125;
-            // 
-            // proxLlegadaP
-            // 
-            this.proxLlegadaP.HeaderText = "Prox llegada P";
-            this.proxLlegadaP.MinimumWidth = 6;
-            this.proxLlegadaP.Name = "proxLlegadaP";
-            this.proxLlegadaP.Width = 125;
-            // 
-            // rndFinEP
-            // 
-            this.rndFinEP.HeaderText = "RND fin EP";
-            this.rndFinEP.MinimumWidth = 6;
-            this.rndFinEP.Name = "rndFinEP";
-            this.rndFinEP.Width = 125;
-            // 
-            // tiempoFinEP
-            // 
-            this.tiempoFinEP.HeaderText = "Tiempo atención EP";
-            this.tiempoFinEP.MinimumWidth = 6;
-            this.tiempoFinEP.Name = "tiempoFinEP";
-            this.tiempoFinEP.Width = 125;
-            // 
-            // finEP1
-            // 
-            this.finEP1.HeaderText = "Fin envio 1";
-            this.finEP1.MinimumWidth = 6;
-            this.finEP1.Name = "finEP1";
-            this.finEP1.Width = 125;
-            // 
-            // finEP2
-            // 
-            this.finEP2.HeaderText = "Fin envio 2";
-            this.finEP2.MinimumWidth = 6;
-            this.finEP2.Name = "finEP2";
-            this.finEP2.Width = 125;
-            // 
-            // finEP3
-            // 
-            this.finEP3.HeaderText = "Fin envio 3";
-            this.finEP3.MinimumWidth = 6;
-            this.finEP3.Name = "finEP3";
-            this.finEP3.Width = 125;
-            // 
-            // Column26
-            // 
-            this.Column26.HeaderText = "RND fin R";
-            this.Column26.MinimumWidth = 6;
-            this.Column26.Name = "Column26";
-            this.Column26.Width = 125;
-            // 
-            // Column27
-            // 
-            this.Column27.HeaderText = "Tiempo atención R";
-            this.Column27.MinimumWidth = 6;
-            this.Column27.Name = "Column27";
-            this.Column27.Width = 125;
-            // 
-            // Column28
-            // 
-            this.Column28.HeaderText = "Fin R 1";
-            this.Column28.MinimumWidth = 6;
-            this.Column28.Name = "Column28";
-            this.Column28.Width = 125;
-            // 
-            // Column29
-            // 
-            this.Column29.HeaderText = "Fin R 2";
-            this.Column29.MinimumWidth = 6;
-            this.Column29.Name = "Column29";
-            this.Column29.Width = 125;
-            // 
-            // rndFinVenta
-            // 
-            this.rndFinVenta.HeaderText = "RND fin V";
-            this.rndFinVenta.MinimumWidth = 6;
-            this.rndFinVenta.Name = "rndFinVenta";
-            this.rndFinVenta.Width = 125;
-            // 
-            // tiempoFinVenta
-            // 
-            this.tiempoFinVenta.HeaderText = "Tiempo atención V";
-            this.tiempoFinVenta.MinimumWidth = 6;
-            this.tiempoFinVenta.Name = "tiempoFinVenta";
-            this.tiempoFinVenta.Width = 125;
-            // 
-            // finVenta1
-            // 
-            this.finVenta1.HeaderText = "Fin venta 1";
-            this.finVenta1.MinimumWidth = 6;
-            this.finVenta1.Name = "finVenta1";
-            this.finVenta1.Width = 125;
-            // 
-            // finVenta2
-            // 
-            this.finVenta2.HeaderText = "Fin venta 2";
-            this.finVenta2.MinimumWidth = 6;
-            this.finVenta2.Name = "finVenta2";
-            this.finVenta2.Width = 125;
-            // 
-            // finVenta3
-            // 
-            this.finVenta3.HeaderText = "Fin venta 3";
-            this.finVenta3.MinimumWidth = 6;
-            this.finVenta3.Name = "finVenta3";
-            this.finVenta3.Width = 125;
-            // 
-            // rndFinAE
-            // 
-            this.rndFinAE.HeaderText = "RND fin AE";
-            this.rndFinAE.MinimumWidth = 6;
-            this.rndFinAE.Name = "rndFinAE";
-            this.rndFinAE.Width = 125;
-            // 
-            // tiempoFinAE
-            // 
-            this.tiempoFinAE.HeaderText = "Tiempo atención AE";
-            this.tiempoFinAE.MinimumWidth = 6;
-            this.tiempoFinAE.Name = "tiempoFinAE";
-            this.tiempoFinAE.Width = 125;
-            // 
-            // finAE1
-            // 
-            this.finAE1.HeaderText = "Fin AE 1";
-            this.finAE1.MinimumWidth = 6;
-            this.finAE1.Name = "finAE1";
-            this.finAE1.Width = 125;
-            // 
-            // finAE2
-            // 
-            this.finAE2.HeaderText = "Fin AE2";
-            this.finAE2.MinimumWidth = 6;
-            this.finAE2.Name = "finAE2";
-            this.finAE2.Width = 125;
-            // 
-            // rndFinPostales
-            // 
-            this.rndFinPostales.HeaderText = "RND fin P";
-            this.rndFinPostales.MinimumWidth = 6;
-            this.rndFinPostales.Name = "rndFinPostales";
-            this.rndFinPostales.Width = 125;
-            // 
-            // tiempoFinP
-            // 
-            this.tiempoFinP.HeaderText = "Tiempo atención P";
-            this.tiempoFinP.MinimumWidth = 6;
-            this.tiempoFinP.Name = "tiempoFinP";
-            this.tiempoFinP.Width = 125;
-            // 
-            // finPostales
-            // 
-            this.finPostales.HeaderText = "Fin postales";
-            this.finPostales.MinimumWidth = 6;
-            this.finPostales.Name = "finPostales";
-            this.finPostales.Width = 125;
-            // 
-            // cola1EP
-            // 
-            this.cola1EP.HeaderText = "EP Cola1";
-            this.cola1EP.MinimumWidth = 6;
-            this.cola1EP.Name = "cola1EP";
-            this.cola1EP.Width = 125;
-            // 
-            // estado1EP
-            // 
-            this.estado1EP.HeaderText = "EP Estado 1";
-            this.estado1EP.MinimumWidth = 6;
-            this.estado1EP.Name = "estado1EP";
-            this.estado1EP.Width = 125;
-            // 
-            // cola2EP
-            // 
-            this.cola2EP.HeaderText = "EP Cola 2";
-            this.cola2EP.MinimumWidth = 6;
-            this.cola2EP.Name = "cola2EP";
-            this.cola2EP.Width = 125;
-            // 
-            // estado2EP
-            // 
-            this.estado2EP.HeaderText = "EP Estado 2";
-            this.estado2EP.MinimumWidth = 6;
-            this.estado2EP.Name = "estado2EP";
-            this.estado2EP.Width = 125;
-            // 
-            // cola3EP
-            // 
-            this.cola3EP.HeaderText = "EP Cola 3";
-            this.cola3EP.MinimumWidth = 6;
-            this.cola3EP.Name = "cola3EP";
-            this.cola3EP.Width = 125;
-            // 
-            // estado3EP
-            // 
-            this.estado3EP.HeaderText = "EP Estado 3";
-            this.estado3EP.MinimumWidth = 6;
-            this.estado3EP.Name = "estado3EP";
-            this.estado3EP.Width = 125;
-            // 
-            // cola1R
-            // 
-            this.cola1R.HeaderText = "R Cola 1";
-            this.cola1R.MinimumWidth = 6;
-            this.cola1R.Name = "cola1R";
-            this.cola1R.Width = 125;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "R Estado 1";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 125;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "R Cola 2";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 125;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "R Estado 2";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 125;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "V Cola 1";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 125;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "V Estado 1";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.Width = 125;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "V Cola 2";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 125;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "V Estado 2";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 125;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "V Cola 3";
-            this.Column13.MinimumWidth = 6;
-            this.Column13.Name = "Column13";
-            this.Column13.Width = 125;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "V Estado 3";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "AE Cola 1";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "AE Estado 1";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "AE Cola 2";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 125;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "AE Estado 1";
-            this.Column14.MinimumWidth = 6;
-            this.Column14.Name = "Column14";
-            this.Column14.Width = 125;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "P Cola ";
-            this.Column15.MinimumWidth = 6;
-            this.Column15.Name = "Column15";
-            this.Column15.Width = 125;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "P Estado";
-            this.Column16.MinimumWidth = 6;
-            this.Column16.Name = "Column16";
-            this.Column16.Width = 125;
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "AC tiempo esp EP";
-            this.Column17.MinimumWidth = 6;
-            this.Column17.Name = "Column17";
-            this.Column17.Width = 125;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "Cant EP";
-            this.Column18.MinimumWidth = 6;
-            this.Column18.Name = "Column18";
-            this.Column18.Width = 125;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "AC tiempo esp R";
-            this.Column19.MinimumWidth = 6;
-            this.Column19.Name = "Column19";
-            this.Column19.Width = 125;
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "Cant R";
-            this.Column20.MinimumWidth = 6;
-            this.Column20.Name = "Column20";
-            this.Column20.Width = 125;
-            // 
-            // Column21
-            // 
-            this.Column21.HeaderText = "AC tiempo esp V";
-            this.Column21.MinimumWidth = 6;
-            this.Column21.Name = "Column21";
-            this.Column21.Width = 125;
-            // 
-            // Column22
-            // 
-            this.Column22.HeaderText = "Cant V";
-            this.Column22.MinimumWidth = 6;
-            this.Column22.Name = "Column22";
-            this.Column22.Width = 125;
-            // 
-            // Column23
-            // 
-            this.Column23.HeaderText = "AC tiempo esp AE";
-            this.Column23.MinimumWidth = 6;
-            this.Column23.Name = "Column23";
-            this.Column23.Width = 125;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Cant AE";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 125;
-            // 
-            // Column24
-            // 
-            this.Column24.HeaderText = "AC tiempo esp P";
-            this.Column24.MinimumWidth = 6;
-            this.Column24.Name = "Column24";
-            this.Column24.Width = 125;
-            // 
-            // Column25
-            // 
-            this.Column25.HeaderText = "Cant P";
-            this.Column25.MinimumWidth = 6;
-            this.Column25.Name = "Column25";
-            this.Column25.Width = 125;
+            this.txtPrimeraFila.Text = "1";
+            // 
+            // btnReiniciar
+            // 
+            this.btnReiniciar.Location = new System.Drawing.Point(961, 57);
+            this.btnReiniciar.Name = "btnReiniciar";
+            this.btnReiniciar.Size = new System.Drawing.Size(130, 47);
+            this.btnReiniciar.TabIndex = 9;
+            this.btnReiniciar.Text = "Reiniciar simulación";
+            this.btnReiniciar.UseVisualStyleBackColor = true;
+            this.btnReiniciar.Click += new System.EventHandler(this.btnReiniciar_Click);
             // 
             // Simulacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1367, 606);
+            this.ClientSize = new System.Drawing.Size(1529, 606);
+            this.Controls.Add(this.btnReiniciar);
             this.Controls.Add(this.txtPrimeraFila);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.btnIniciarSimulacion);
@@ -1161,6 +1246,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
+        private System.Windows.Forms.Button btnReiniciar;
     }
 }
 
