@@ -235,71 +235,67 @@ namespace TP4_SIM
                     {
                             // No hay un objeto libre, entonces tengo que buscar el de menor cola y esperar
                             cliente.HoraInicioEspera = fila2.Reloj;
-                            if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola)
+                            if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola)
                             {
                                 // Si todos los objetos tienen la misma cola, espera en el objeto 1:
                                 cliente.Estado = "EE1";
-                                fila2.EnvioPaquetes[0].Cola = fila1.EnvioPaquetes[0].Cola + 1;
+                                fila2.EnvioPaquetes[0].Cola += 1;
                             }
-
                             else if (fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola)
                             {
                                 // La menor cola es la del objeto 1
                                 cliente.Estado = "EE1";
-                                fila2.EnvioPaquetes[0].Cola = fila1.EnvioPaquetes[0].Cola + 1;
+                                fila2.EnvioPaquetes[0].Cola += 1;
                             }
                             else if (fila1.EnvioPaquetes[1].Cola < fila1.EnvioPaquetes[0].Cola && fila1.EnvioPaquetes[1].Cola < fila1.EnvioPaquetes[2].Cola)
                             {
                                 // La menor cola es la del objeto 2
                                 cliente.Estado = "EE2";
-                                fila2.EnvioPaquetes[1].Cola = fila1.EnvioPaquetes[1].Cola + 1;
+                                fila2.EnvioPaquetes[1].Cola += 1;
                             }
                             else if (fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[1].Cola)
                             {
                                 // La menor cola es la del objeto 3
                                 cliente.Estado = "EE3";
-                                fila2.EnvioPaquetes[2].Cola = fila1.EnvioPaquetes[2].Cola + 1;
+                                fila2.EnvioPaquetes[2].Cola += 1;
                             }
-                            else
-                            {
-                                // Si dos colas son iguales y una diferente
-                                if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola)
-                                {
-                                    // Las colas 1 y 2  son iguales y menores que la 3
+                             // Si dos colas son iguales y una diferente
+                            else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola) 
+                            { // Las colas 1 y 2  son iguales y menores que la 3
                                     cliente.Estado = "EE1";
-                                    fila2.EnvioPaquetes[0].Cola = fila1.EnvioPaquetes[0].Cola + 1;
-                                }
-                                if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[2].Cola)
+                                    fila2.EnvioPaquetes[0].Cola += 1;
+                            }
+                            else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[2].Cola)
                                 {
                                     // Las colas 1 y 2  son iguales y mayores que la 3
                                     cliente.Estado = "EE3";
-                                    fila2.EnvioPaquetes[2].Cola = fila1.EnvioPaquetes[2].Cola + 1;
+                                    fila2.EnvioPaquetes[2].Cola += 1;
                                 }
-                                if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola)
+                            else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola)
                                 {
                                     // Las colas del 1 y 3 son iguales y menores que la 2
                                     cliente.Estado = "EE1";
-                                    fila2.EnvioPaquetes[0].Cola = fila1.EnvioPaquetes[0].Cola + 1;
+                                    fila2.EnvioPaquetes[0].Cola += 1;
                                 }
-                                if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[1].Cola)
+                            else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[1].Cola)
                                 {
                                     // Las colas del 1 y 3 son iguales y mayores que la 2
                                     cliente.Estado = "EE2";
-                                    fila2.EnvioPaquetes[1].Cola = fila1.EnvioPaquetes[1].Cola + 1;
+                                    fila2.EnvioPaquetes[1].Cola += 1;
                                 }
-                                if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola)
+                            else if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola)
                                 {
                                     // Las colas 2 y 3 son iguales y menores que la 1
                                     cliente.Estado = "EE2";
-                                    fila2.EnvioPaquetes[1].Cola = fila1.EnvioPaquetes[1].Cola + 1;
+                                    fila2.EnvioPaquetes[1].Cola += 1;
                                 }
-                                else
+                            else if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola > fila1.EnvioPaquetes[0].Cola)
                                 {
                                     // Las colas 2 y 3 son iguales y mayores que la 1
                                     cliente.Estado = "EE1";
-                                    fila2.EnvioPaquetes[0].Cola = fila1.EnvioPaquetes[0].Cola + 1;
+                                    fila2.EnvioPaquetes[0].Cola += 1;
                                 }
-                            }                       
+                                                   
                     }
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
@@ -378,47 +374,45 @@ namespace TP4_SIM
                             cliente.Estado = "EV3";
                             fila2.Ventas[2].Cola = fila1.Ventas[2].Cola + 1;
                         }
-                        else
-                        {
-                            // Si dos colas son iguales y una diferente
-                            if (fila1.Ventas[0].Cola == fila1.Ventas[1].Cola && fila1.Ventas[0].Cola < fila1.Ventas[2].Cola)
+                        // Si dos colas son iguales y una diferente
+                           else if (fila1.Ventas[0].Cola == fila1.Ventas[1].Cola && fila1.Ventas[0].Cola < fila1.Ventas[2].Cola)
                             {
                                 // Las colas 1 y 2 son iguales y menores que la 3
                                 cliente.Estado = "EV1";
                                 fila2.Ventas[0].Cola = fila1.Ventas[0].Cola + 1;
                             }
-                            if (fila1.Ventas[0].Cola == fila1.Ventas[1].Cola && fila1.Ventas[0].Cola > fila1.Ventas[2].Cola)
+                            else if (fila1.Ventas[0].Cola == fila1.Ventas[1].Cola && fila1.Ventas[0].Cola > fila1.Ventas[2].Cola)
                             {
                                 // Las colas 1 y 2 son iguales y mayores que la 3
                                 cliente.Estado = "EV3";
                                 fila2.Ventas[2].Cola = fila1.Ventas[2].Cola + 1;
                             }
 
-                            if (fila1.Ventas[0].Cola == fila1.Ventas[2].Cola && fila1.Ventas[0].Cola < fila1.Ventas[1].Cola)
+                            else if (fila1.Ventas[0].Cola == fila1.Ventas[2].Cola && fila1.Ventas[0].Cola < fila1.Ventas[1].Cola)
                             {
                                 // Las colas  1 y 3 son iguales y menores que la 2
                                 cliente.Estado = "EV1";
                                 fila2.Ventas[0].Cola = fila1.Ventas[0].Cola + 1;
                             }
-                            if (fila1.Ventas[0].Cola == fila1.Ventas[2].Cola && fila1.Ventas[0].Cola > fila1.Ventas[1].Cola)
+                            else if (fila1.Ventas[0].Cola == fila1.Ventas[2].Cola && fila1.Ventas[0].Cola > fila1.Ventas[1].Cola)
                             {
                                 // Las colas  1 y 3 son iguales y mayores que la 2
                                 cliente.Estado = "EV2";
                                 fila2.Ventas[1].Cola = fila1.Ventas[1].Cola + 1;
                             }
-                            if (fila1.Ventas[1].Cola == fila1.Ventas[2].Cola && fila1.Ventas[1].Cola < fila1.Ventas[0].Cola)
+                            else if (fila1.Ventas[1].Cola == fila1.Ventas[2].Cola && fila1.Ventas[1].Cola < fila1.Ventas[0].Cola)
                             {
                                 // Las colas 2 y 3 son iguales y menores que la 1
                                 cliente.Estado = "EV2";
                                 fila2.Ventas[1].Cola = fila1.Ventas[1].Cola + 1;
                             }
-                            else
+                            else if (fila1.Ventas[1].Cola == fila1.Ventas[2].Cola && fila1.Ventas[1].Cola > fila1.Ventas[0].Cola)
                             {
                                 // Las colas 2 y 3 son iguales y mayores que la 1
                                 cliente.Estado = "EV1";
                                 fila2.Ventas[0].Cola = fila1.Ventas[0].Cola + 1;
                             }
-                        }
+                        
                     }
 
                     // Como es una llegada tengo que agregar el cliente
@@ -859,6 +853,25 @@ namespace TP4_SIM
                 }
                 
             }
+
+            double acEsperaE = fila2.EstadisticasEnvio.AcumuladorEspera;
+            double cantE = fila2.EstadisticasEnvio.CantClientesAtendidos;
+
+            double acEsperaR = fila2.EstadisticasReclamo.AcumuladorEspera;
+            double cantR = fila2.EstadisticasReclamo.CantClientesAtendidos;
+
+            double acEsperaV = fila2.EstadisticasVenta.AcumuladorEspera;
+            double cantV = fila2.EstadisticasVenta.CantClientesAtendidos;
+
+            double acEsperaAE = fila2.EstadisticasAE.AcumuladorEspera;
+            double cantAE = fila2.EstadisticasAE.CantClientesAtendidos;
+
+            double acEsperaP = fila2.EstadisticasPostales.AcumuladorEspera;
+            double cantP = fila2.EstadisticasPostales.CantClientesAtendidos;
+
+            double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP };
+            Resultados ventanaRes = new Resultados(vectorRes);
+            ventanaRes.Show();
         }
 
         private List<double> buscarProxEvento(List<double> tiempos)
@@ -958,7 +971,7 @@ namespace TP4_SIM
         private void calcularFinAtencionEnvio(int nroObjetoEnvio, FilaVector fila1, FilaVector fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SE" + nroObjetoEnvio;
-            string estadoEsperando = "EE" + nroObjetoEnvio;
+            
             int indice = nroObjetoEnvio - 1;
 
             // Busco al cliente que estaba siendo atendido en ese objeto y lo elimino, y cambio las estadísticas
@@ -979,6 +992,7 @@ namespace TP4_SIM
             // se genera un nuevo fin de atención), y el estado de ese cliente debe pasar a "siendo atendido"
             else
             {
+                string estadoEsperando = "EE" + nroObjetoEnvio;
                 fila2.EnvioPaquetes[indice].Cola = fila1.EnvioPaquetes[indice].Cola - 1;
                 fila2.EnvioPaquetes[indice].Estado = "Ocupado";
                 int indexClientePorAtender = buscarClientePorEstado(estadoEsperando, fila1.Clientes);
@@ -997,7 +1011,7 @@ namespace TP4_SIM
         private void calcularFinAtencionReclamo(int nroObjetoReclamo, FilaVector fila1, FilaVector fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SR" + nroObjetoReclamo;
-            string estadoEsperando = "ER" + nroObjetoReclamo;
+            
             int indice = nroObjetoReclamo - 1;
 
             int indexClienteAtendido = buscarClientePorEstado(estadoSiendoAtendido, fila1.Clientes);
@@ -1013,6 +1027,7 @@ namespace TP4_SIM
             }
             else
             {
+                string estadoEsperando = "ER" + nroObjetoReclamo;
                 fila2.Reclamos[indice].Cola = fila1.Reclamos[indice].Cola - 1;
                 fila2.Reclamos[indice].Estado = "Ocupado";
                 int indexClientePorAtender = buscarClientePorEstado(estadoEsperando, fila1.Clientes);
@@ -1030,7 +1045,8 @@ namespace TP4_SIM
         private void calcularFinAtencionVenta(int nroObjetoVenta, FilaVector fila1, FilaVector fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SV" + nroObjetoVenta;
-            string estadoEsperando = "EV" + nroObjetoVenta;
+            
+
             int indice = nroObjetoVenta - 1;
 
             int indexClienteAtendido = buscarClientePorEstado(estadoSiendoAtendido, fila2.Clientes);
@@ -1047,6 +1063,8 @@ namespace TP4_SIM
             }
             else
             {
+                string estadoEsperando = "EV" + nroObjetoVenta;
+
                 fila2.Ventas[indice].Cola = fila1.Ventas[indice].Cola - 1;
                 fila2.Ventas[indice].Estado = "Ocupado";
                 int indexClientePorAtender = buscarClientePorEstado(estadoEsperando, fila1.Clientes);
@@ -1065,7 +1083,7 @@ namespace TP4_SIM
         {
 
             string estadoSiendoAtendido = "SAE" + nroObjetoAE;
-            string estadoEsperando = "EAE" + nroObjetoAE;
+            
             int indice = nroObjetoAE - 1;
 
             int indexClienteAtendido = buscarClientePorEstado(estadoSiendoAtendido, fila1.Clientes);
@@ -1082,6 +1100,7 @@ namespace TP4_SIM
             }
             else
             {
+                string estadoEsperando = "EAE" + nroObjetoAE;
                 fila2.AtencionEmp[indice].Cola = fila1.AtencionEmp[indice].Cola - 1;
                 fila2.AtencionEmp[indice].Estado = "Ocupado";
                 int indexClientePorAtender = buscarClientePorEstado(estadoEsperando, fila1.Clientes);
@@ -1123,18 +1142,6 @@ namespace TP4_SIM
 
                 fila2.EstadisticasPostales.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indiceClientePorAtender].HoraInicioEspera) + fila1.EstadisticasPostales.AcumuladorEspera;
             }
-        }
-
-        private void agrgarColumnasCliente(Cliente cliente)
-        {
-
-        }
-
-        private void btnReiniciar_Click(object sender, EventArgs e)
-        {
-            grdSimulacion.Rows.Clear();
-            //FilaVector fila1 = new FilaVector();
-            //FilaVector fila2 = new FilaVector();
         }
     }
 } 

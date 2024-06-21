@@ -69,6 +69,12 @@
     <Compile Include="Clases\Postales.cs" />
     <Compile Include="Clases\Reclamo.cs" />
     <Compile Include="Clases\Venta.cs" />
+    <Compile Include="Resultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resultados.Designer.cs">
+      <DependentUpon>Resultados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Simulacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Resultados.resx">
+      <DependentUpon>Resultados.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Simulacion.resx">
       <DependentUpon>Simulacion.cs</DependentUpon>
     </EmbeddedResource>
