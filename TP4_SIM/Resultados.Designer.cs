@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Resultados));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(53, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(671, 217);
+            this.groupBox1.Size = new System.Drawing.Size(553, 217);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Punto 1";
@@ -180,7 +181,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(378, 29);
+            this.label7.Location = new System.Drawing.Point(328, 29);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(180, 16);
             this.label7.TabIndex = 10;
@@ -189,49 +190,50 @@
             // txtOcupacionP
             // 
             this.txtOcupacionP.Enabled = false;
-            this.txtOcupacionP.Location = new System.Drawing.Point(414, 171);
+            this.txtOcupacionP.Location = new System.Drawing.Point(356, 171);
             this.txtOcupacionP.Name = "txtOcupacionP";
-            this.txtOcupacionP.Size = new System.Drawing.Size(100, 22);
+            this.txtOcupacionP.Size = new System.Drawing.Size(124, 22);
             this.txtOcupacionP.TabIndex = 15;
             // 
             // txtOcupacionAE
             // 
             this.txtOcupacionAE.Enabled = false;
-            this.txtOcupacionAE.Location = new System.Drawing.Point(414, 145);
+            this.txtOcupacionAE.Location = new System.Drawing.Point(356, 145);
             this.txtOcupacionAE.Name = "txtOcupacionAE";
-            this.txtOcupacionAE.Size = new System.Drawing.Size(100, 22);
+            this.txtOcupacionAE.Size = new System.Drawing.Size(124, 22);
             this.txtOcupacionAE.TabIndex = 14;
             // 
             // txtOcupacionV
             // 
             this.txtOcupacionV.Enabled = false;
-            this.txtOcupacionV.Location = new System.Drawing.Point(414, 117);
+            this.txtOcupacionV.Location = new System.Drawing.Point(356, 117);
             this.txtOcupacionV.Name = "txtOcupacionV";
-            this.txtOcupacionV.Size = new System.Drawing.Size(100, 22);
+            this.txtOcupacionV.Size = new System.Drawing.Size(124, 22);
             this.txtOcupacionV.TabIndex = 13;
             // 
             // txtOcupacionR
             // 
             this.txtOcupacionR.Enabled = false;
-            this.txtOcupacionR.Location = new System.Drawing.Point(414, 89);
+            this.txtOcupacionR.Location = new System.Drawing.Point(356, 89);
             this.txtOcupacionR.Name = "txtOcupacionR";
-            this.txtOcupacionR.Size = new System.Drawing.Size(100, 22);
+            this.txtOcupacionR.Size = new System.Drawing.Size(124, 22);
             this.txtOcupacionR.TabIndex = 12;
             // 
             // txtOcupacionE
             // 
             this.txtOcupacionE.Enabled = false;
-            this.txtOcupacionE.Location = new System.Drawing.Point(414, 61);
+            this.txtOcupacionE.Location = new System.Drawing.Point(356, 61);
             this.txtOcupacionE.Name = "txtOcupacionE";
-            this.txtOcupacionE.Size = new System.Drawing.Size(100, 22);
+            this.txtOcupacionE.Size = new System.Drawing.Size(124, 22);
             this.txtOcupacionE.TabIndex = 11;
             // 
             // Resultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 493);
+            this.ClientSize = new System.Drawing.Size(681, 493);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Resultados";
             this.Text = "Resultados";
             this.Load += new System.EventHandler(this.Resultados_Load);

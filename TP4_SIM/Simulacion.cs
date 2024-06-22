@@ -160,20 +160,26 @@ namespace TP4_SIM
                     listaAux1.Add(fila1.Postales[0].Cola.ToString());
                     listaAux1.Add(fila1.Postales[0].Estado.ToString());
                     listaAux1.Add(fila1.EstadisticasEnvio.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasEnvio.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasEnvio.CantClientesAtendidos.ToString());
                     listaAux1.Add(fila1.EstadisticasReclamo.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasReclamo.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasReclamo.CantClientesAtendidos.ToString());
                     listaAux1.Add(fila1.EstadisticasVenta.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasVenta.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasVenta.CantClientesAtendidos.ToString());
                     listaAux1.Add(fila1.EstadisticasAE.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasAE.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasAE.CantClientesAtendidos.ToString());
                     listaAux1.Add(fila1.EstadisticasPostales.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasPostales.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasPostales.CantClientesAtendidos.ToString());
 
                     foreach (Cliente Cli in fila1.Clientes)
                     {
                         listaAux1.Add(Cli.Estado);
                         listaAux1.Add(Cli.HoraInicioEspera.ToString());
+                        listaAux1.Add(Cli.HoraInicioAtencion.ToString());
                     }
 
                     // Agregar la fila a la grilla
@@ -202,10 +208,13 @@ namespace TP4_SIM
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn(); 
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1) ;
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
-                    
+                    columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
+
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+                    grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
                     
 
                     // Reviso las colas y los estados de los objetos ENVIO (en este caso son 3)
@@ -219,7 +228,7 @@ namespace TP4_SIM
                             cliente.Estado = "SE" + (j + 1);
                             cliente.HoraInicioAtencion = fila2.Reloj;
 
-                            cliente.HoraInicioEspera = fila2.Reloj;
+                            cliente.HoraInicioAtencion = fila2.Reloj;
                             fila2.EnvioPaquetes[j].Estado = "Ocupado";
 
                             fila2.Fin_envio.Rnd = generarRandom(random);
@@ -325,9 +334,13 @@ namespace TP4_SIM
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
+
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+                    grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Ventas.Count; j++)
@@ -337,8 +350,6 @@ namespace TP4_SIM
                             // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
                             cliente.Estado = "SV" + (j+1);
                             cliente.HoraInicioAtencion = fila2.Reloj;
-
-                            cliente.HoraInicioEspera = fila2.Reloj;
                             fila2.Ventas[j].Estado = "Ocupado";
 
                             fila2.Fin_venta.Rnd = generarRandom(random);
@@ -444,9 +455,13 @@ namespace TP4_SIM
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
+
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+                    grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
 
                     bool empleadoLibre = false;
@@ -456,8 +471,6 @@ namespace TP4_SIM
                         {
                             // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
                             cliente.Estado = "SR" + (j + 1);
-
-                            cliente.HoraInicioEspera = fila2.Reloj;
                             cliente.HoraInicioAtencion = fila2.Reloj;
                             fila2.Reclamos[j].Estado = "Ocupado";
 
@@ -518,9 +531,13 @@ namespace TP4_SIM
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
+
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+                    grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
 
                     bool empleadoLibre = false;
@@ -531,7 +548,6 @@ namespace TP4_SIM
                             // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
                             cliente.Estado = "SAE" + (j + 1);
                             cliente.HoraInicioAtencion = fila2.Reloj;
-                            cliente.HoraInicioEspera = fila2.Reloj;
                             fila2.AtencionEmp[j].Estado = "Ocupado";
 
                             fila2.Fin_AE.Rnd = generarRandom(random);
@@ -579,9 +595,13 @@ namespace TP4_SIM
                     DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
                     columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
                     DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HLlegada" + (fila2.Clientes.Count + 1);
+                    columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
+                    DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
+                    columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
+
                     grdSimulacion.Columns.Add(columnaEstado);
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
+                    grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
 
                     // Genero la prox. llegada_AE
@@ -599,7 +619,6 @@ namespace TP4_SIM
 
                         cliente.Estado = "SP";
                         cliente.HoraInicioAtencion = fila2.Reloj;
-                        cliente.HoraInicioEspera = fila2.Reloj;
                         fila2.Postales[0].Estado = "Ocupado";
 
                         //Calculo fin_atención
@@ -831,19 +850,25 @@ namespace TP4_SIM
                     listaAux.Add(fila2.Postales[0].Cola.ToString());
                     listaAux.Add(fila2.Postales[0].Estado.ToString());
                     listaAux.Add(fila2.EstadisticasEnvio.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasEnvio.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasEnvio.CantClientesAtendidos.ToString());
                     listaAux.Add(fila2.EstadisticasReclamo.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasReclamo.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasReclamo.CantClientesAtendidos.ToString());
                     listaAux.Add(fila2.EstadisticasVenta.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasVenta.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasVenta.CantClientesAtendidos.ToString());
                     listaAux.Add(fila2.EstadisticasAE.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasAE.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasAE.CantClientesAtendidos.ToString());
                     listaAux.Add(fila2.EstadisticasPostales.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasPostales.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasPostales.CantClientesAtendidos.ToString());
                     foreach (Cliente Cli in fila2.Clientes)
                         {
                         listaAux.Add(Cli.Estado);
                         listaAux.Add(Cli.HoraInicioEspera.ToString());
+                        listaAux.Add(Cli.HoraInicioAtencion.ToString());
                         }
 
                     filasMostrar.Add(fila2);
@@ -855,21 +880,29 @@ namespace TP4_SIM
             }
 
             double acEsperaE = fila2.EstadisticasEnvio.AcumuladorEspera;
+            double acOcupE = fila2.EstadisticasEnvio.AcumuladorOcupacion;
             double cantE = fila2.EstadisticasEnvio.CantClientesAtendidos;
 
             double acEsperaR = fila2.EstadisticasReclamo.AcumuladorEspera;
+            double acOcupR = fila2.EstadisticasReclamo.AcumuladorOcupacion;
             double cantR = fila2.EstadisticasReclamo.CantClientesAtendidos;
 
             double acEsperaV = fila2.EstadisticasVenta.AcumuladorEspera;
+            double acOcupV = fila2.EstadisticasVenta.AcumuladorOcupacion;
             double cantV = fila2.EstadisticasVenta.CantClientesAtendidos;
 
             double acEsperaAE = fila2.EstadisticasAE.AcumuladorEspera;
+            double acOcupAE = fila2.EstadisticasAE.AcumuladorOcupacion;
             double cantAE = fila2.EstadisticasAE.CantClientesAtendidos;
 
             double acEsperaP = fila2.EstadisticasPostales.AcumuladorEspera;
+            double acOcupP = fila2.EstadisticasPostales.AcumuladorOcupacion;
             double cantP = fila2.EstadisticasPostales.CantClientesAtendidos;
 
-            double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP };
+            double relojFinal = fila2.Reloj;
+
+            double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP,
+            acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, relojFinal};
             Resultados ventanaRes = new Resultados(vectorRes);
             ventanaRes.Show();
         }
@@ -1000,11 +1033,14 @@ namespace TP4_SIM
                 fila2.Clientes[indexClientePorAtender].HoraInicioAtencion = fila2.Reloj;
 
 
+                
+
                 fila2.Fin_envio.Rnd = generarRandom(random);
                 fila2.Fin_envio.TiempoAtencion = calcularTiempo(media, fila2.Fin_envio.Rnd);
                 fila2.Fin_envio.FinAtencion[indice] = fila2.Fin_envio.TiempoAtencion + fila2.Reloj;
 
-                fila2.EstadisticasEnvio.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indexClientePorAtender].HoraInicioEspera) + fila1.EstadisticasEnvio.AcumuladorEspera;
+                fila2.EstadisticasEnvio.AcumuladorEspera = truncarNumero((fila2.Reloj - fila2.Clientes[indexClientePorAtender].HoraInicioEspera) + fila1.EstadisticasEnvio.AcumuladorEspera);
+                fila2.Clientes[indexClientePorAtender].HoraInicioEspera = 0;
             }
         }
 
@@ -1034,11 +1070,13 @@ namespace TP4_SIM
                 fila2.Clientes[indexClientePorAtender].Estado = estadoSiendoAtendido;
                 fila2.Clientes[indexClientePorAtender].HoraInicioAtencion = fila2.Reloj;
 
+
                 fila2.Fin_reclamo.Rnd = generarRandom(random);
                 fila2.Fin_reclamo.TiempoAtencion = calcularTiempo(media, fila2.Fin_reclamo.Rnd);
                 fila2.Fin_reclamo.FinAtencion[indice] = fila2.Fin_reclamo.TiempoAtencion + fila2.Reloj;
 
                 fila2.EstadisticasReclamo.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indexClientePorAtender].HoraInicioEspera) + fila1.EstadisticasReclamo.AcumuladorEspera;
+                fila2.Clientes[indexClientePorAtender].HoraInicioEspera = 0;
             }
         }
 
@@ -1071,11 +1109,13 @@ namespace TP4_SIM
                 fila2.Clientes[indexClientePorAtender].Estado = estadoSiendoAtendido;
                 fila2.Clientes[indexClientePorAtender].HoraInicioAtencion = fila2.Reloj;
 
+
                 fila2.Fin_venta.Rnd = generarRandom(random);
                 fila2.Fin_venta.TiempoAtencion = calcularTiempo(media, fila2.Fin_venta.Rnd);
                 fila2.Fin_venta.FinAtencion[indice] = fila2.Fin_venta.TiempoAtencion + fila2.Reloj;
 
                 fila2.EstadisticasVenta.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indexClientePorAtender].HoraInicioEspera) + fila1.EstadisticasVenta.AcumuladorEspera;
+                fila2.Clientes[indexClientePorAtender].HoraInicioEspera = 0;
             }
         }
 
@@ -1107,11 +1147,13 @@ namespace TP4_SIM
                 fila2.Clientes[indexClientePorAtender].Estado = estadoSiendoAtendido;
                 fila2.Clientes[indexClientePorAtender].HoraInicioAtencion = fila2.Reloj;
 
+
                 fila2.Fin_AE.Rnd = generarRandom(random);
                 fila2.Fin_AE.TiempoAtencion = calcularTiempo(media, fila2.Fin_AE.Rnd);
                 fila2.Fin_AE.FinAtencion[indice] = fila2.Fin_AE.TiempoAtencion + fila2.Reloj;
 
                 fila2.EstadisticasAE.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indexClientePorAtender].HoraInicioEspera) + fila1.EstadisticasAE.AcumuladorEspera;
+                fila2.Clientes[indexClientePorAtender].HoraInicioEspera = 0;
             }
         }
         private void calcularFinAtencionPostales(FilaVector fila1, FilaVector fila2, Random random, double media)
@@ -1136,11 +1178,14 @@ namespace TP4_SIM
                 int indiceClientePorAtender = buscarClientePorEstado("EP", fila1.Clientes);
                 fila2.Clientes[indiceClientePorAtender].Estado = "SP";
                 fila2.Clientes[indiceClientePorAtender].HoraInicioAtencion = fila2.Reloj;
+
+
                 fila2.Fin_postales.Rnd = generarRandom(random);
                 fila2.Fin_postales.TiempoAtencion = calcularTiempo(media, fila2.Fin_postales.Rnd);
                 fila2.Fin_postales.FinAtencion = fila2.Fin_postales.TiempoAtencion + fila2.Reloj;
 
                 fila2.EstadisticasPostales.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indiceClientePorAtender].HoraInicioEspera) + fila1.EstadisticasPostales.AcumuladorEspera;
+                fila2.Clientes[indiceClientePorAtender].HoraInicioEspera = 0;
             }
         }
     }

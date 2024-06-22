@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simulacion));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtFinPaquete = new System.Windows.Forms.TextBox();
@@ -56,6 +57,11 @@
             this.txtLlegadaPostales = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.grdSimulacion = new System.Windows.Forms.DataGridView();
+            this.txtCantFilas = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnIniciarSimulacion = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtPrimeraFila = new System.Windows.Forms.TextBox();
             this.evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reloj = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rndLlegadaEP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,20 +123,20 @@
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acOcupacionE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acOcupacionR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acOcupacionV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acOcupacionAE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acOcupacionP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtCantFilas = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnIniciarSimulacion = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtPrimeraFila = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -387,7 +393,7 @@
             this.txtLlegadaPostales.Name = "txtLlegadaPostales";
             this.txtLlegadaPostales.Size = new System.Drawing.Size(112, 22);
             this.txtLlegadaPostales.TabIndex = 14;
-            this.txtLlegadaPostales.Text = "7.5";
+            this.txtLlegadaPostales.Text = "7,5";
             // 
             // label10
             // 
@@ -466,30 +472,81 @@
             this.Column15,
             this.Column16,
             this.Column17,
+            this.acOcupacionE,
             this.Column18,
             this.Column19,
+            this.acOcupacionR,
             this.Column20,
             this.Column21,
+            this.acOcupacionV,
             this.Column22,
             this.Column23,
+            this.acOcupacionAE,
             this.Column5,
             this.Column24,
+            this.acOcupacionP,
             this.Column25});
             this.grdSimulacion.Location = new System.Drawing.Point(360, 127);
             this.grdSimulacion.Name = "grdSimulacion";
             this.grdSimulacion.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdSimulacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdSimulacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.grdSimulacion.RowHeadersWidth = 51;
             this.grdSimulacion.RowTemplate.Height = 24;
             this.grdSimulacion.Size = new System.Drawing.Size(1141, 420);
             this.grdSimulacion.TabIndex = 3;
+            // 
+            // txtCantFilas
+            // 
+            this.txtCantFilas.Location = new System.Drawing.Point(546, 52);
+            this.txtCantFilas.Name = "txtCantFilas";
+            this.txtCantFilas.Size = new System.Drawing.Size(112, 22);
+            this.txtCantFilas.TabIndex = 5;
+            this.txtCantFilas.Text = "300";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(377, 55);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(155, 16);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Cant. de líneas a simular:";
+            // 
+            // btnIniciarSimulacion
+            // 
+            this.btnIniciarSimulacion.Location = new System.Drawing.Point(753, 55);
+            this.btnIniciarSimulacion.Name = "btnIniciarSimulacion";
+            this.btnIniciarSimulacion.Size = new System.Drawing.Size(130, 47);
+            this.btnIniciarSimulacion.TabIndex = 6;
+            this.btnIniciarSimulacion.Text = "INICIAR SIMULACIÓN";
+            this.btnIniciarSimulacion.UseVisualStyleBackColor = true;
+            this.btnIniciarSimulacion.Click += new System.EventHandler(this.btnIniciarSimulacion_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(401, 82);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(131, 16);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Mostrar desde la fila:";
+            // 
+            // txtPrimeraFila
+            // 
+            this.txtPrimeraFila.Location = new System.Drawing.Point(546, 82);
+            this.txtPrimeraFila.Name = "txtPrimeraFila";
+            this.txtPrimeraFila.Size = new System.Drawing.Size(112, 22);
+            this.txtPrimeraFila.TabIndex = 8;
+            this.txtPrimeraFila.Text = "1";
             // 
             // evento
             // 
@@ -979,6 +1036,14 @@
             this.Column17.ReadOnly = true;
             this.Column17.Width = 117;
             // 
+            // acOcupacionE
+            // 
+            this.acOcupacionE.HeaderText = "AC ocupación EP";
+            this.acOcupacionE.MinimumWidth = 6;
+            this.acOcupacionE.Name = "acOcupacionE";
+            this.acOcupacionE.ReadOnly = true;
+            this.acOcupacionE.Width = 129;
+            // 
             // Column18
             // 
             this.Column18.HeaderText = "Cant EP";
@@ -994,6 +1059,14 @@
             this.Column19.Name = "Column19";
             this.Column19.ReadOnly = true;
             this.Column19.Width = 114;
+            // 
+            // acOcupacionR
+            // 
+            this.acOcupacionR.HeaderText = "AC ocupación R";
+            this.acOcupacionR.MinimumWidth = 6;
+            this.acOcupacionR.Name = "acOcupacionR";
+            this.acOcupacionR.ReadOnly = true;
+            this.acOcupacionR.Width = 122;
             // 
             // Column20
             // 
@@ -1011,6 +1084,14 @@
             this.Column21.ReadOnly = true;
             this.Column21.Width = 114;
             // 
+            // acOcupacionV
+            // 
+            this.acOcupacionV.HeaderText = "AC ocupación V";
+            this.acOcupacionV.MinimumWidth = 6;
+            this.acOcupacionV.Name = "acOcupacionV";
+            this.acOcupacionV.ReadOnly = true;
+            this.acOcupacionV.Width = 121;
+            // 
             // Column22
             // 
             this.Column22.HeaderText = "Cant V";
@@ -1026,6 +1107,14 @@
             this.Column23.Name = "Column23";
             this.Column23.ReadOnly = true;
             this.Column23.Width = 117;
+            // 
+            // acOcupacionAE
+            // 
+            this.acOcupacionAE.HeaderText = "AC ocupación AE";
+            this.acOcupacionAE.MinimumWidth = 6;
+            this.acOcupacionAE.Name = "acOcupacionAE";
+            this.acOcupacionAE.ReadOnly = true;
+            this.acOcupacionAE.Width = 129;
             // 
             // Column5
             // 
@@ -1043,6 +1132,14 @@
             this.Column24.ReadOnly = true;
             this.Column24.Width = 114;
             // 
+            // acOcupacionP
+            // 
+            this.acOcupacionP.HeaderText = "AC ocupación P";
+            this.acOcupacionP.MinimumWidth = 6;
+            this.acOcupacionP.Name = "acOcupacionP";
+            this.acOcupacionP.ReadOnly = true;
+            this.acOcupacionP.Width = 121;
+            // 
             // Column25
             // 
             this.Column25.HeaderText = "Cant P";
@@ -1050,52 +1147,6 @@
             this.Column25.Name = "Column25";
             this.Column25.ReadOnly = true;
             this.Column25.Width = 70;
-            // 
-            // txtCantFilas
-            // 
-            this.txtCantFilas.Location = new System.Drawing.Point(546, 52);
-            this.txtCantFilas.Name = "txtCantFilas";
-            this.txtCantFilas.Size = new System.Drawing.Size(112, 22);
-            this.txtCantFilas.TabIndex = 5;
-            this.txtCantFilas.Text = "1000";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(377, 55);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(155, 16);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Cant. de líneas a simular:";
-            // 
-            // btnIniciarSimulacion
-            // 
-            this.btnIniciarSimulacion.Location = new System.Drawing.Point(753, 55);
-            this.btnIniciarSimulacion.Name = "btnIniciarSimulacion";
-            this.btnIniciarSimulacion.Size = new System.Drawing.Size(130, 47);
-            this.btnIniciarSimulacion.TabIndex = 6;
-            this.btnIniciarSimulacion.Text = "INICIAR SIMULACIÓN";
-            this.btnIniciarSimulacion.UseVisualStyleBackColor = true;
-            this.btnIniciarSimulacion.Click += new System.EventHandler(this.btnIniciarSimulacion_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(401, 82);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(131, 16);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Mostrar desde la fila:";
-            // 
-            // txtPrimeraFila
-            // 
-            this.txtPrimeraFila.Location = new System.Drawing.Point(546, 82);
-            this.txtPrimeraFila.Name = "txtPrimeraFila";
-            this.txtPrimeraFila.Size = new System.Drawing.Size(112, 22);
-            this.txtPrimeraFila.TabIndex = 8;
-            this.txtPrimeraFila.Text = "1";
             // 
             // Simulacion
             // 
@@ -1114,8 +1165,9 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Simulacion";
-            this.Text = "Form1";
+            this.Text = "Simulación";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1227,14 +1279,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionV;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionAE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionP;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
     }
 }
