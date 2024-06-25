@@ -53,11 +53,13 @@
     <Compile Include="Clases\Estadisticas\EstadisticaEnvio.cs" />
     <Compile Include="Clases\Estadisticas\EstadisticaPostales.cs" />
     <Compile Include="Clases\Estadisticas\EstadisticaReclamo.cs" />
+    <Compile Include="Clases\Estadisticas\EstadisticaSeguridad.cs" />
     <Compile Include="Clases\Estadisticas\EstadisticaVenta.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionEmpresarial.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionEnvio.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionPostales.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionReclamo.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAtencionSeguridad.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionVenta.cs" />
     <Compile Include="Clases\EventosLlegadas\Llegada.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaAE.cs" />
@@ -65,9 +67,23 @@
     <Compile Include="Clases\EventosLlegadas\LlegadaPostales.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaReclamo.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaVenta.cs" />
+    <Compile Include="Clases\FilaVector - Copia.cs" />
     <Compile Include="Clases\FilaVector.cs" />
+    <Compile Include="Clases\InspeccionSeguridad.cs" />
     <Compile Include="Clases\Postales.cs" />
     <Compile Include="Clases\Reclamo.cs" />
+    <Compile Include="SimNuevoServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimNuevoServicio.Designer.cs">
+      <DependentUpon>SimNuevoServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SimOriginal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimOriginal.Designer.cs">
+      <DependentUpon>SimOriginal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\Venta.cs" />
     <Compile Include="Resultados.cs">
       <SubType>Form</SubType>
@@ -85,6 +101,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Resultados.resx">
       <DependentUpon>Resultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimNuevoServicio.resx">
+      <DependentUpon>SimNuevoServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimOriginal.resx">
+      <DependentUpon>SimOriginal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Simulacion.resx">
       <DependentUpon>Simulacion.cs</DependentUpon>

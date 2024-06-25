@@ -1,56 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Threading;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using TP4_SIM.Clases;
-using TP4_SIM.Clases.EventosLlegadas;
 
 namespace TP4_SIM
 {
-    public partial class Simulacion : Form
+    public partial class SimNuevoServicio : Form
     {
-        public Simulacion()
+        private int cantFilas;
+        double mediaLlegadaPaquete;
+        double mediaFinPaquete;
+        double mediaLlegadaReclamo;
+        double mediaFinReclamo;
+        double mediaLlegadaVenta;
+        double mediaFinVenta;
+        double mediaLlegadaAE;
+        double mediaFinAE;
+        double mediaLlegadaPostales;
+        double mediaFinPostales;
+        private int nroPrimeraFilaMostrar;
+        private int nroUltimaFilaMostrar;
+        public SimNuevoServicio(int cant, double[] medias, int nroPrimeraFila, int nroUltimaFila)
         {
             InitializeComponent();
-        }
-
-        private void btnIniciarSimulacion_Click(object sender, EventArgs e)
-        {
-            grdSimulacion.Rows.Clear();
-            int cantFilas = int.Parse(txtCantFilas.Text);
+            this.cantFilas = cant;
             // Valores de media (dist. exponencial) de los eventos 
-            double mediaLlegadaPaquete = double.Parse(txtLlegadaPaquete.Text);
-            double mediaFinPaquete = double.Parse(txtFinPaquete.Text);
-            double mediaLlegadaReclamo = double.Parse(txtLlegadaReclamo.Text);
-            double mediaFinReclamo = double.Parse(txtFinReclamo.Text);
-            double mediaLlegadaVenta = double.Parse(txtLlegadaVenta.Text);
-            double mediaFinVenta = double.Parse(txtFinVenta.Text);
-            double mediaLlegadaAE = double.Parse(txtLlegadaAtencion.Text);
-            double mediaFinAE = double.Parse(txtFinAtencion.Text);
-            double mediaLlegadaPostales = double.Parse(txtLlegadaPostales.Text);
-            double mediaFinPostales = double.Parse(txtFinPostales.Text);
+            this.mediaLlegadaPaquete = medias[0];
+            this.mediaFinPaquete = medias[1];
+            this.mediaLlegadaReclamo = medias[2];
+            this.mediaFinReclamo = medias[3];
+            this.mediaLlegadaVenta = medias[4];
+            this.mediaFinVenta = medias[5];
+            this.mediaLlegadaAE = medias[6];
+            this.mediaFinAE = medias[7];
+            this.mediaLlegadaPostales = medias[8];
+            this.mediaFinPostales = medias[9];
 
             // Nro de fila a partir de la que sea desea visualizar
-            int nroPrimeraFilaMostrar = int.Parse(txtPrimeraFila.Text);
-            int nroUltimaFilaMostrar = nroPrimeraFilaMostrar + 300;
-            if (nroUltimaFilaMostrar > cantFilas) { nroUltimaFilaMostrar = cantFilas; }
+            this.nroPrimeraFilaMostrar = nroPrimeraFila;
+            this.nroUltimaFilaMostrar = nroUltimaFila;
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            grdSimulacion.Rows.Clear();
+          
 
             string[] nombresEventos = {"llegada_envio", "llegada_reclamo", "llegada_venta", "llegada_AE", "llegada_postales",
                 "fin_envio1","fin_envio2", "fin_envio3", "fin_reclamo1", "fin_reclamo2", "fin_venta1", "fin_venta2", "fin_venta3",
-                "fin_AE1", "fin_AE2", "fin_postales" };
-
-
-
+                "fin_AE1", "fin_AE2", "fin_postales", "fin_seguridad" };
 
 
             Random random = new Random();
 
             // Se completa la primera fila de inicialización 
-            FilaVector fila1 = new FilaVector();
+            FilaVectorNuevoServicio fila1 = new FilaVectorNuevoServicio();
             fila1.NroFila = 1;
             fila1.Evento = "inicialización";
             fila1.Reloj = 0;
@@ -75,6 +86,7 @@ namespace TP4_SIM
             fila1.LlegadaPostales.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPostales, fila1.LlegadaPostales.Rnd);
             fila1.LlegadaPostales.ProxLlegada = fila1.Reloj + fila1.LlegadaPostales.TiempoEntreLlegadas;
 
+
             // Se ponen todos los tiempos de los prox eventos en una lista para madarlos al método que busca al siguiente
             List<double> posiblesProxEventos = new List<double>();
             posiblesProxEventos.Add(fila1.LlegadaEnvio.ProxLlegada);
@@ -85,11 +97,11 @@ namespace TP4_SIM
 
             List<double> proxEvento = buscarProxEvento(posiblesProxEventos);
 
-            FilaVector fila2 = new FilaVector();
+            FilaVectorNuevoServicio fila2 = new FilaVectorNuevoServicio();
             fila2.Reloj = (double)proxEvento[0];
             fila2.Evento = nombresEventos[Convert.ToInt32(proxEvento[1])];
 
-            List<FilaVector> filasMostrar = new List<FilaVector>();
+            List<FilaVectorNuevoServicio> filasMostrar = new List<FilaVectorNuevoServicio>();
 
             // For que genera las filas
             for (int i = 0; i < cantFilas; i++)
@@ -120,6 +132,10 @@ namespace TP4_SIM
                     listaAux1.Add(fila1.LlegadaPostales.Rnd.ToString());
                     listaAux1.Add(fila1.LlegadaPostales.TiempoEntreLlegadas.ToString());
                     listaAux1.Add(fila1.LlegadaPostales.ProxLlegada.ToString());
+
+                    listaAux1.Add(fila1.RndSeguridad.ToString());
+                    listaAux1.Add(fila1.ResSeguridad);
+
                     listaAux1.Add(fila1.Fin_envio.Rnd.ToString());
                     listaAux1.Add(fila1.Fin_envio.TiempoAtencion.ToString());
                     listaAux1.Add(fila1.Fin_envio.FinAtencion[0].ToString());
@@ -141,6 +157,9 @@ namespace TP4_SIM
                     listaAux1.Add(fila1.Fin_postales.Rnd.ToString());
                     listaAux1.Add(fila1.Fin_postales.TiempoAtencion.ToString());
                     listaAux1.Add(fila1.Fin_postales.FinAtencion.ToString());
+
+                    listaAux1.Add(fila1.Fin_seguridad.FinAtencion.ToString());
+
                     listaAux1.Add(fila1.EnvioPaquetes[0].Cola.ToString());
                     listaAux1.Add(fila1.EnvioPaquetes[0].Estado.ToString());
                     listaAux1.Add(fila1.EnvioPaquetes[1].Cola.ToString());
@@ -163,6 +182,11 @@ namespace TP4_SIM
                     listaAux1.Add(fila1.AtencionEmp[1].Estado.ToString());
                     listaAux1.Add(fila1.Postales[0].Cola.ToString());
                     listaAux1.Add(fila1.Postales[0].Estado.ToString());
+
+                    listaAux1.Add(fila1.Seguridad[0].Cola.ToString());
+                    listaAux1.Add(fila1.Seguridad[0].Estado.ToString());
+
+
                     listaAux1.Add(fila1.EstadisticasEnvio.AcumuladorEspera.ToString());
                     listaAux1.Add(fila1.EstadisticasEnvio.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasEnvio.CantClientesAtendidos.ToString());
@@ -178,6 +202,10 @@ namespace TP4_SIM
                     listaAux1.Add(fila1.EstadisticasPostales.AcumuladorEspera.ToString());
                     listaAux1.Add(fila1.EstadisticasPostales.AcumuladorOcupacion.ToString());
                     listaAux1.Add(fila1.EstadisticasPostales.CantClientesAtendidos.ToString());
+
+                    listaAux1.Add(fila1.EstadisticasSeguridad.AcumuladorEspera.ToString());
+                    listaAux1.Add(fila1.EstadisticasSeguridad.AcumuladorOcupacion.ToString());
+                    listaAux1.Add(fila1.EstadisticasSeguridad.CantClientesAtendidos.ToString());
 
                     foreach (Cliente Cli in fila1.Clientes)
                     {
@@ -220,100 +248,44 @@ namespace TP4_SIM
                     grdSimulacion.Columns.Add(columnaHoraInicioEspera);
                     grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
+                    fila2.RndSeguridad = generarRandom(random);
+                    fila2.ResSeguridad = calcularProbabilidad(fila2.RndSeguridad);
 
-                    // Reviso las colas y los estados de los objetos ENVIO (en este caso son 3)
-                    bool empleadoLibre = false;
-                    for (int j = 0; j < fila1.EnvioPaquetes.Count; j++)
+                    if (fila2.ResSeguridad == "Pasa")
                     {
-                        if (fila1.EnvioPaquetes[j].Estado == "Libre")
+                        // Debe pasar por el nuevo servicio
+                        if (fila1.Seguridad[0].Estado == "Libre")
                         {
-                            // Hay un objeto libre: le asigno al nuevo cliente el estado siendo atendido, e indico horaInicioAtención, cambio el estado del objeto donde se
-                            // atiende, y genero el fin de atención para ese mismo objeto.
-                            cliente.Estado = "SE" + (j + 1);
+                            cliente.Estado = "SS";
                             cliente.HoraInicioAtencion = fila2.Reloj;
+                            fila2.Seguridad[0].Estado = "Ocupado";
 
-                            cliente.HoraInicioAtencion = fila2.Reloj;
-                            fila2.EnvioPaquetes[j].Estado = "Ocupado";
+                            fila2.Fin_seguridad.FinAtencion = fila2.Reloj + 0.10;
+                            fila2.Fin_seguridad.ServidorLlegada = "Paquetes";
 
-                            fila2.Fin_envio.Rnd = generarRandom(random);
-                            fila2.Fin_envio.TiempoAtencion = calcularTiempo(mediaFinPaquete, fila2.Fin_envio.Rnd);
-                            fila2.Fin_envio.FinAtencion[j] = fila2.Reloj + fila2.Fin_envio.TiempoAtencion;
-
-                            empleadoLibre = true;
-                            break;
+                            // DESPUÉS DE PASAR POR SEGURIDAD DEBE IR A HACER FILA POR ENVIOS DE NUEVO
 
                         }
-                    }
-                    if (!empleadoLibre)
-                    {
-                        // No hay un objeto libre, entonces tengo que buscar el de menor cola y esperar
-                        cliente.HoraInicioEspera = fila2.Reloj;
-                        if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola)
+                        else 
                         {
-                            // Si todos los objetos tienen la misma cola, espera en el objeto 1:
-                            cliente.Estado = "EE1";
-                            fila2.EnvioPaquetes[0].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola)
-                        {
-                            // La menor cola es la del objeto 1
-                            cliente.Estado = "EE1";
-                            fila2.EnvioPaquetes[0].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[1].Cola < fila1.EnvioPaquetes[0].Cola && fila1.EnvioPaquetes[1].Cola < fila1.EnvioPaquetes[2].Cola)
-                        {
-                            // La menor cola es la del objeto 2
-                            cliente.Estado = "EE2";
-                            fila2.EnvioPaquetes[1].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[1].Cola)
-                        {
-                            // La menor cola es la del objeto 3
-                            cliente.Estado = "EE3";
-                            fila2.EnvioPaquetes[2].Cola += 1;
-                        }
-                        // Si dos colas son iguales y una diferente
-                        else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola)
-                        { // Las colas 1 y 2  son iguales y menores que la 3
-                            cliente.Estado = "EE1";
-                            fila2.EnvioPaquetes[0].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[2].Cola)
-                        {
-                            // Las colas 1 y 2  son iguales y mayores que la 3
-                            cliente.Estado = "EE3";
-                            fila2.EnvioPaquetes[2].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola)
-                        {
-                            // Las colas del 1 y 3 son iguales y menores que la 2
-                            cliente.Estado = "EE1";
-                            fila2.EnvioPaquetes[0].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[1].Cola)
-                        {
-                            // Las colas del 1 y 3 son iguales y mayores que la 2
-                            cliente.Estado = "EE2";
-                            fila2.EnvioPaquetes[1].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola)
-                        {
-                            // Las colas 2 y 3 son iguales y menores que la 1
-                            cliente.Estado = "EE2";
-                            fila2.EnvioPaquetes[1].Cola += 1;
-                        }
-                        else if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola > fila1.EnvioPaquetes[0].Cola)
-                        {
-                            // Las colas 2 y 3 son iguales y mayores que la 1
-                            cliente.Estado = "EE1";
-                            fila2.EnvioPaquetes[0].Cola += 1;
+                            fila2.Seguridad[0].Cola += 1;
+                            cliente.Estado = "ES";
+                            cliente.HoraInicioEspera = fila2.Reloj;
                         }
 
                     }
+
+                    else if (fila2.ResSeguridad == "No pasa")
+                    {
+                        verificarLlegadaEnvio(fila1, fila2, random, cliente);
+                    }
+
+
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
+
+
+
                 }
 
                 // LLEGADA VENTA
@@ -593,6 +565,15 @@ namespace TP4_SIM
                 if (fila2.Evento == "llegada_postales")
                 {
                     copiarProximasLlegadas(fila1, fila2);
+                    // Genero la prox. llegada_AE
+                    fila2.LlegadaPostales.Rnd = generarRandom(random);
+                    fila2.LlegadaPostales.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPostales, fila2.LlegadaPostales.Rnd);
+                    fila2.LlegadaPostales.ProxLlegada = fila2.Reloj + fila2.LlegadaPostales.TiempoEntreLlegadas;
+
+                    copiarObjetosFilaAnterior(fila1, fila2);
+                    copiarFinesAtencion(fila1, fila2);
+                    copiarEstadisticas(fila1, fila2);
+
                     Cliente cliente = new Cliente();
 
 
@@ -609,39 +590,37 @@ namespace TP4_SIM
                     grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
 
-                    // Genero la prox. llegada_AE
-                    fila2.LlegadaPostales.Rnd = generarRandom(random);
-                    fila2.LlegadaPostales.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPostales, fila2.LlegadaPostales.Rnd);
-                    fila2.LlegadaPostales.ProxLlegada = fila2.Reloj + fila2.LlegadaPostales.TiempoEntreLlegadas;
+                    fila2.RndSeguridad = generarRandom(random);
+                    fila2.ResSeguridad = calcularProbabilidad(fila2.RndSeguridad);
 
-                    copiarObjetosFilaAnterior(fila1, fila2);
-                    copiarFinesAtencion(fila1, fila2);
-                    copiarEstadisticas(fila1, fila2);
-
-                    if (fila1.Postales[0].Cola == 0 && fila1.Postales[0].Estado == "Libre")
+                    if (fila2.ResSeguridad == "Pasa")
                     {
-                        // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
+                        // Debe pasar por el nuevo servicio
+                        if (fila1.Seguridad[0].Estado == "Libre")
+                        {
+                            cliente.Estado = "SS";
+                            cliente.HoraInicioAtencion = fila2.Reloj;
+                            fila2.Seguridad[0].Estado = "Ocupado";
 
-                        cliente.Estado = "SP";
-                        cliente.HoraInicioAtencion = fila2.Reloj;
-                        fila2.Postales[0].Estado = "Ocupado";
-
-                        //Calculo fin_atención
-                        fila2.Fin_postales.Rnd = generarRandom(random);
-                        fila2.Fin_postales.TiempoAtencion = calcularTiempo(mediaFinPostales, fila2.Fin_postales.Rnd);
-                        fila2.Fin_postales.FinAtencion = fila2.Reloj + fila2.Fin_postales.TiempoAtencion;
+                            fila2.Fin_seguridad.FinAtencion = fila2.Reloj + 0.10;
+                            fila2.Fin_seguridad.ServidorLlegada = "Postales";
+                        }
+                        else
+                        {
+                            fila2.Seguridad[0].Cola += 1;
+                            cliente.Estado = "ES";
+                            cliente.HoraInicioEspera = fila2.Reloj;
+                        }
 
                     }
-                    else
+                    else if (fila2.ResSeguridad == "No pasa")
                     {
-                        cliente.Estado = "EP";
-                        cliente.HoraInicioEspera = fila2.Reloj;
-                        fila2.Postales[0].Cola = fila1.Postales[0].Cola + 1;
+                        verificarLlegadaPostales(fila1, fila2, random, cliente);
+
                     }
+                    
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
 
                 }
 
@@ -761,6 +740,17 @@ namespace TP4_SIM
                     calcularFinAtencionPostales(fila1, fila2, random, mediaFinPostales);
                 }
 
+                // FIN SEGURIDAD
+                if (fila2.Evento == "fin_seguridad")
+                {
+                    copiarProximasLlegadas(fila1, fila2);
+                    copiarFinesAtencion(fila1, fila2);
+                    copiarObjetosFilaAnterior(fila1, fila2);
+                    copiarEstadisticas(fila1, fila2);
+
+                    calcularFinAtencionSeguridad(fila1, fila2, random, mediaFinPostales);
+                }
+
                 List<double> posiblesProximosEventos = new List<double>();
                 posiblesProximosEventos.Add(fila2.LlegadaEnvio.ProxLlegada); // 0 
                 posiblesProximosEventos.Add(fila2.LlegadaReclamo.ProxLlegada); // 1
@@ -778,6 +768,7 @@ namespace TP4_SIM
                 posiblesProximosEventos.Add((double)fila2.Fin_AE.FinAtencion[0]);
                 posiblesProximosEventos.Add((double)fila2.Fin_AE.FinAtencion[1]);
                 posiblesProximosEventos.Add((double)fila2.Fin_postales.FinAtencion);
+                posiblesProximosEventos.Add(fila2.Fin_seguridad.FinAtencion);
 
 
                 List<double> proximoEvento = buscarProxEvento(posiblesProximosEventos);
@@ -787,7 +778,7 @@ namespace TP4_SIM
 
                 if (!(i == cantFilas - 1))
                 {
-                    fila2 = new FilaVector();
+                    fila2 = new FilaVectorNuevoServicio();
                     fila2.Reloj = (double)proximoEvento[0];
                     fila2.Evento = nombresEventos[(int)proximoEvento[1]];
                 }
@@ -811,6 +802,10 @@ namespace TP4_SIM
                     listaAux.Add(fila2.LlegadaPostales.Rnd.ToString());
                     listaAux.Add(fila2.LlegadaPostales.TiempoEntreLlegadas.ToString());
                     listaAux.Add(fila2.LlegadaPostales.ProxLlegada.ToString());
+
+                    listaAux.Add(fila2.RndSeguridad.ToString());
+                    listaAux.Add(fila2.ResSeguridad);
+
                     listaAux.Add(fila2.Fin_envio.Rnd.ToString());
                     listaAux.Add(fila2.Fin_envio.TiempoAtencion.ToString());
                     listaAux.Add(fila2.Fin_envio.FinAtencion[0].ToString());
@@ -832,6 +827,9 @@ namespace TP4_SIM
                     listaAux.Add(fila2.Fin_postales.Rnd.ToString());
                     listaAux.Add(fila2.Fin_postales.TiempoAtencion.ToString());
                     listaAux.Add(fila2.Fin_postales.FinAtencion.ToString());
+
+                    listaAux.Add(fila2.Fin_seguridad.FinAtencion.ToString());
+
                     listaAux.Add(fila2.EnvioPaquetes[0].Cola.ToString());
                     listaAux.Add(fila2.EnvioPaquetes[0].Estado.ToString());
                     listaAux.Add(fila2.EnvioPaquetes[1].Cola.ToString());
@@ -854,6 +852,10 @@ namespace TP4_SIM
                     listaAux.Add(fila2.AtencionEmp[1].Estado.ToString());
                     listaAux.Add(fila2.Postales[0].Cola.ToString());
                     listaAux.Add(fila2.Postales[0].Estado.ToString());
+
+                    listaAux.Add(fila2.Seguridad[0].Cola.ToString());
+                    listaAux.Add(fila2.Seguridad[0].Estado.ToString());
+
                     listaAux.Add(fila2.EstadisticasEnvio.AcumuladorEspera.ToString());
                     listaAux.Add(fila2.EstadisticasEnvio.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasEnvio.CantClientesAtendidos.ToString());
@@ -869,6 +871,12 @@ namespace TP4_SIM
                     listaAux.Add(fila2.EstadisticasPostales.AcumuladorEspera.ToString());
                     listaAux.Add(fila2.EstadisticasPostales.AcumuladorOcupacion.ToString());
                     listaAux.Add(fila2.EstadisticasPostales.CantClientesAtendidos.ToString());
+
+                    listaAux.Add(fila2.EstadisticasSeguridad.AcumuladorEspera.ToString());
+                    listaAux.Add(fila2.EstadisticasSeguridad.AcumuladorOcupacion.ToString());
+                    listaAux.Add(fila2.EstadisticasSeguridad.CantClientesAtendidos.ToString());
+
+
                     foreach (Cliente Cli in fila2.Clientes)
                     {
                         listaAux.Add(Cli.Estado);
@@ -908,8 +916,13 @@ namespace TP4_SIM
 
             double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP,
             acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, relojFinal};
+            /*
             Resultados ventanaRes = new Resultados(vectorRes);
             ventanaRes.Show();
+            */  
+
+            // FALTA CORREGIR LOS CÁLCULOS PARA EL NUEVO SERVICIO !!!
+
         }
 
         private List<double> buscarProxEvento(List<double> tiempos)
@@ -967,28 +980,32 @@ namespace TP4_SIM
             throw new InvalidOperationException($"No se encontró un cliente con el estado: {estado}");
         }
 
-        private void copiarObjetosFilaAnterior(FilaVector fila1, FilaVector fila2)
+        private void copiarObjetosFilaAnterior(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2)
         {
             fila2.EnvioPaquetes = fila1.EnvioPaquetes;
             fila2.Reclamos = fila1.Reclamos;
             fila2.Ventas = fila1.Ventas;
             fila2.AtencionEmp = fila1.AtencionEmp;
             fila2.Postales = fila1.Postales;
+            fila2.Seguridad = fila1.Seguridad;
 
 
             fila2.Clientes = fila1.Clientes;
         }
 
-        private void copiarFinesAtencion(FilaVector fila1, FilaVector fila2)
+        private void copiarFinesAtencion(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2)
         {
             fila2.Fin_envio.FinAtencion = fila1.Fin_envio.FinAtencion;
             fila2.Fin_reclamo.FinAtencion = fila1.Fin_reclamo.FinAtencion;
             fila2.Fin_venta.FinAtencion = fila1.Fin_venta.FinAtencion;
             fila2.Fin_AE.FinAtencion = fila1.Fin_AE.FinAtencion;
             fila2.Fin_postales.FinAtencion = fila1.Fin_postales.FinAtencion;
+            fila2.Fin_seguridad.FinAtencion = fila1.Fin_seguridad.FinAtencion;
+
+            fila2.Fin_seguridad.ServidorLlegada = fila1.Fin_seguridad.ServidorLlegada;
         }
 
-        private void copiarProximasLlegadas(FilaVector fila1, FilaVector fila2)
+        private void copiarProximasLlegadas(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2)
         {
             fila2.LlegadaReclamo.ProxLlegada = fila1.LlegadaReclamo.ProxLlegada;
             fila2.LlegadaVenta.ProxLlegada = fila1.LlegadaVenta.ProxLlegada;
@@ -997,16 +1014,17 @@ namespace TP4_SIM
             fila2.LlegadaEnvio.ProxLlegada = fila1.LlegadaEnvio.ProxLlegada;
         }
 
-        private void copiarEstadisticas(FilaVector fila1, FilaVector fila2)
+        private void copiarEstadisticas(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2)
         {
             fila2.EstadisticasEnvio = fila1.EstadisticasEnvio;
             fila2.EstadisticasReclamo = fila1.EstadisticasReclamo;
             fila2.EstadisticasVenta = fila1.EstadisticasVenta;
             fila2.EstadisticasAE = fila1.EstadisticasAE;
             fila2.EstadisticasPostales = fila1.EstadisticasPostales;
+            fila2.EstadisticasSeguridad = fila1.EstadisticasSeguridad;
         }
 
-        private void calcularFinAtencionEnvio(int nroObjetoEnvio, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionEnvio(int nroObjetoEnvio, FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SE" + nroObjetoEnvio;
 
@@ -1049,7 +1067,7 @@ namespace TP4_SIM
             }
         }
 
-        private void calcularFinAtencionReclamo(int nroObjetoReclamo, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionReclamo(int nroObjetoReclamo, FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SR" + nroObjetoReclamo;
 
@@ -1085,7 +1103,7 @@ namespace TP4_SIM
             }
         }
 
-        private void calcularFinAtencionVenta(int nroObjetoVenta, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionVenta(int nroObjetoVenta, FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SV" + nroObjetoVenta;
 
@@ -1124,7 +1142,7 @@ namespace TP4_SIM
             }
         }
 
-        private void calcularFinAtencionEmp(int nroObjetoAE, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionEmp(int nroObjetoAE, FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, double media)
         {
 
             string estadoSiendoAtendido = "SAE" + nroObjetoAE;
@@ -1161,7 +1179,7 @@ namespace TP4_SIM
                 fila2.Clientes[indexClientePorAtender].HoraInicioEspera = 0;
             }
         }
-        private void calcularFinAtencionPostales(FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionPostales(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, double media)
         {
 
             int indexClienteAtendido = buscarClientePorEstado("SP", fila1.Clientes);
@@ -1195,36 +1213,182 @@ namespace TP4_SIM
         }
 
 
-        // SIMULACIÓN CON NUEVO SERVICIO -------------------------------------------------------------------------------------------------------------------------------
-
-        private void btnNuevoServicio_Click(object sender, EventArgs e)
+        private void calcularFinAtencionSeguridad(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, double media)
         {
-            grdSimulacion.Rows.Clear();
-            int cantFilas = int.Parse(txtCantFilas.Text);
-            // Valores de media (dist. exponencial) de los eventos 
-            double mediaLlegadaPaquete = double.Parse(txtLlegadaPaquete.Text);
-            double mediaFinPaquete = double.Parse(txtFinPaquete.Text);
-            double mediaLlegadaReclamo = double.Parse(txtLlegadaReclamo.Text);
-            double mediaFinReclamo = double.Parse(txtFinReclamo.Text);
-            double mediaLlegadaVenta = double.Parse(txtLlegadaVenta.Text);
-            double mediaFinVenta = double.Parse(txtFinVenta.Text);
-            double mediaLlegadaAE = double.Parse(txtLlegadaAtencion.Text);
-            double mediaFinAE = double.Parse(txtFinAtencion.Text);
-            double mediaLlegadaPostales = double.Parse(txtLlegadaPostales.Text);
-            double mediaFinPostales = double.Parse(txtFinPostales.Text);
 
-            // Nro de fila a partir de la que sea desea visualizar
-            int nroPrimeraFilaMostrar = int.Parse(txtPrimeraFila.Text);
-            int nroUltimaFilaMostrar = nroPrimeraFilaMostrar + 300;
-            if (nroUltimaFilaMostrar > cantFilas) { nroUltimaFilaMostrar = cantFilas; }
+            int indexClienteAtendido = buscarClientePorEstado("SS", fila1.Clientes);
+
+            fila2.EstadisticasSeguridad.CantClientesAtendidos += 1;
+
+            fila2.EstadisticasSeguridad.AcumuladorOcupacion = truncarNumero(fila2.Reloj - fila2.Clientes[indexClienteAtendido].HoraInicioAtencion) + fila1.EstadisticasSeguridad.AcumuladorOcupacion;
 
 
-            double[] medias = {mediaLlegadaPaquete, mediaFinPaquete, mediaLlegadaReclamo, mediaFinReclamo, mediaLlegadaVenta, mediaFinVenta,
-            mediaLlegadaAE, mediaFinAE, mediaLlegadaPostales, mediaFinPostales};
+            // NO ELIMINO AL CLIENTE, TENGO QUE HACER QUE VUELA A DONDE VINO (a Envíos o Postales)
+            // Si tiene que ir a Envíos:
+            if (fila2.Fin_seguridad.ServidorLlegada == "Paquetes")
+            {
+                fila2.Fin_seguridad.ServidorLlegada = "";
+                verificarLlegadaEnvio(fila1, fila2, random, fila2.Clientes[indexClienteAtendido]);
+            }
+            // Si tiene que ir a Postales:
+            else if (fila2.Fin_seguridad.ServidorLlegada == "Postales")
+            {
 
-            SimNuevoServicio ventana = new SimNuevoServicio(cantFilas, medias, nroPrimeraFilaMostrar, nroUltimaFilaMostrar);
-            ventana.Show();
+                fila2.Fin_seguridad.ServidorLlegada = "";
+                verificarLlegadaPostales(fila1, fila2, random, fila2.Clientes[indexClienteAtendido]);
+            }
+            
 
+
+
+            if (fila1.Seguridad[0].Cola == 0)
+            {
+                fila2.Seguridad[0].Estado = "Libre";
+                fila2.Fin_seguridad.FinAtencion = 0;
+            }
+            else
+            {
+                fila2.Seguridad[0].Cola = fila1.Seguridad[0].Cola - 1;
+                fila2.Seguridad[0].Estado = "Ocupado";
+                int indiceClientePorAtender = buscarClientePorEstado("ES", fila1.Clientes);
+                fila2.Clientes[indiceClientePorAtender].Estado = "SS";
+                fila2.Clientes[indiceClientePorAtender].HoraInicioAtencion = fila2.Reloj;
+
+                fila2.Fin_seguridad.Rnd = fila2.Reloj + 0.1;
+
+                fila2.EstadisticasSeguridad.AcumuladorEspera = truncarNumero(fila2.Reloj - fila2.Clientes[indiceClientePorAtender].HoraInicioEspera) + fila1.EstadisticasSeguridad.AcumuladorEspera;
+                fila2.Clientes[indiceClientePorAtender].HoraInicioEspera = 0;
+            }
+        }
+
+        private string calcularProbabilidad(double rnd)
+        {
+            if (rnd < 0.5)  // revisar si es menor a 0.5 o menor-igual a 0.5
+            {
+                return "Pasa";
+            }
+            else
+            {
+                return "No pasa";
+            }
+        }
+
+        public void verificarLlegadaEnvio(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, Cliente cliente)
+        {
+
+            // Reviso las colas y los estados de los objetos ENVIO (en este caso son 3)
+            bool empleadoLibre = false;
+            for (int j = 0; j < fila1.EnvioPaquetes.Count; j++)
+            {
+                if (fila1.EnvioPaquetes[j].Estado == "Libre")
+                {
+                    // Hay un objeto libre: le asigno al nuevo cliente el estado siendo atendido, e indico horaInicioAtención, cambio el estado del objeto donde se
+                    // atiende, y genero el fin de atención para ese mismo objeto.
+                    cliente.Estado = "SE" + (j + 1);
+                    cliente.HoraInicioAtencion = fila2.Reloj;
+                    fila2.EnvioPaquetes[j].Estado = "Ocupado";
+
+                    fila2.Fin_envio.Rnd = generarRandom(random);
+                    fila2.Fin_envio.TiempoAtencion = calcularTiempo(mediaFinPaquete, fila2.Fin_envio.Rnd);
+                    fila2.Fin_envio.FinAtencion[j] = fila2.Reloj + fila2.Fin_envio.TiempoAtencion;
+
+                    empleadoLibre = true;
+                    break;
+
+                }
+            }
+            if (!empleadoLibre)
+            {
+                // No hay un objeto libre, entonces tengo que buscar el de menor cola y esperar
+                cliente.HoraInicioEspera = fila2.Reloj;
+                if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola)
+                {
+                    // Si todos los objetos tienen la misma cola, espera en el objeto 1:
+                    cliente.Estado = "EE1";
+                    fila2.EnvioPaquetes[0].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola)
+                {
+                    // La menor cola es la del objeto 1
+                    cliente.Estado = "EE1";
+                    fila2.EnvioPaquetes[0].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[1].Cola < fila1.EnvioPaquetes[0].Cola && fila1.EnvioPaquetes[1].Cola < fila1.EnvioPaquetes[2].Cola)
+                {
+                    // La menor cola es la del objeto 2
+                    cliente.Estado = "EE2";
+                    fila2.EnvioPaquetes[1].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[1].Cola)
+                {
+                    // La menor cola es la del objeto 3
+                    cliente.Estado = "EE3";
+                    fila2.EnvioPaquetes[2].Cola += 1;
+                }
+                // Si dos colas son iguales y una diferente
+                else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[2].Cola)
+                { // Las colas 1 y 2  son iguales y menores que la 3
+                    cliente.Estado = "EE1";
+                    fila2.EnvioPaquetes[0].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[1].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[2].Cola)
+                {
+                    // Las colas 1 y 2  son iguales y mayores que la 3
+                    cliente.Estado = "EE3";
+                    fila2.EnvioPaquetes[2].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola < fila1.EnvioPaquetes[1].Cola)
+                {
+                    // Las colas del 1 y 3 son iguales y menores que la 2
+                    cliente.Estado = "EE1";
+                    fila2.EnvioPaquetes[0].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[0].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[0].Cola > fila1.EnvioPaquetes[1].Cola)
+                {
+                    // Las colas del 1 y 3 son iguales y mayores que la 2
+                    cliente.Estado = "EE2";
+                    fila2.EnvioPaquetes[1].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola < fila1.EnvioPaquetes[0].Cola)
+                {
+                    // Las colas 2 y 3 son iguales y menores que la 1
+                    cliente.Estado = "EE2";
+                    fila2.EnvioPaquetes[1].Cola += 1;
+                }
+                else if (fila1.EnvioPaquetes[1].Cola == fila1.EnvioPaquetes[2].Cola && fila1.EnvioPaquetes[2].Cola > fila1.EnvioPaquetes[0].Cola)
+                {
+                    // Las colas 2 y 3 son iguales y mayores que la 1
+                    cliente.Estado = "EE1";
+                    fila2.EnvioPaquetes[0].Cola += 1;
+                }
+
+            }
+        }
+
+        private void verificarLlegadaPostales(FilaVectorNuevoServicio fila1, FilaVectorNuevoServicio fila2, Random random, Cliente cliente)
+        {
+
+
+            if (fila1.Postales[0].Cola == 0 && fila1.Postales[0].Estado == "Libre")
+            {
+                // Si es atendido se cambiam los estado correspondientes, y se genera el fin de atención
+
+                cliente.Estado = "SP";
+                cliente.HoraInicioAtencion = fila2.Reloj;
+                fila2.Postales[0].Estado = "Ocupado";
+
+                //Calculo fin_atención
+                fila2.Fin_postales.Rnd = generarRandom(random);
+                fila2.Fin_postales.TiempoAtencion = calcularTiempo(mediaFinPostales, fila2.Fin_postales.Rnd);
+                fila2.Fin_postales.FinAtencion = fila2.Reloj + fila2.Fin_postales.TiempoAtencion;
+
+            }
+            else
+            {
+                cliente.Estado = "EP";
+                cliente.HoraInicioEspera = fila2.Reloj;
+                fila2.Postales[0].Cola = fila1.Postales[0].Cola + 1;
+            }
         }
 
 

@@ -1,16 +1,16 @@
 ﻿namespace TP4_SIM
 {
-    partial class Simulacion
+    partial class SimNuevoServicio
     {
         /// <summary>
-        /// Variable del diseñador necesaria.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Limpiar los recursos que se estén usando.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,43 +20,17 @@
             base.Dispose(disposing);
         }
 
-        #region Código generado por el Diseñador de Windows Forms
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido de este método con el editor de código.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simulacion));
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtFinPaquete = new System.Windows.Forms.TextBox();
-            this.txtLlegadaPaquete = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtFinReclamo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtLlegadaReclamo = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtFinVenta = new System.Windows.Forms.TextBox();
-            this.txtLlegadaVenta = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtFinAtencion = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtLlegadaAtencion = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.txtFinPostales = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtLlegadaPostales = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.grdSimulacion = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reloj = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rndLlegadaEP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +48,8 @@
             this.rndLlegadaPostales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tiempoLlegadaPostales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proxLlegadaP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rndSeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.resSeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rndFinEP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tiempoFinEP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.finEP1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +71,7 @@
             this.rndFinPostales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tiempoFinP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.finPostales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finSeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cola1EP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado1EP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cola2EP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,6 +94,8 @@
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.acOcupacionE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,280 +111,11 @@
             this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.acOcupacionP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtCantFilas = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnIniciarSimulacion = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtPrimeraFila = new System.Windows.Forms.TextBox();
-            this.btnNuevoServicio = new System.Windows.Forms.Button();
-            this.btnAusencia = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.acEsperaS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asOcupS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdSimulacion)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "OFICINA DE CORREOS MOCASA";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtFinPaquete);
-            this.groupBox1.Controls.Add(this.txtLlegadaPaquete);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(56, 55);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(266, 88);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Envío de Paquetes";
-            // 
-            // txtFinPaquete
-            // 
-            this.txtFinPaquete.Location = new System.Drawing.Point(137, 50);
-            this.txtFinPaquete.Name = "txtFinPaquete";
-            this.txtFinPaquete.Size = new System.Drawing.Size(112, 22);
-            this.txtFinPaquete.TabIndex = 3;
-            this.txtFinPaquete.Text = "6";
-            // 
-            // txtLlegadaPaquete
-            // 
-            this.txtLlegadaPaquete.Location = new System.Drawing.Point(137, 21);
-            this.txtLlegadaPaquete.Name = "txtLlegadaPaquete";
-            this.txtLlegadaPaquete.Size = new System.Drawing.Size(112, 22);
-            this.txtLlegadaPaquete.TabIndex = 2;
-            this.txtLlegadaPaquete.Text = "2,4";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(49, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Fin atención:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(29, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Llegada cliente:";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtFinReclamo);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.txtLlegadaReclamo);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(56, 162);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(266, 88);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Reclamaciones y Devoluciones";
-            // 
-            // txtFinReclamo
-            // 
-            this.txtFinReclamo.Location = new System.Drawing.Point(137, 54);
-            this.txtFinReclamo.Name = "txtFinReclamo";
-            this.txtFinReclamo.Size = new System.Drawing.Size(112, 22);
-            this.txtFinReclamo.TabIndex = 7;
-            this.txtFinReclamo.Text = "8,57";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(29, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 16);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Llegada cliente:";
-            // 
-            // txtLlegadaReclamo
-            // 
-            this.txtLlegadaReclamo.Location = new System.Drawing.Point(137, 25);
-            this.txtLlegadaReclamo.Name = "txtLlegadaReclamo";
-            this.txtLlegadaReclamo.Size = new System.Drawing.Size(112, 22);
-            this.txtLlegadaReclamo.TabIndex = 6;
-            this.txtLlegadaReclamo.Text = "4";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(49, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Fin atención:";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtFinVenta);
-            this.groupBox3.Controls.Add(this.txtLlegadaVenta);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(56, 266);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(266, 88);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Venta de Sellos y Sobres";
-            // 
-            // txtFinVenta
-            // 
-            this.txtFinVenta.Location = new System.Drawing.Point(137, 55);
-            this.txtFinVenta.Name = "txtFinVenta";
-            this.txtFinVenta.Size = new System.Drawing.Size(112, 22);
-            this.txtFinVenta.TabIndex = 7;
-            this.txtFinVenta.Text = "3,33";
-            // 
-            // txtLlegadaVenta
-            // 
-            this.txtLlegadaVenta.Location = new System.Drawing.Point(137, 26);
-            this.txtLlegadaVenta.Name = "txtLlegadaVenta";
-            this.txtLlegadaVenta.Size = new System.Drawing.Size(112, 22);
-            this.txtLlegadaVenta.TabIndex = 6;
-            this.txtLlegadaVenta.Text = "2";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(49, 55);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 16);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Fin atención:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(29, 29);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(102, 16);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Llegada cliente:";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.txtFinAtencion);
-            this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.txtLlegadaAtencion);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(56, 373);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(266, 88);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Atención Empresarial";
-            // 
-            // txtFinAtencion
-            // 
-            this.txtFinAtencion.Location = new System.Drawing.Point(137, 53);
-            this.txtFinAtencion.Name = "txtFinAtencion";
-            this.txtFinAtencion.Size = new System.Drawing.Size(112, 22);
-            this.txtFinAtencion.TabIndex = 11;
-            this.txtFinAtencion.Text = "12";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(29, 27);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 16);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Llegada cliente:";
-            // 
-            // txtLlegadaAtencion
-            // 
-            this.txtLlegadaAtencion.Location = new System.Drawing.Point(137, 24);
-            this.txtLlegadaAtencion.Name = "txtLlegadaAtencion";
-            this.txtLlegadaAtencion.Size = new System.Drawing.Size(112, 22);
-            this.txtLlegadaAtencion.TabIndex = 10;
-            this.txtLlegadaAtencion.Text = "6";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(49, 53);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 16);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Fin atención:";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.txtFinPostales);
-            this.groupBox5.Controls.Add(this.label11);
-            this.groupBox5.Controls.Add(this.txtLlegadaPostales);
-            this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(56, 476);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(266, 88);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Postales y Envíos Especiales";
-            // 
-            // txtFinPostales
-            // 
-            this.txtFinPostales.Location = new System.Drawing.Point(137, 55);
-            this.txtFinPostales.Name = "txtFinPostales";
-            this.txtFinPostales.Size = new System.Drawing.Size(112, 22);
-            this.txtFinPostales.TabIndex = 15;
-            this.txtFinPostales.Text = "20";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(29, 29);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(102, 16);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Llegada cliente:";
-            // 
-            // txtLlegadaPostales
-            // 
-            this.txtLlegadaPostales.Location = new System.Drawing.Point(137, 26);
-            this.txtLlegadaPostales.Name = "txtLlegadaPostales";
-            this.txtLlegadaPostales.Size = new System.Drawing.Size(112, 22);
-            this.txtLlegadaPostales.TabIndex = 14;
-            this.txtLlegadaPostales.Text = "7,5";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(49, 55);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 16);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Fin atención:";
             // 
             // grdSimulacion
             // 
@@ -430,6 +140,8 @@
             this.rndLlegadaPostales,
             this.tiempoLlegadaPostales,
             this.proxLlegadaP,
+            this.rndSeg,
+            this.resSeg,
             this.rndFinEP,
             this.tiempoFinEP,
             this.finEP1,
@@ -451,6 +163,7 @@
             this.rndFinPostales,
             this.tiempoFinP,
             this.finPostales,
+            this.finSeg,
             this.cola1EP,
             this.estado1EP,
             this.cola2EP,
@@ -473,6 +186,8 @@
             this.Column14,
             this.Column15,
             this.Column16,
+            this.Column30,
+            this.Column31,
             this.Column17,
             this.acOcupacionE,
             this.Column18,
@@ -487,8 +202,11 @@
             this.Column5,
             this.Column24,
             this.acOcupacionP,
-            this.Column25});
-            this.grdSimulacion.Location = new System.Drawing.Point(360, 127);
+            this.Column25,
+            this.acEsperaS,
+            this.asOcupS,
+            this.cantS});
+            this.grdSimulacion.Location = new System.Drawing.Point(24, 93);
             this.grdSimulacion.Name = "grdSimulacion";
             this.grdSimulacion.ReadOnly = true;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -502,7 +220,17 @@
             this.grdSimulacion.RowHeadersWidth = 51;
             this.grdSimulacion.RowTemplate.Height = 24;
             this.grdSimulacion.Size = new System.Drawing.Size(1141, 420);
-            this.grdSimulacion.TabIndex = 3;
+            this.grdSimulacion.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(24, 27);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(189, 41);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "INICIAR SIMULACIÓN";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // evento
             // 
@@ -639,6 +367,22 @@
             this.proxLlegadaP.Name = "proxLlegadaP";
             this.proxLlegadaP.ReadOnly = true;
             this.proxLlegadaP.Width = 103;
+            // 
+            // rndSeg
+            // 
+            this.rndSeg.HeaderText = "RND Seguridad";
+            this.rndSeg.MinimumWidth = 6;
+            this.rndSeg.Name = "rndSeg";
+            this.rndSeg.ReadOnly = true;
+            this.rndSeg.Width = 121;
+            // 
+            // resSeg
+            // 
+            this.resSeg.HeaderText = "Pasa por seguridad";
+            this.resSeg.MinimumWidth = 6;
+            this.resSeg.Name = "resSeg";
+            this.resSeg.ReadOnly = true;
+            this.resSeg.Width = 142;
             // 
             // rndFinEP
             // 
@@ -807,6 +551,14 @@
             this.finPostales.Name = "finPostales";
             this.finPostales.ReadOnly = true;
             this.finPostales.Width = 101;
+            // 
+            // finSeg
+            // 
+            this.finSeg.HeaderText = "Fin seguridad";
+            this.finSeg.MinimumWidth = 6;
+            this.finSeg.Name = "finSeg";
+            this.finSeg.ReadOnly = true;
+            this.finSeg.Width = 109;
             // 
             // cola1EP
             // 
@@ -984,6 +736,22 @@
             this.Column16.ReadOnly = true;
             this.Column16.Width = 84;
             // 
+            // Column30
+            // 
+            this.Column30.HeaderText = "S Cola";
+            this.Column30.MinimumWidth = 6;
+            this.Column30.Name = "Column30";
+            this.Column30.ReadOnly = true;
+            this.Column30.Width = 71;
+            // 
+            // Column31
+            // 
+            this.Column31.HeaderText = "S Estado";
+            this.Column31.MinimumWidth = 6;
+            this.Column31.Name = "Column31";
+            this.Column31.ReadOnly = true;
+            this.Column31.Width = 84;
+            // 
             // Column17
             // 
             this.Column17.HeaderText = "AC tiempo esp EP";
@@ -1104,143 +872,48 @@
             this.Column25.ReadOnly = true;
             this.Column25.Width = 70;
             // 
-            // txtCantFilas
+            // acEsperaS
             // 
-            this.txtCantFilas.Location = new System.Drawing.Point(546, 52);
-            this.txtCantFilas.Name = "txtCantFilas";
-            this.txtCantFilas.Size = new System.Drawing.Size(112, 22);
-            this.txtCantFilas.TabIndex = 5;
-            this.txtCantFilas.Text = "300";
+            this.acEsperaS.HeaderText = "AC tiempo esp S";
+            this.acEsperaS.MinimumWidth = 6;
+            this.acEsperaS.Name = "acEsperaS";
+            this.acEsperaS.ReadOnly = true;
+            this.acEsperaS.Width = 114;
             // 
-            // label12
+            // asOcupS
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(377, 55);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(155, 16);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Cant. de líneas a simular:";
+            this.asOcupS.HeaderText = "AC ocupación S";
+            this.asOcupS.MinimumWidth = 6;
+            this.asOcupS.Name = "asOcupS";
+            this.asOcupS.ReadOnly = true;
+            this.asOcupS.Width = 121;
             // 
-            // btnIniciarSimulacion
+            // cantS
             // 
-            this.btnIniciarSimulacion.Location = new System.Drawing.Point(753, 55);
-            this.btnIniciarSimulacion.Name = "btnIniciarSimulacion";
-            this.btnIniciarSimulacion.Size = new System.Drawing.Size(130, 47);
-            this.btnIniciarSimulacion.TabIndex = 6;
-            this.btnIniciarSimulacion.Text = "INICIAR SIMULACIÓN";
-            this.btnIniciarSimulacion.UseVisualStyleBackColor = true;
-            this.btnIniciarSimulacion.Click += new System.EventHandler(this.btnIniciarSimulacion_Click);
+            this.cantS.HeaderText = "Cant S";
+            this.cantS.MinimumWidth = 6;
+            this.cantS.Name = "cantS";
+            this.cantS.ReadOnly = true;
+            this.cantS.Width = 70;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(401, 82);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(131, 16);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Mostrar desde la fila:";
-            // 
-            // txtPrimeraFila
-            // 
-            this.txtPrimeraFila.Location = new System.Drawing.Point(546, 82);
-            this.txtPrimeraFila.Name = "txtPrimeraFila";
-            this.txtPrimeraFila.Size = new System.Drawing.Size(112, 22);
-            this.txtPrimeraFila.TabIndex = 8;
-            this.txtPrimeraFila.Text = "1";
-            // 
-            // btnNuevoServicio
-            // 
-            this.btnNuevoServicio.Location = new System.Drawing.Point(916, 55);
-            this.btnNuevoServicio.Name = "btnNuevoServicio";
-            this.btnNuevoServicio.Size = new System.Drawing.Size(130, 47);
-            this.btnNuevoServicio.TabIndex = 9;
-            this.btnNuevoServicio.Text = "Simular con nuevo servicio";
-            this.btnNuevoServicio.UseVisualStyleBackColor = true;
-            this.btnNuevoServicio.Click += new System.EventHandler(this.btnNuevoServicio_Click);
-            // 
-            // btnAusencia
-            // 
-            this.btnAusencia.Location = new System.Drawing.Point(1076, 55);
-            this.btnAusencia.Name = "btnAusencia";
-            this.btnAusencia.Size = new System.Drawing.Size(130, 47);
-            this.btnAusencia.TabIndex = 10;
-            this.btnAusencia.Text = "Simular con ausencia en AE";
-            this.btnAusencia.UseVisualStyleBackColor = true;
-            // 
-            // Simulacion
+            // SimNuevoServicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1529, 606);
-            this.Controls.Add(this.btnAusencia);
-            this.Controls.Add(this.btnNuevoServicio);
-            this.Controls.Add(this.txtPrimeraFila);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.btnIniciarSimulacion);
-            this.Controls.Add(this.txtCantFilas);
-            this.Controls.Add(this.label12);
+            this.ClientSize = new System.Drawing.Size(1177, 570);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.grdSimulacion);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Simulacion";
-            this.Text = "Simulación";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            this.Name = "SimNuevoServicio";
+            this.Text = "SimNuevoServicio";
             ((System.ComponentModel.ISupportInitialize)(this.grdSimulacion)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtFinPaquete;
-        private System.Windows.Forms.TextBox txtLlegadaPaquete;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtFinReclamo;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtLlegadaReclamo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox txtFinVenta;
-        private System.Windows.Forms.TextBox txtLlegadaVenta;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox txtFinAtencion;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtLlegadaAtencion;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox txtFinPostales;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtLlegadaPostales;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView grdSimulacion;
-        private System.Windows.Forms.TextBox txtCantFilas;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button btnIniciarSimulacion;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtPrimeraFila;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn evento;
         private System.Windows.Forms.DataGridViewTextBoxColumn reloj;
         private System.Windows.Forms.DataGridViewTextBoxColumn rndLlegadaEP;
@@ -1258,6 +931,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rndLlegadaPostales;
         private System.Windows.Forms.DataGridViewTextBoxColumn tiempoLlegadaPostales;
         private System.Windows.Forms.DataGridViewTextBoxColumn proxLlegadaP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rndSeg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn resSeg;
         private System.Windows.Forms.DataGridViewTextBoxColumn rndFinEP;
         private System.Windows.Forms.DataGridViewTextBoxColumn tiempoFinEP;
         private System.Windows.Forms.DataGridViewTextBoxColumn finEP1;
@@ -1279,6 +954,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rndFinPostales;
         private System.Windows.Forms.DataGridViewTextBoxColumn tiempoFinP;
         private System.Windows.Forms.DataGridViewTextBoxColumn finPostales;
+        private System.Windows.Forms.DataGridViewTextBoxColumn finSeg;
         private System.Windows.Forms.DataGridViewTextBoxColumn cola1EP;
         private System.Windows.Forms.DataGridViewTextBoxColumn estado1EP;
         private System.Windows.Forms.DataGridViewTextBoxColumn cola2EP;
@@ -1301,6 +977,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
         private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
@@ -1316,8 +994,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
         private System.Windows.Forms.DataGridViewTextBoxColumn acOcupacionP;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
-        private System.Windows.Forms.Button btnNuevoServicio;
-        private System.Windows.Forms.Button btnAusencia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acEsperaS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asOcupS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantS;
     }
 }
-
