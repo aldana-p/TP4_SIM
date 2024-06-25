@@ -78,12 +78,6 @@
     <Compile Include="SimNuevoServicio.Designer.cs">
       <DependentUpon>SimNuevoServicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="SimOriginal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SimOriginal.Designer.cs">
-      <DependentUpon>SimOriginal.cs</DependentUpon>
-    </Compile>
     <Compile Include="Clases\Venta.cs" />
     <Compile Include="Resultados.cs">
       <SubType>Form</SubType>
@@ -104,9 +98,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SimNuevoServicio.resx">
       <DependentUpon>SimNuevoServicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SimOriginal.resx">
-      <DependentUpon>SimOriginal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Simulacion.resx">
       <DependentUpon>Simulacion.cs</DependentUpon>
