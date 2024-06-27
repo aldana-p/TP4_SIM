@@ -850,12 +850,7 @@ namespace TP4_SIM
 
             double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP, acEsperaS, cantS,
             acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, acOcupS, relojFinal};
-            /*
-            Resultados ventanaRes = new Resultados(vectorRes);
-            ventanaRes.Show();
-            */
-
-            // FALTA CORREGIR LOS CÁLCULOS PARA EL NUEVO SERVICIO !!!
+          
 
             // Falta verificar cuando la cantidad es 0 -> no se puede calcular (da NaN)
             txtEsperaE.Text = (Math.Truncate((vectorRes[0] / vectorRes[1]) * 100) / 100).ToString();
@@ -863,16 +858,16 @@ namespace TP4_SIM
             txtEsperaV.Text = (Math.Truncate((vectorRes[4] / vectorRes[5]) * 100) / 100).ToString();
             txtEsperaAE.Text = (Math.Truncate((vectorRes[6] / vectorRes[7]) * 100) / 100).ToString();
             txtEsperaP.Text = (Math.Truncate((vectorRes[8] / vectorRes[9]) * 100) / 100).ToString();
-            txtEsperaP.Text = (Math.Truncate((vectorRes[10] / vectorRes[11]) * 100) / 100).ToString();
+            txtEsperaS.Text = (Math.Truncate((vectorRes[10] / vectorRes[11]) * 100) / 100).ToString();
 
             relojFinal = vectorRes[16];
 
             double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
-            double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
+            double ocupR = (vectorRes[11] / 2) * 100 / relojFinal;
             double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
-            double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
-            double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
-            double ocupS = (vectorRes[15] / 3) * 100 / relojFinal;
+            double ocupAE = (vectorRes[13] / 2) * 100 / relojFinal;
+            double ocupP = (vectorRes[14] * 100) / relojFinal;
+            double ocupS = (vectorRes[15] * 100) / relojFinal;
 
             txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
             txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";

@@ -201,10 +201,6 @@ namespace TP4_SIM
                         }
                     }
                     tablaResultado.Rows.Add(listaAux1.ToArray());
-                    // Agregar la fila a la grilla
-                    //grdSimulacion.Rows.Add(listaAux1.ToArray());
-
-                    ; // me falta agregar las columnas de ocupación en el data grid view
                 }
 
                 // ----------------------------------------- LLEGADAS -----------------------------------------------------------------------------
@@ -222,12 +218,6 @@ namespace TP4_SIM
                     copiarEstadisticas(fila1, fila2);
 
                     Cliente cliente = new Cliente();   //Al ser una llegada tengo que crear al cliente
-
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
-
 
                     // Reviso las colas y los estados de los objetos ENVIO (en este caso son 3)
                     bool empleadoLibre = false;
@@ -322,8 +312,6 @@ namespace TP4_SIM
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA VENTA
@@ -342,21 +330,6 @@ namespace TP4_SIM
 
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
-
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Ventas.Count; j++)
@@ -445,8 +418,6 @@ namespace TP4_SIM
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[i + 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[i + 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
 
                 }
 
@@ -466,21 +437,6 @@ namespace TP4_SIM
 
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
-
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
 
                     bool empleadoLibre = false;
@@ -524,8 +480,6 @@ namespace TP4_SIM
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA ATENCIÓN EMPRESARIAL
@@ -545,22 +499,6 @@ namespace TP4_SIM
                     // Tengo que revisar las colas y los estados de VENTAS con el for
 
                     Cliente cliente = new Cliente();
-
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
-
 
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.AtencionEmp.Count; j++)
@@ -956,10 +894,10 @@ namespace TP4_SIM
                 relojFinal = vectorRes[15];
 
                 double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
-                double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
+                double ocupR = (vectorRes[11] / 2) * 100 / relojFinal;
                 double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
-                double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
-                double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
+                double ocupAE = (vectorRes[13] / 2) * 100 / relojFinal;
+                double ocupP = (vectorRes[14] * 100) / relojFinal;
 
                 txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
                 txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";

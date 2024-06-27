@@ -761,10 +761,7 @@ namespace TP4_SIM
 
             double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP,
             acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, relojFinal};
-            /*
-            Resultados ventanaRes = new Resultados(vectorRes);
-            ventanaRes.Show();
-            */
+            
 
             // FALTA CORREGIR LOS CÁLCULOS PARA EL NUEVO SERVICIO !!!
 
@@ -779,9 +776,9 @@ namespace TP4_SIM
 
             double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
             double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
-            double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
-            double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
-            double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
+            double ocupV = (vectorRes[12] / 2) * 100 / relojFinal;
+            double ocupAE = (vectorRes[13] / 2) * 100 / relojFinal;
+            double ocupP = (vectorRes[14] * 100) / relojFinal;
 
             txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
             txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";

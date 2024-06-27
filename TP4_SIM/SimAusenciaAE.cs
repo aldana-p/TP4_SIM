@@ -92,16 +92,12 @@ namespace TP4_SIM
             posiblesProxEventos.Add(fila1.LlegadaAE.ProxLlegada);
             posiblesProxEventos.Add(fila1.LlegadaPostales.ProxLlegada);
            
-            //posiblesProxEventos.Add(fila1.ComienzoAusencia.ProxAusencia); //al ser la primera debe ser 0;
-
-            //Como el reloj empieza en cero, marcamo como ausente al empleado de AE 2
-            //marcarAusencia(new FilaVectorAusenciaAE(), fila1);
+           
 
             List<double> proxEvento = buscarProxEvento(posiblesProxEventos);
             
             FilaVectorAusenciaAE fila2 = new FilaVectorAusenciaAE();
-            //fila2.Reloj = (double)proxEvento[0];
-            //fila2.Evento = nombresEventos[Convert.ToInt32(proxEvento[1])];
+
             fila2.Reloj = 0;
             fila2.Evento = "comienzo_ausencia";
 
@@ -457,9 +453,6 @@ namespace TP4_SIM
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[i + 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[i + 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
-
                 }
 
                 // LLEGADA RECLAMO
@@ -520,8 +513,6 @@ namespace TP4_SIM
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA ATENCIÓN EMPRESARIAL
@@ -635,8 +626,6 @@ namespace TP4_SIM
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[fila2.NroFila - 1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
 
                 }
 
@@ -911,8 +900,6 @@ namespace TP4_SIM
 
                     filasMostrar.Add(fila2);
                     tablaResultado.Rows.Add(listaAux.ToArray());
-                    //tengo que mostrar la útlima fila siempre
-                    //grdSimulacion.Rows.Add(listaAux.ToArray()); // me falta agregar las columnas de ocupación en el data grid view
                 }
 
             }
@@ -956,10 +943,10 @@ namespace TP4_SIM
             relojFinal = vectorRes[15];
 
             double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
-            double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
+            double ocupR = (vectorRes[11] / 2) * 100 / relojFinal;
             double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
-            double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
-            double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
+            double ocupAE = (vectorRes[13] / 2) * 100 / relojFinal;
+            double ocupP = (vectorRes[14] * 100) / relojFinal;
 
             txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
             txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";
@@ -1095,9 +1082,6 @@ namespace TP4_SIM
                 int indexClientePorAtender = buscarClientePorEstado(estadoEsperando, fila1.Clientes);
                 fila2.Clientes[indexClientePorAtender].Estado = estadoSiendoAtendido;
                 fila2.Clientes[indexClientePorAtender].HoraInicioAtencion = fila2.Reloj;
-
-
-
 
                 fila2.Fin_envio.Rnd = generarRandom(random);
                 fila2.Fin_envio.TiempoAtencion = calcularTiempo(media, fila2.Fin_envio.Rnd);
