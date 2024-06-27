@@ -11,9 +11,9 @@ namespace TP4_SIM.Clases.EventosFinAtencion
         private double rnd;
         private double tiempoAtencion;
         private double[] finAtencion;
-        public FinAtencionReclamo()
+        public FinAtencionReclamo(int nroEmpleados)
         {
-            finAtencion = new double[2];
+            finAtencion = new double[nroEmpleados];
         }
 
         public double Rnd { get => rnd; set => rnd = value; }

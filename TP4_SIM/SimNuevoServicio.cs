@@ -841,10 +841,15 @@ namespace TP4_SIM
             double acOcupP = fila2.EstadisticasPostales.AcumuladorOcupacion;
             double cantP = fila2.EstadisticasPostales.CantClientesAtendidos;
 
+            double acEsperaS = fila2.EstadisticasSeguridad.AcumuladorEspera;
+            double acOcupS = fila2.EstadisticasSeguridad.AcumuladorOcupacion;
+            double cantS = fila2.EstadisticasSeguridad.CantClientesAtendidos;
+
+
             double relojFinal = fila2.Reloj;
 
-            double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP,
-            acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, relojFinal};
+            double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP, acEsperaS, cantS,
+            acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, acOcupS, relojFinal};
             /*
             Resultados ventanaRes = new Resultados(vectorRes);
             ventanaRes.Show();
@@ -858,20 +863,23 @@ namespace TP4_SIM
             txtEsperaV.Text = (Math.Truncate((vectorRes[4] / vectorRes[5]) * 100) / 100).ToString();
             txtEsperaAE.Text = (Math.Truncate((vectorRes[6] / vectorRes[7]) * 100) / 100).ToString();
             txtEsperaP.Text = (Math.Truncate((vectorRes[8] / vectorRes[9]) * 100) / 100).ToString();
+            txtEsperaP.Text = (Math.Truncate((vectorRes[10] / vectorRes[11]) * 100) / 100).ToString();
 
-            relojFinal = vectorRes[15];
+            relojFinal = vectorRes[16];
 
             double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
             double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
             double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
             double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
             double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
+            double ocupS = (vectorRes[15] / 3) * 100 / relojFinal;
 
             txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
             txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";
             txtOcupacionV.Text = (Math.Truncate(ocupV * 100) / 100).ToString() + "%";
             txtOcupacionAE.Text = (Math.Truncate(ocupAE * 100) / 100).ToString() + "%";
             txtOcupacionP.Text = (Math.Truncate(ocupP * 100) / 100).ToString() + "%";
+            txtOcupacionS.Text = (Math.Truncate(ocupS * 100) / 100).ToString() + "%";
         }
 
         private List<double> buscarProxEvento(List<double> tiempos)

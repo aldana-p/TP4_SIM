@@ -96,7 +96,8 @@
     <Compile Include="Clases\EventosLlegadas\LlegadaReclamo.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaVenta.cs" />
     <Compile Include="Clases\FilaVectorAusenciaAE.cs" />
-    <Compile Include="Clases\FilaVector - Copia.cs" />
+    <Compile Include="Clases\FilaVectorPunto3.cs" />
+    <Compile Include="Clases\FilaVectorSeguridad.cs" />
     <Compile Include="Clases\FilaVector.cs" />
     <Compile Include="Clases\InspeccionSeguridad.cs" />
     <Compile Include="Clases\Postales.cs" />
@@ -120,6 +121,12 @@
     <Compile Include="Resultados.Designer.cs">
       <DependentUpon>Resultados.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimPunto3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimPunto3.Designer.cs">
+      <DependentUpon>SimPunto3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Simulacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SimNuevoServicio.resx">
       <DependentUpon>SimNuevoServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimPunto3.resx">
+      <DependentUpon>SimPunto3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Simulacion.resx">
       <DependentUpon>Simulacion.cs</DependentUpon>

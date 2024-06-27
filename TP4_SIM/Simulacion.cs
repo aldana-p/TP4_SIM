@@ -1427,5 +1427,34 @@ namespace TP4_SIM
             SimAusenciaAE ventana = new SimAusenciaAE(cantFilas, medias, nroPrimeraFilaMostrar, nroUltimaFilaMostrar);
             ventana.Show();
         }
+
+        private void btnPunto3_Click(object sender, EventArgs e)
+        {
+
+            int cantFilas = int.Parse(txtCantFilas.Text);
+            // Valores de media (dist. exponencial) de los eventos 
+            double mediaLlegadaPaquete = double.Parse(txtLlegadaPaquete.Text);
+            double mediaFinPaquete = double.Parse(txtFinPaquete.Text);
+            double mediaLlegadaReclamo = double.Parse(txtLlegadaReclamo.Text);
+            double mediaFinReclamo = double.Parse(txtFinReclamo.Text);
+            double mediaLlegadaVenta = double.Parse(txtLlegadaVenta.Text);
+            double mediaFinVenta = double.Parse(txtFinVenta.Text);
+            double mediaLlegadaAE = double.Parse(txtLlegadaAtencion.Text);
+            double mediaFinAE = double.Parse(txtFinAtencion.Text);
+            double mediaLlegadaPostales = double.Parse(txtLlegadaPostales.Text);
+            double mediaFinPostales = double.Parse(txtFinPostales.Text);
+
+            // Nro de fila a partir de la que sea desea visualizar
+            int nroPrimeraFilaMostrar = int.Parse(txtPrimeraFila.Text);
+            int nroUltimaFilaMostrar = nroPrimeraFilaMostrar + 300;
+            if (nroUltimaFilaMostrar > cantFilas) { nroUltimaFilaMostrar = cantFilas; }
+
+
+            double[] medias = {mediaLlegadaPaquete, mediaFinPaquete, mediaLlegadaReclamo, mediaFinReclamo, mediaLlegadaVenta, mediaFinVenta,
+            mediaLlegadaAE, mediaFinAE, mediaLlegadaPostales, mediaFinPostales};
+
+            SimPunto3 ventana = new SimPunto3(cantFilas, medias, nroPrimeraFilaMostrar, nroUltimaFilaMostrar);
+            ventana.Show();
+        }
     }
     }

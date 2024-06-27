@@ -72,8 +72,8 @@ namespace TP4_SIM
             this.LlegadaPostales = new LlegadaPostales();
 
             this.fin_envio = new FinAtencionEnvio();
-            this.fin_reclamo = new FinAtencionReclamo();
-            this.fin_venta = new FinAtencionVenta();
+            this.fin_reclamo = new FinAtencionReclamo(2);
+            this.fin_venta = new FinAtencionVenta(3);
             this.fin_AE = new FinAtencionEmpresarial();
             this.fin_postales = new FinAtencionPostales();
             this.fin_seguridad = new FinAtencionSeguridad();

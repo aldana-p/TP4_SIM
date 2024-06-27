@@ -91,7 +91,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(34, 514);
+            this.label21.Location = new System.Drawing.Point(34, 502);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(82, 20);
             this.label21.TabIndex = 20;
@@ -101,7 +101,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(34, 480);
+            this.label22.Location = new System.Drawing.Point(34, 469);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(128, 20);
             this.label22.TabIndex = 19;
@@ -111,7 +111,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(34, 445);
+            this.label23.Location = new System.Drawing.Point(34, 436);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(67, 20);
             this.label23.TabIndex = 18;
@@ -121,7 +121,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(34, 411);
+            this.label24.Location = new System.Drawing.Point(34, 403);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(92, 20);
             this.label24.TabIndex = 17;
@@ -140,7 +140,7 @@
             // txtOcupacionP
             // 
             this.txtOcupacionP.Enabled = false;
-            this.txtOcupacionP.Location = new System.Drawing.Point(230, 514);
+            this.txtOcupacionP.Location = new System.Drawing.Point(230, 502);
             this.txtOcupacionP.Name = "txtOcupacionP";
             this.txtOcupacionP.Size = new System.Drawing.Size(124, 27);
             this.txtOcupacionP.TabIndex = 15;
@@ -148,7 +148,7 @@
             // txtOcupacionAE
             // 
             this.txtOcupacionAE.Enabled = false;
-            this.txtOcupacionAE.Location = new System.Drawing.Point(230, 480);
+            this.txtOcupacionAE.Location = new System.Drawing.Point(230, 469);
             this.txtOcupacionAE.Name = "txtOcupacionAE";
             this.txtOcupacionAE.Size = new System.Drawing.Size(124, 27);
             this.txtOcupacionAE.TabIndex = 14;
@@ -156,7 +156,7 @@
             // txtOcupacionV
             // 
             this.txtOcupacionV.Enabled = false;
-            this.txtOcupacionV.Location = new System.Drawing.Point(230, 450);
+            this.txtOcupacionV.Location = new System.Drawing.Point(230, 436);
             this.txtOcupacionV.Name = "txtOcupacionV";
             this.txtOcupacionV.Size = new System.Drawing.Size(124, 27);
             this.txtOcupacionV.TabIndex = 13;
@@ -164,7 +164,7 @@
             // txtOcupacionR
             // 
             this.txtOcupacionR.Enabled = false;
-            this.txtOcupacionR.Location = new System.Drawing.Point(230, 416);
+            this.txtOcupacionR.Location = new System.Drawing.Point(230, 403);
             this.txtOcupacionR.Name = "txtOcupacionR";
             this.txtOcupacionR.Size = new System.Drawing.Size(124, 27);
             this.txtOcupacionR.TabIndex = 12;
@@ -242,7 +242,7 @@
             // txtEsperaE
             // 
             this.txtEsperaE.Enabled = false;
-            this.txtEsperaE.Location = new System.Drawing.Point(230, 93);
+            this.txtEsperaE.Location = new System.Drawing.Point(230, 101);
             this.txtEsperaE.Name = "txtEsperaE";
             this.txtEsperaE.Size = new System.Drawing.Size(100, 27);
             this.txtEsperaE.TabIndex = 4;
@@ -281,7 +281,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(34, 93);
+            this.label20.Location = new System.Drawing.Point(34, 101);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(163, 20);
             this.label20.TabIndex = 0;
@@ -298,7 +298,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // SimAusenciaVenta
+            // SimAusenciaAE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -306,8 +306,8 @@
             this.ClientSize = new System.Drawing.Size(745, 629);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.button1);
-            this.Name = "SimAusenciaVenta";
-            this.Text = "Simulación con ausencia de empleado en ventas";
+            this.Name = "SimAusenciaAE";
+            this.Text = "Simulación con ausencia de empleado AE";
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
