@@ -215,10 +215,6 @@ namespace TP4_SIM
                     }
                     tablaResultado.Rows.Add(listaAux1.ToArray());
 
-                    // Agregar la fila a la grilla
-                    //grdSimulacion.Rows.Add(listaAux1.ToArray());
-
-                    ; // me falta agregar las columnas de ocupación en el data grid view
                 }
 
                 // ----------------------------------------- LLEGADAS -----------------------------------------------------------------------------
@@ -1367,26 +1363,26 @@ namespace TP4_SIM
             tablaResultado.Columns.Add("Pasa por seguridad");
             tablaResultado.Columns.Add("RND fin EP");
             tablaResultado.Columns.Add("Tiempo atencion EP");
-            tablaResultado.Columns.Add("Tiempo fin envio 1");
-            tablaResultado.Columns.Add("Tiempo fin envio 2");
-            tablaResultado.Columns.Add("Tiempo fin envio 3");
+            tablaResultado.Columns.Add("Fin envio 1");
+            tablaResultado.Columns.Add("Fin envio 2");
+            tablaResultado.Columns.Add("Fin envio 3");
             tablaResultado.Columns.Add("RND fin R");
             tablaResultado.Columns.Add("Tiempo atencion R");
-            tablaResultado.Columns.Add("Tiempo fin reclamo 1");
-            tablaResultado.Columns.Add("Tiempo fin reclamo 2");
+            tablaResultado.Columns.Add("Fin reclamo 1");
+            tablaResultado.Columns.Add("Fin reclamo 2");
             tablaResultado.Columns.Add("RND fin V");
             tablaResultado.Columns.Add("Tiempo atencion V");
-            tablaResultado.Columns.Add("Tiempo fin venta 1");
-            tablaResultado.Columns.Add("Tiempo fin venta 2");
-            tablaResultado.Columns.Add("Tiempo fin venta 3");
+            tablaResultado.Columns.Add("Fin venta 1");
+            tablaResultado.Columns.Add("Fin venta 2");
+            tablaResultado.Columns.Add("Fin venta 3");
             tablaResultado.Columns.Add("RND fin AE");
             tablaResultado.Columns.Add("Tiempo atencion AE");
-            tablaResultado.Columns.Add("Tiempo fin atencion 1");
-            tablaResultado.Columns.Add("Tiempo fin atencion 2");
+            tablaResultado.Columns.Add("Fin atencion 1");
+            tablaResultado.Columns.Add("Fin atencion 2");
             tablaResultado.Columns.Add("RND fin P");
             tablaResultado.Columns.Add("Tiempo atencion P");
-            tablaResultado.Columns.Add("Tiempo fin postal");
-            tablaResultado.Columns.Add("Tiempo fin seguridad");
+            tablaResultado.Columns.Add("Fin postal");
+            tablaResultado.Columns.Add("Fin seguridad");
             tablaResultado.Columns.Add("EP COLA 1");
             tablaResultado.Columns.Add("EP Estado 1");
             tablaResultado.Columns.Add("EP COLA 2");
@@ -1407,7 +1403,6 @@ namespace TP4_SIM
             tablaResultado.Columns.Add("AE Estado 1");
             tablaResultado.Columns.Add("AE COLA 2");
             tablaResultado.Columns.Add("AE Estado 2");
-
             tablaResultado.Columns.Add("P COLA 1");
             tablaResultado.Columns.Add("P Estado 1");
             tablaResultado.Columns.Add("S COLA 1");

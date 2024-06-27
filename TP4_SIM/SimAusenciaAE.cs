@@ -1,57 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TP4_SIM.Clases;
-using TP4_SIM.Clases.EventosLlegadas;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TP4_SIM
 {
-    public partial class Simulacion : Form
+    public partial class SimAusenciaAE : Form
     {
-        public Simulacion()
+        private int cantFilas;
+        double mediaLlegadaPaquete;
+        double mediaFinPaquete;
+        double mediaLlegadaReclamo;
+        double mediaFinReclamo;
+        double mediaLlegadaVenta;
+        double mediaFinVenta;
+        double mediaLlegadaAE;
+        double mediaFinAE;
+        double mediaLlegadaPostales;
+        double mediaFinPostales;
+        private int nroPrimeraFilaMostrar;
+        private int nroUltimaFilaMostrar;
+        public SimAusenciaAE(int cant, double[] medias, int nroPrimeraFila, int nroUltimaFila)
         {
             InitializeComponent();
-        }
-
-        private void btnIniciarSimulacion_Click(object sender, EventArgs e)
-        {
-            int cantFilas = int.Parse(txtCantFilas.Text);
+            this.cantFilas = cant;
             // Valores de media (dist. exponencial) de los eventos 
-            double mediaLlegadaPaquete = double.Parse(txtLlegadaPaquete.Text);
-            double mediaFinPaquete = double.Parse(txtFinPaquete.Text);
-            double mediaLlegadaReclamo = double.Parse(txtLlegadaReclamo.Text);
-            double mediaFinReclamo = double.Parse(txtFinReclamo.Text);
-            double mediaLlegadaVenta = double.Parse(txtLlegadaVenta.Text);
-            double mediaFinVenta = double.Parse(txtFinVenta.Text);
-            double mediaLlegadaAE = double.Parse(txtLlegadaAtencion.Text);
-            double mediaFinAE = double.Parse(txtFinAtencion.Text);
-            double mediaLlegadaPostales = double.Parse(txtLlegadaPostales.Text);
-            double mediaFinPostales = double.Parse(txtFinPostales.Text);
+            this.mediaLlegadaPaquete = medias[0];
+            this.mediaFinPaquete = medias[1];
+            this.mediaLlegadaReclamo = medias[2];
+            this.mediaFinReclamo = medias[3];
+            this.mediaLlegadaVenta = medias[4];
+            this.mediaFinVenta = medias[5];
+            this.mediaLlegadaAE = medias[6];
+            this.mediaFinAE = medias[7];
+            this.mediaLlegadaPostales = medias[8];
+            this.mediaFinPostales = medias[9];
 
             // Nro de fila a partir de la que sea desea visualizar
-            int nroPrimeraFilaMostrar = int.Parse(txtPrimeraFila.Text);
-            int nroUltimaFilaMostrar = nroPrimeraFilaMostrar + 300;
-            if (nroUltimaFilaMostrar > cantFilas) { nroUltimaFilaMostrar = cantFilas; }
+            this.nroPrimeraFilaMostrar = nroPrimeraFila;
+            this.nroUltimaFilaMostrar = nroUltimaFila;
 
-            string[] nombresEventos = {"llegada_envio", "llegada_reclamo", "llegada_venta", "llegada_AE", "llegada_postales",
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string[] nombresEventos = {"llegada_envio", "llegada_reclamo", "llegada_venta", "llegada_AE", "llegada_postales", "comienzo_ausencia", "fin_ausencia",
                 "fin_envio1","fin_envio2", "fin_envio3", "fin_reclamo1", "fin_reclamo2", "fin_venta1", "fin_venta2", "fin_venta3",
-                "fin_AE1", "fin_AE2", "fin_postales" };
+                "fin_AE1", "fin_AE2", "fin_postales"};
 
 
             Random random = new Random();
 
             // Se completa la primera fila de inicialización 
-            FilaVector fila1 = new FilaVector();
+            FilaVectorAusenciaAE fila1 = new FilaVectorAusenciaAE();
             fila1.NroFila = 1;
-            fila1.Evento = "Inicializacion";
+            fila1.Evento = "inicializacion";
             fila1.Reloj = 0;
 
             fila1.LlegadaEnvio.Rnd = generarRandom(random);
@@ -74,6 +83,7 @@ namespace TP4_SIM
             fila1.LlegadaPostales.TiempoEntreLlegadas = calcularTiempo(mediaLlegadaPostales, fila1.LlegadaPostales.Rnd);
             fila1.LlegadaPostales.ProxLlegada = fila1.Reloj + fila1.LlegadaPostales.TiempoEntreLlegadas;
 
+
             // Se ponen todos los tiempos de los prox eventos en una lista para madarlos al método que busca al siguiente
             List<double> posiblesProxEventos = new List<double>();
             posiblesProxEventos.Add(fila1.LlegadaEnvio.ProxLlegada);
@@ -81,14 +91,23 @@ namespace TP4_SIM
             posiblesProxEventos.Add(fila1.LlegadaVenta.ProxLlegada);
             posiblesProxEventos.Add(fila1.LlegadaAE.ProxLlegada);
             posiblesProxEventos.Add(fila1.LlegadaPostales.ProxLlegada);
+           
+            //posiblesProxEventos.Add(fila1.ComienzoAusencia.ProxAusencia); //al ser la primera debe ser 0;
+
+            //Como el reloj empieza en cero, marcamo como ausente al empleado de AE 2
+            //marcarAusencia(new FilaVectorAusenciaAE(), fila1);
 
             List<double> proxEvento = buscarProxEvento(posiblesProxEventos);
+            
+            FilaVectorAusenciaAE fila2 = new FilaVectorAusenciaAE();
+            //fila2.Reloj = (double)proxEvento[0];
+            //fila2.Evento = nombresEventos[Convert.ToInt32(proxEvento[1])];
+            fila2.Reloj = 0;
+            fila2.Evento = "comienzo_ausencia";
 
-            FilaVector fila2 = new FilaVector();
-            fila2.Reloj = (double)proxEvento[0];
-            fila2.Evento = nombresEventos[Convert.ToInt32(proxEvento[1])];
 
-            List<FilaVector> filasMostrar = new List<FilaVector>();
+            List<FilaVectorAusenciaAE> filasMostrar = new List<FilaVectorAusenciaAE>();
+
             DataTable tablaResultado = new DataTable();
             agregarColumnasTabla(tablaResultado);
 
@@ -96,8 +115,7 @@ namespace TP4_SIM
             for (int i = 0; i < cantFilas; i++)
             {
                 fila2.NroFila = i + 2; //tiene que empezar desde el 2
-                //filasMostrar.Add(fila1);
-
+                
                 if ((i + 1) >= nroPrimeraFilaMostrar && (i + 1) <= nroUltimaFilaMostrar)
                 {
                     // Agregar cada atributo individualmente de fila1
@@ -182,32 +200,45 @@ namespace TP4_SIM
 
                     foreach (Cliente Cli in fila1.Clientes)
                     {
-                        if (Cli.Estado != "Eliminado")
-                        {
-                            listaAux1.Add(Cli.Estado);
-                            listaAux1.Add(Cli.HoraInicioEspera.ToString());
-                            listaAux1.Add(Cli.HoraInicioAtencion.ToString());
-                        }
-                        else
-                        {
-                            Cli.Estado = "Eliminado";
-                            Cli.HoraInicioEspera = -1;
-                            Cli.HoraInicioAtencion = -1;
-
-                            listaAux1.Add("Eliminado");
-                            listaAux1.Add("-");
-                            listaAux1.Add("-");
-
-                        }
+                        listaAux1.Add(Cli.Estado);
+                        listaAux1.Add(Cli.HoraInicioEspera.ToString());
+                        listaAux1.Add(Cli.HoraInicioAtencion.ToString());
                     }
                     tablaResultado.Rows.Add(listaAux1.ToArray());
-                    // Agregar la fila a la grilla
-                    //grdSimulacion.Rows.Add(listaAux1.ToArray());
 
-                    ; // me falta agregar las columnas de ocupación en el data grid view
                 }
 
                 // ----------------------------------------- LLEGADAS -----------------------------------------------------------------------------
+
+                //COMIENZO AUSENCIA
+                if(fila2.Evento == "comienzo_ausencia")
+                {
+                    copiarProximasLlegadas(fila1, fila2);
+                    copiarObjetosFilaAnterior(fila1, fila2);
+                    copiarFinesAtencion(fila1, fila2);
+                    copiarEstadisticas(fila1, fila2);
+
+                    fila2.AtencionEmp[1].Estado = "Ausente";
+                    fila2.Fin_ausencia.Fin = fila2.Reloj + 0.2;
+                    fila2.ComienzoAusencia.ProxAusencia = fila2.Reloj + 1;
+         
+                    
+                    // Debo ver si hay un cliente siendo atendido en AE2
+                    try
+                    {
+                        int indiceCliente = buscarClientePorEstado("SAE2", fila2.Clientes);
+                        //Tengo que recalcular el fin de atención de nuevo para ese cliente --> le puedo sumar directamente los 0.2 de la ausencia 
+                        fila2.Fin_AE.FinAtencion[1] += 0.2;
+
+                        
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        // Si no lo encuentra sigo con el programa
+                    }
+                }
+
+
                 //LLEGADA ENVIO
                 if (fila2.Evento == "llegada_envio")
                 {
@@ -222,12 +253,6 @@ namespace TP4_SIM
                     copiarEstadisticas(fila1, fila2);
 
                     Cliente cliente = new Cliente();   //Al ser una llegada tengo que crear al cliente
-
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
-
 
                     // Reviso las colas y los estados de los objetos ENVIO (en este caso son 3)
                     bool empleadoLibre = false;
@@ -343,21 +368,6 @@ namespace TP4_SIM
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
 
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
-
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Ventas.Count; j++)
                     {
@@ -467,22 +477,6 @@ namespace TP4_SIM
                     // Tengo que revisar las colas y los estados de VENTAS con el for
                     Cliente cliente = new Cliente();
 
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
-
-
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.Reclamos.Count; j++)
                     {
@@ -546,22 +540,6 @@ namespace TP4_SIM
 
                     Cliente cliente = new Cliente();
 
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
-
-
                     bool empleadoLibre = false;
                     for (int j = 0; j < fila1.AtencionEmp.Count; j++)
                     {
@@ -584,27 +562,35 @@ namespace TP4_SIM
                     {
                         cliente.HoraInicioEspera = fila2.Reloj;
                         // Si ninguna está libre, deberá esperar en la cola más corta
-                        if (fila1.AtencionEmp[0].Cola == fila1.AtencionEmp[1].Cola)
+
+                        if (fila1.AtencionEmp[1].Estado != "Ausente")
                         {
-                            cliente.Estado = "EAE1";
-                            fila2.AtencionEmp[0].Cola = fila1.AtencionEmp[0].Cola + 1;
-                        }
-                        else if (fila1.AtencionEmp[0].Cola < fila1.AtencionEmp[1].Cola)
-                        {
-                            cliente.Estado = "EAE1";
-                            fila2.AtencionEmp[0].Cola = fila1.AtencionEmp[0].Cola + 1;
+                            if (fila1.AtencionEmp[0].Cola == fila1.AtencionEmp[1].Cola)
+                            {
+                                cliente.Estado = "EAE1";
+                                fila2.AtencionEmp[0].Cola = fila1.AtencionEmp[0].Cola + 1;
+                            }
+                            else if (fila1.AtencionEmp[0].Cola < fila1.AtencionEmp[1].Cola)
+                            {
+                                cliente.Estado = "EAE1";
+                                fila2.AtencionEmp[0].Cola = fila1.AtencionEmp[0].Cola + 1;
+                            }
+                            else
+                            {
+                                cliente.Estado = "EAE2";
+                                fila2.AtencionEmp[1].Cola = fila1.AtencionEmp[1].Cola + 1;
+                            }
                         }
                         else
                         {
-                            cliente.Estado = "EAE2";
-                            fila2.AtencionEmp[1].Cola = fila1.AtencionEmp[1].Cola + 1;
+                            cliente.Estado = "EAE1";
+                            fila2.AtencionEmp[0].Cola = fila1.AtencionEmp[0].Cola + 1;
                         }
+                       
                     }
                     // Como es una llegada tengo que agregar el cliente
                     fila2.Clientes.Add(cliente);
                     agregarClienteTabla(fila2, tablaResultado, cliente);
-                    //grdSimulacion.Rows[i+1].Cells[columnaEstado.Index].Value = cliente.Estado.ToString();
-                    //grdSimulacion.Rows[i+1].Cells[columnaHoraInicioEspera.Index].Value = cliente.HoraInicioEspera.ToString();
                 }
 
                 // LLEGADA POSTALES
@@ -622,21 +608,6 @@ namespace TP4_SIM
                     copiarEstadisticas(fila1, fila2);
 
                     Cliente cliente = new Cliente();
-
-
-                    //int cantColumnas = grdSimulacion.ColumnCount;
-                    //DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    //columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count + 1);
-                    //DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    //columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count + 1);
-
-                    //agregarColumnasClientes(fila2, tablaResultado);
-
-                    //grdSimulacion.Columns.Add(columnaEstado);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioEspera);
-                    //grdSimulacion.Columns.Add(columnaHoraInicioAtencion);
 
 
                     if (fila1.Postales[0].Cola == 0 && fila1.Postales[0].Estado == "Libre")
@@ -668,6 +639,29 @@ namespace TP4_SIM
                 }
 
                 // --------------------------------------------FINES DE ATENCIÓN---------------------------------------------------------------------------------------
+                if (fila2.Evento == "fin_ausencia")
+                {
+                    copiarProximasLlegadas(fila1, fila2);
+                    copiarFinesAtencion(fila1, fila2);
+                    copiarObjetosFilaAnterior(fila1, fila2);  // incluye los clientes, y los objetos (servidores)
+                    copiarEstadisticas(fila1, fila2);  // copio los acumuladores y contadores
+
+                    // Debo ver si hay un cliente siendo atendido en AE2
+                    try
+                    {
+                        int indiceCliente = buscarClientePorEstado("SAE2", fila2.Clientes);
+                        fila2.AtencionEmp[1].Estado = "Ocupado";
+                        fila2.Fin_ausencia.Fin = 0;
+                                               
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        fila2.AtencionEmp[1].Estado = "Libre";
+                        fila2.Fin_ausencia.Fin = 0;
+                    }
+
+                }
+                
                 // FIN ENVIO PAQUETES
 
                 if (fila2.Evento == "fin_envio1")
@@ -783,12 +777,15 @@ namespace TP4_SIM
                     calcularFinAtencionPostales(fila1, fila2, random, mediaFinPostales);
                 }
 
+
                 List<double> posiblesProximosEventos = new List<double>();
                 posiblesProximosEventos.Add(fila2.LlegadaEnvio.ProxLlegada); // 0 
                 posiblesProximosEventos.Add(fila2.LlegadaReclamo.ProxLlegada); // 1
                 posiblesProximosEventos.Add(fila2.LlegadaVenta.ProxLlegada); // 2
                 posiblesProximosEventos.Add(fila2.LlegadaAE.ProxLlegada); // 3
                 posiblesProximosEventos.Add(fila2.LlegadaPostales.ProxLlegada); //4
+                posiblesProximosEventos.Add(fila2.ComienzoAusencia.ProxAusencia);
+                posiblesProximosEventos.Add(fila2.Fin_ausencia.Fin);
                 posiblesProximosEventos.Add((double)fila2.Fin_envio.FinAtencion[0]);
                 posiblesProximosEventos.Add((double)fila2.Fin_envio.FinAtencion[1]);
                 posiblesProximosEventos.Add((double)fila2.Fin_envio.FinAtencion[2]);
@@ -809,7 +806,7 @@ namespace TP4_SIM
 
                 if (!(i == cantFilas - 1))
                 {
-                    fila2 = new FilaVector();
+                    fila2 = new FilaVectorAusenciaAE();
                     fila2.Reloj = (double)proximoEvento[0];
                     fila2.Evento = nombresEventos[(int)proximoEvento[1]];
                 }
@@ -917,56 +914,57 @@ namespace TP4_SIM
                 }
 
             }
-            CargarCsv(tablaResultado, "Sim.csv");
+            CargarCsv(tablaResultado, "SimAusenciaVenta.csv");
             cargarResultadosNormal(fila2);
         }
-        public void cargarResultadosNormal(FilaVector fila2)
-        {       double acEsperaE = fila2.EstadisticasEnvio.AcumuladorEspera;
-                double acOcupE = fila2.EstadisticasEnvio.AcumuladorOcupacion;
-                double cantE = fila2.EstadisticasEnvio.CantClientesAtendidos;
+        public void cargarResultadosNormal(FilaVectorAusenciaAE fila2)
+        {
+            double acEsperaE = fila2.EstadisticasEnvio.AcumuladorEspera;
+            double acOcupE = fila2.EstadisticasEnvio.AcumuladorOcupacion;
+            double cantE = fila2.EstadisticasEnvio.CantClientesAtendidos;
 
-                double acEsperaR = fila2.EstadisticasReclamo.AcumuladorEspera;
-                double acOcupR = fila2.EstadisticasReclamo.AcumuladorOcupacion;
-                double cantR = fila2.EstadisticasReclamo.CantClientesAtendidos;
+            double acEsperaR = fila2.EstadisticasReclamo.AcumuladorEspera;
+            double acOcupR = fila2.EstadisticasReclamo.AcumuladorOcupacion;
+            double cantR = fila2.EstadisticasReclamo.CantClientesAtendidos;
 
-                double acEsperaV = fila2.EstadisticasVenta.AcumuladorEspera;
-                double acOcupV = fila2.EstadisticasVenta.AcumuladorOcupacion;
-                double cantV = fila2.EstadisticasVenta.CantClientesAtendidos;
+            double acEsperaV = fila2.EstadisticasVenta.AcumuladorEspera;
+            double acOcupV = fila2.EstadisticasVenta.AcumuladorOcupacion;
+            double cantV = fila2.EstadisticasVenta.CantClientesAtendidos;
 
-                double acEsperaAE = fila2.EstadisticasAE.AcumuladorEspera;
-                double acOcupAE = fila2.EstadisticasAE.AcumuladorOcupacion;
-                double cantAE = fila2.EstadisticasAE.CantClientesAtendidos;
+            double acEsperaAE = fila2.EstadisticasAE.AcumuladorEspera;
+            double acOcupAE = fila2.EstadisticasAE.AcumuladorOcupacion;
+            double cantAE = fila2.EstadisticasAE.CantClientesAtendidos;
 
-                double acEsperaP = fila2.EstadisticasPostales.AcumuladorEspera;
-                double acOcupP = fila2.EstadisticasPostales.AcumuladorOcupacion;
-                double cantP = fila2.EstadisticasPostales.CantClientesAtendidos;
+            double acEsperaP = fila2.EstadisticasPostales.AcumuladorEspera;
+            double acOcupP = fila2.EstadisticasPostales.AcumuladorOcupacion;
+            double cantP = fila2.EstadisticasPostales.CantClientesAtendidos;
 
-                double relojFinal = fila2.Reloj;
+            double relojFinal = fila2.Reloj;
 
-                double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP,
+            double[] vectorRes = { acEsperaE,cantE, acEsperaR, cantR, acEsperaV, cantV, acEsperaAE, cantAE, acEsperaP, cantP,
                 acOcupE, acOcupR, acOcupV, acOcupAE, acOcupP, relojFinal};
 
-                // Falta verificar cuando la cantidad es 0 -> no se puede calcular (da NaN)
-                txtEsperaE.Text = (Math.Truncate((vectorRes[0] / vectorRes[1]) * 100) / 100).ToString();
-                txtEsperaR.Text = (Math.Truncate((vectorRes[2] / vectorRes[3]) * 100) / 100).ToString();
-                txtEsperaV.Text = (Math.Truncate((vectorRes[4] / vectorRes[5]) * 100) / 100).ToString();
-                txtEsperaAE.Text = (Math.Truncate((vectorRes[6] / vectorRes[7]) * 100) / 100).ToString();
-                txtEsperaP.Text = (Math.Truncate((vectorRes[8] / vectorRes[9]) * 100) / 100).ToString();
+            // Falta verificar cuando la cantidad es 0 -> no se puede calcular (da NaN)
+            txtEsperaE.Text = (Math.Truncate((vectorRes[0] / vectorRes[1]) * 100) / 100).ToString();
+            txtEsperaR.Text = (Math.Truncate((vectorRes[2] / vectorRes[3]) * 100) / 100).ToString();
+            txtEsperaV.Text = (Math.Truncate((vectorRes[4] / vectorRes[5]) * 100) / 100).ToString();
+            txtEsperaAE.Text = (Math.Truncate((vectorRes[6] / vectorRes[7]) * 100) / 100).ToString();
+            txtEsperaP.Text = (Math.Truncate((vectorRes[8] / vectorRes[9]) * 100) / 100).ToString();
 
-                relojFinal = vectorRes[15];
+            relojFinal = vectorRes[15];
 
-                double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
-                double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
-                double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
-                double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
-                double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
+            double ocupE = (vectorRes[10] / 3) * 100 / relojFinal;
+            double ocupR = (vectorRes[11] / 3) * 100 / relojFinal;
+            double ocupV = (vectorRes[12] / 3) * 100 / relojFinal;
+            double ocupAE = (vectorRes[13] / 3) * 100 / relojFinal;
+            double ocupP = (vectorRes[14] / 3) * 100 / relojFinal;
 
-                txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
-                txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";
-                txtOcupacionV.Text = (Math.Truncate(ocupV * 100) / 100).ToString() + "%";
-                txtOcupacionAE.Text = (Math.Truncate(ocupAE * 100) / 100).ToString() + "%";
-                txtOcupacionP.Text = (Math.Truncate(ocupP * 100) / 100).ToString() + "%";
-            
+            txtOcupacionE.Text = (Math.Truncate(ocupE * 100) / 100).ToString() + "%";
+            txtOcupacionR.Text = (Math.Truncate(ocupR * 100) / 100).ToString() + "%";
+            txtOcupacionV.Text = (Math.Truncate(ocupV * 100) / 100).ToString() + "%";
+            txtOcupacionAE.Text = (Math.Truncate(ocupAE * 100) / 100).ToString() + "%";
+            txtOcupacionP.Text = (Math.Truncate(ocupP * 100) / 100).ToString() + "%";
+
         }
 
         private List<double> buscarProxEvento(List<double> tiempos)
@@ -1024,7 +1022,7 @@ namespace TP4_SIM
             throw new InvalidOperationException($"No se encontró un cliente con el estado: {estado}");
         }
 
-        private void copiarObjetosFilaAnterior(FilaVector fila1, FilaVector fila2)
+        private void copiarObjetosFilaAnterior(FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2)
         {
             fila2.EnvioPaquetes = fila1.EnvioPaquetes;
             fila2.Reclamos = fila1.Reclamos;
@@ -1036,25 +1034,27 @@ namespace TP4_SIM
             fila2.Clientes = fila1.Clientes;
         }
 
-        private void copiarFinesAtencion(FilaVector fila1, FilaVector fila2)
+        private void copiarFinesAtencion(FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2)
         {
             fila2.Fin_envio.FinAtencion = fila1.Fin_envio.FinAtencion;
             fila2.Fin_reclamo.FinAtencion = fila1.Fin_reclamo.FinAtencion;
             fila2.Fin_venta.FinAtencion = fila1.Fin_venta.FinAtencion;
             fila2.Fin_AE.FinAtencion = fila1.Fin_AE.FinAtencion;
             fila2.Fin_postales.FinAtencion = fila1.Fin_postales.FinAtencion;
+            fila2.Fin_ausencia.Fin = fila1.Fin_ausencia.Fin;
         }
 
-        private void copiarProximasLlegadas(FilaVector fila1, FilaVector fila2)
+        private void copiarProximasLlegadas(FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2)
         {
             fila2.LlegadaReclamo.ProxLlegada = fila1.LlegadaReclamo.ProxLlegada;
             fila2.LlegadaVenta.ProxLlegada = fila1.LlegadaVenta.ProxLlegada;
             fila2.LlegadaAE.ProxLlegada = fila1.LlegadaAE.ProxLlegada;
             fila2.LlegadaPostales.ProxLlegada = fila1.LlegadaPostales.ProxLlegada;
             fila2.LlegadaEnvio.ProxLlegada = fila1.LlegadaEnvio.ProxLlegada;
+            fila2.ComienzoAusencia.ProxAusencia = fila1.ComienzoAusencia.ProxAusencia;
         }
 
-        private void copiarEstadisticas(FilaVector fila1, FilaVector fila2)
+        private void copiarEstadisticas(FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2)
         {
             fila2.EstadisticasEnvio = fila1.EstadisticasEnvio;
             fila2.EstadisticasReclamo = fila1.EstadisticasReclamo;
@@ -1063,7 +1063,7 @@ namespace TP4_SIM
             fila2.EstadisticasPostales = fila1.EstadisticasPostales;
         }
 
-        private void calcularFinAtencionEnvio(int nroObjetoEnvio, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionEnvio(int nroObjetoEnvio, FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SE" + nroObjetoEnvio;
 
@@ -1106,7 +1106,7 @@ namespace TP4_SIM
             }
         }
 
-        private void calcularFinAtencionReclamo(int nroObjetoReclamo, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionReclamo(int nroObjetoReclamo, FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SR" + nroObjetoReclamo;
 
@@ -1142,7 +1142,7 @@ namespace TP4_SIM
             }
         }
 
-        private void calcularFinAtencionVenta(int nroObjetoVenta, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionVenta(int nroObjetoVenta, FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2, Random random, double media)
         {
             string estadoSiendoAtendido = "SV" + nroObjetoVenta;
 
@@ -1181,7 +1181,7 @@ namespace TP4_SIM
             }
         }
 
-        private void calcularFinAtencionEmp(int nroObjetoAE, FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionEmp(int nroObjetoAE, FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2, Random random, double media)
         {
 
             string estadoSiendoAtendido = "SAE" + nroObjetoAE;
@@ -1218,7 +1218,7 @@ namespace TP4_SIM
                 fila2.Clientes[indexClientePorAtender].HoraInicioEspera = 0;
             }
         }
-        private void calcularFinAtencionPostales(FilaVector fila1, FilaVector fila2, Random random, double media)
+        private void calcularFinAtencionPostales(FilaVectorAusenciaAE fila1, FilaVectorAusenciaAE fila2, Random random, double media)
         {
 
             int indexClienteAtendido = buscarClientePorEstado("SP", fila1.Clientes);
@@ -1251,82 +1251,52 @@ namespace TP4_SIM
             }
         }
 
-
-        // SIMULACIÓN CON NUEVO SERVICIO -------------------------------------------------------------------------------------------------------------------------------
-
-        private void btnNuevoServicio_Click(object sender, EventArgs e)
-        {
-            int cantFilas = int.Parse(txtCantFilas.Text);
-            // Valores de media (dist. exponencial) de los eventos 
-            double mediaLlegadaPaquete = double.Parse(txtLlegadaPaquete.Text);
-            double mediaFinPaquete = double.Parse(txtFinPaquete.Text);
-            double mediaLlegadaReclamo = double.Parse(txtLlegadaReclamo.Text);
-            double mediaFinReclamo = double.Parse(txtFinReclamo.Text);
-            double mediaLlegadaVenta = double.Parse(txtLlegadaVenta.Text);
-            double mediaFinVenta = double.Parse(txtFinVenta.Text);
-            double mediaLlegadaAE = double.Parse(txtLlegadaAtencion.Text);
-            double mediaFinAE = double.Parse(txtFinAtencion.Text);
-            double mediaLlegadaPostales = double.Parse(txtLlegadaPostales.Text);
-            double mediaFinPostales = double.Parse(txtFinPostales.Text);
-
-            // Nro de fila a partir de la que sea desea visualizar
-            int nroPrimeraFilaMostrar = int.Parse(txtPrimeraFila.Text);
-            int nroUltimaFilaMostrar = nroPrimeraFilaMostrar + 300;
-            if (nroUltimaFilaMostrar > cantFilas) { nroUltimaFilaMostrar = cantFilas; }
-
-
-            double[] medias = {mediaLlegadaPaquete, mediaFinPaquete, mediaLlegadaReclamo, mediaFinReclamo, mediaLlegadaVenta, mediaFinVenta,
-            mediaLlegadaAE, mediaFinAE, mediaLlegadaPostales, mediaFinPostales};
-
-            SimNuevoServicio ventana = new SimNuevoServicio(cantFilas, medias, nroPrimeraFilaMostrar, nroUltimaFilaMostrar);
-            ventana.Show();
-
-        }
         public static void CargarCsv(DataTable Tabla, string name)
         {
             CsvConverter.DataTableToCsv(Tabla, name, true);
 
         }
+
         public static void agregarColumnasTabla(DataTable tablaResultado)
         {
             tablaResultado.Columns.Add("Evento");
             tablaResultado.Columns.Add("Reloj");
             tablaResultado.Columns.Add("RND Llegada EP");
             tablaResultado.Columns.Add("Tiempo entre llegadas EP");
-            tablaResultado.Columns.Add("Proxima llegada EP");
+            tablaResultado.Columns.Add("Prox. llegada EP");
             tablaResultado.Columns.Add("RND Llegada R");
             tablaResultado.Columns.Add("Tiempo entre llegadas R");
-            tablaResultado.Columns.Add("Proxima llegada R");
+            tablaResultado.Columns.Add("Prox. llegada R");
             tablaResultado.Columns.Add("RND Llegada V");
             tablaResultado.Columns.Add("Tiempo entre llegadas V");
-            tablaResultado.Columns.Add("Proxima llegada V");
+            tablaResultado.Columns.Add("Prox. llegada V");
             tablaResultado.Columns.Add("RND Llegada AE");
             tablaResultado.Columns.Add("Tiempo entre llegadas AE");
-            tablaResultado.Columns.Add("Proxima llegada AE");
+            tablaResultado.Columns.Add("Prox. llegada AE");
             tablaResultado.Columns.Add("RND Llegada P");
             tablaResultado.Columns.Add("Tiempo entre llegadas P");
-            tablaResultado.Columns.Add("Proxima llegada P");
+            tablaResultado.Columns.Add("Prox. llegada P");
             tablaResultado.Columns.Add("RND fin EP");
             tablaResultado.Columns.Add("Tiempo atencion EP");
-            tablaResultado.Columns.Add("Tiempo fin envio 1");
-            tablaResultado.Columns.Add("Tiempo fin envio 2");
-            tablaResultado.Columns.Add("Tiempo fin envio 3");
+            tablaResultado.Columns.Add("Fin envio 1");
+            tablaResultado.Columns.Add("Fin envio 2");
+            tablaResultado.Columns.Add("Fin envio 3");
             tablaResultado.Columns.Add("RND fin R");
             tablaResultado.Columns.Add("Tiempo atencion R");
-            tablaResultado.Columns.Add("Tiempo fin reclamo 1");
-            tablaResultado.Columns.Add("Tiempo fin reclamo 2");
+            tablaResultado.Columns.Add("Fin reclamo 1");
+            tablaResultado.Columns.Add("Fin reclamo 2");
             tablaResultado.Columns.Add("RND fin V");
             tablaResultado.Columns.Add("Tiempo atencion V");
-            tablaResultado.Columns.Add("Tiempo fin venta 1");
-            tablaResultado.Columns.Add("Tiempo fin venta 2");
-            tablaResultado.Columns.Add("Tiempo fin venta 3");
+            tablaResultado.Columns.Add("Fin venta 1");
+            tablaResultado.Columns.Add("Fin venta 2");
+            tablaResultado.Columns.Add("Fin venta 3");
             tablaResultado.Columns.Add("RND fin AE");
             tablaResultado.Columns.Add("Tiempo atencion AE");
-            tablaResultado.Columns.Add("Tiempo fin atencion 1");
-            tablaResultado.Columns.Add("Tiempo fin atencion 2");
+            tablaResultado.Columns.Add("Fin atencion 1");
+            tablaResultado.Columns.Add("Fin atencion 2");
             tablaResultado.Columns.Add("RND fin P");
             tablaResultado.Columns.Add("Tiempo atencion P");
-            tablaResultado.Columns.Add("Tiempo fin postal");
+            tablaResultado.Columns.Add("Fin postal");
             tablaResultado.Columns.Add("EP COLA 1");
             tablaResultado.Columns.Add("EP Estado 1");
             tablaResultado.Columns.Add("EP COLA 2");
@@ -1347,7 +1317,6 @@ namespace TP4_SIM
             tablaResultado.Columns.Add("AE Estado 1");
             tablaResultado.Columns.Add("AE COLA 2");
             tablaResultado.Columns.Add("AE Estado 2");
-
             tablaResultado.Columns.Add("P COLA 1");
             tablaResultado.Columns.Add("P Estado 1");
             tablaResultado.Columns.Add("AC tiempo espera EP");
@@ -1365,10 +1334,10 @@ namespace TP4_SIM
             tablaResultado.Columns.Add("AC tiempo espera P");
             tablaResultado.Columns.Add("AC ocupacion P");
             tablaResultado.Columns.Add("CANT P");
+
         }
 
-        // agregar o reemplazar cliente
-        public static void agregarClienteTabla(FilaVector fila2, DataTable tablaResultado, Cliente cliente)
+        public static void agregarClienteTabla(FilaVectorAusenciaAE fila2, DataTable tablaResultado, Cliente cliente)
         {
             bool fueEliminado = false;
             foreach (Cliente Cli in fila2.Clientes)
@@ -1384,48 +1353,61 @@ namespace TP4_SIM
                 }
             }
             if (fueEliminado == false)
-                {
-                    DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
-                    columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count);
-                    DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count);
-                    DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
-                    columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count);
+            {
+                DataGridViewColumn columnaEstado = new DataGridViewTextBoxColumn();
+                columnaEstado.HeaderText = "Estado" + (fila2.Clientes.Count);
+                DataGridViewColumn columnaHoraInicioEspera = new DataGridViewTextBoxColumn();
+                columnaHoraInicioEspera.HeaderText = "HEspera" + (fila2.Clientes.Count);
+                DataGridViewColumn columnaHoraInicioAtencion = new DataGridViewTextBoxColumn();
+                columnaHoraInicioAtencion.HeaderText = "HAtención" + (fila2.Clientes.Count);
 
-                    tablaResultado.Columns.Add("Estado " + (fila2.Clientes.Count));
-                    tablaResultado.Columns.Add("HEspera " + (fila2.Clientes.Count));
-                    tablaResultado.Columns.Add("HAtencion " + (fila2.Clientes.Count));
-                }
-                
+                tablaResultado.Columns.Add("Estado " + (fila2.Clientes.Count));
+                tablaResultado.Columns.Add("HEspera " + (fila2.Clientes.Count));
+                tablaResultado.Columns.Add("HAtencion " + (fila2.Clientes.Count));
             }
 
-        private void btnAusencia_Click(object sender, EventArgs e)
-        {
-
-            int cantFilas = int.Parse(txtCantFilas.Text);
-            // Valores de media (dist. exponencial) de los eventos 
-            double mediaLlegadaPaquete = double.Parse(txtLlegadaPaquete.Text);
-            double mediaFinPaquete = double.Parse(txtFinPaquete.Text);
-            double mediaLlegadaReclamo = double.Parse(txtLlegadaReclamo.Text);
-            double mediaFinReclamo = double.Parse(txtFinReclamo.Text);
-            double mediaLlegadaVenta = double.Parse(txtLlegadaVenta.Text);
-            double mediaFinVenta = double.Parse(txtFinVenta.Text);
-            double mediaLlegadaAE = double.Parse(txtLlegadaAtencion.Text);
-            double mediaFinAE = double.Parse(txtFinAtencion.Text);
-            double mediaLlegadaPostales = double.Parse(txtLlegadaPostales.Text);
-            double mediaFinPostales = double.Parse(txtFinPostales.Text);
-
-            // Nro de fila a partir de la que sea desea visualizar
-            int nroPrimeraFilaMostrar = int.Parse(txtPrimeraFila.Text);
-            int nroUltimaFilaMostrar = nroPrimeraFilaMostrar + 300;
-            if (nroUltimaFilaMostrar > cantFilas) { nroUltimaFilaMostrar = cantFilas; }
-
-
-            double[] medias = {mediaLlegadaPaquete, mediaFinPaquete, mediaLlegadaReclamo, mediaFinReclamo, mediaLlegadaVenta, mediaFinVenta,
-            mediaLlegadaAE, mediaFinAE, mediaLlegadaPostales, mediaFinPostales};
-
-            SimAusenciaAE ventana = new SimAusenciaAE(cantFilas, medias, nroPrimeraFilaMostrar, nroUltimaFilaMostrar);
-            ventana.Show();
         }
+
+        public void marcarAusencia( FilaVectorAusenciaAE fila2)
+        {
+            double enteroReloj = Math.Truncate(fila2.Reloj);
+            if (fila2.Reloj >= enteroReloj && fila2.Reloj <= (enteroReloj + 0.2)){
+                fila2.AtencionEmp[1].Estado = "Ausente";
+            }
+            /*
+            else
+            {
+                fila2.AtencionEmp[1].Estado = fila1.AtencionEmp[1].Estado;
+            }*/
+
+
+
+        }
+        
+        // Método para cuando había un cliente siendo atendido, y se tiene que ausentar el empleado
+        public void verificarAusenciaAE(FilaVectorAusenciaAE fila)
+        {
+            // Debo ver si hay un cliente siendo atendido en AE2
+            try
+            {
+                int indiceCliente = buscarClientePorEstado("SAE2", fila.Clientes);
+                //Debo sumar el tiempo de atención hasta que se fue, y después cuando vuelva a ser atendido, marcar la nueva hora inicio atención.
+                // y tengo que recalcular el fin de atención de nuevo para ese cliente --> le puedo sumar directamente los 0.2 de la ausencia 
+                if (fila.AtencionEmp[1].Estado == "Ausente")
+                {
+                    double tiempoAtencion1 = fila.Reloj - fila.Clientes[indiceCliente].HoraInicioAtencion;
+                    fila.EstadisticasAE.AcumuladorOcupacion += tiempoAtencion1;
+                    fila.Clientes[indiceCliente].HoraInicioAtencion = 0;
+                    fila.Fin_AE.FinAtencion[1] += 0.2;
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Si no lo encuentra sigo con el programa
+            }
+        }
+
+
     }
-    }
+
+}

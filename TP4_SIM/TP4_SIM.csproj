@@ -87,17 +87,26 @@
     <Compile Include="Clases\EventosFinAtencion\FinAtencionReclamo.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionSeguridad.cs" />
     <Compile Include="Clases\EventosFinAtencion\FinAtencionVenta.cs" />
+    <Compile Include="Clases\EventosFinAtencion\FinAusencia.cs" />
+    <Compile Include="Clases\EventosLlegadas\ComienzoAusencia.cs" />
     <Compile Include="Clases\EventosLlegadas\Llegada.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaAE.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaEnvio.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaPostales.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaReclamo.cs" />
     <Compile Include="Clases\EventosLlegadas\LlegadaVenta.cs" />
+    <Compile Include="Clases\FilaVectorAusenciaAE.cs" />
     <Compile Include="Clases\FilaVector - Copia.cs" />
     <Compile Include="Clases\FilaVector.cs" />
     <Compile Include="Clases\InspeccionSeguridad.cs" />
     <Compile Include="Clases\Postales.cs" />
     <Compile Include="Clases\Reclamo.cs" />
+    <Compile Include="SimAusenciaAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimAusenciaAE.Designer.cs">
+      <DependentUpon>SimAusenciaAE.cs</DependentUpon>
+    </Compile>
     <Compile Include="SimNuevoServicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +130,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Resultados.resx">
       <DependentUpon>Resultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimAusenciaAE.resx">
+      <DependentUpon>SimAusenciaAE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimNuevoServicio.resx">
       <DependentUpon>SimNuevoServicio.cs</DependentUpon>
